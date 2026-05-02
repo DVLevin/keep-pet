@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Keep Pet — MVP Budget One-Pager · Iteration 1 · €30k ceiling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F2E8;
+    --bg-elev: #FBF7EE;
+    --bg-card: #F0E9DB;
+    --ink: #1F262B;
+    --ink-mid: #3D4650;
+    --ink-dim: #6B737A;
+    --ink-faint: #9AA09F;
+    --accent: #B8522D;
+    --accent-deep: #8F3E20;
+    --accent-soft: rgba(184, 82, 45, 0.07);
+    --ochre: #C8872D;
+    --ochre-soft: rgba(200, 135, 45, 0.08);
+    --line: #E2D8C4;
+    --line-strong: #C9BEA5;
+    --success: #6B8E4E;
+    --success-soft: rgba(107, 142, 78, 0.1);
+    --warn: #B8522D;
+    --warn-soft: rgba(184, 82, 45, 0.07);
+    --serif: "Fraunces", "Source Serif 4", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+    --mono: "IBM Plex Mono", "SF Mono", "Menlo", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(184, 82, 45, 0.015) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(200, 135, 45, 0.015) 0%, transparent 40%);
+    z-index: -1;
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(184, 82, 45, 0.35); transition: border-color 0.15s ease; }
+  a:hover { border-bottom-color: var(--accent); }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 56px 32px; }
+
+  /* ── Hero ── */
+  header.hero { padding: 80px 0 64px 0; border-bottom: 1px solid var(--line); }
+  .hero .eyebrow {
+    font-family: var(--mono);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin-bottom: 24px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero .eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 60px;
+    line-height: 1.05;
+    font-weight: 400;
+    margin-bottom: 28px;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .hero .subtitle {
+    font-size: 19px;
+    color: var(--ink-mid);
+    max-width: 680px;
+    margin-bottom: 40px;
+    line-height: 1.55;
+  }
+  .hero .meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .hero .meta .label {
+    font-family: var(--mono);
+    font-style: italic;
+    color: var(--ink-faint);
+    font-size: 11px;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .hero .meta .value {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .hero .version-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    padding: 4px 14px;
+    border-radius: 2px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    margin-bottom: 24px;
+    font-weight: 400;
+    border-left: 2px solid var(--accent);
+  }
+
+  /* ── Sections ── */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head { margin-bottom: 32px; }
+  .section-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--accent);
+    font-weight: 400;
+    margin-right: 14px;
+  }
+  .section-label {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--ink-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    font-weight: 500;
+  }
+  h3 {
+    font-family: var(--serif);
+    font-size: 36px;
+    line-height: 1.15;
+    font-weight: 400;
+    margin: 12px 0 22px 0;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  h3 em { font-style: italic; color: var(--accent); }
+  h4 {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  p { margin-bottom: 20px; color: var(--ink); }
+  p.lead {
+    font-family: var(--serif);
+    font-size: 21px;
+    line-height: 1.45;
+    color: var(--ink-mid);
+    margin-bottom: 28px;
+    font-weight: 400;
+    max-width: 720px;
+  }
+  p.lead em { font-style: italic; color: var(--accent); }
+  p.dim { color: var(--ink-dim); }
+  ul, ol { margin: 0 0 22px 22px; }
+  li { margin-bottom: 10px; color: var(--ink); }
+  li strong { font-weight: 600; color: var(--ink); }
+  strong { font-weight: 600; color: var(--ink); }
+  em { font-style: italic; }
+
+  /* ── Pull quote ── */
+  .pullquote {
+    margin: 40px 0;
+    padding: 28px 0 24px 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    text-align: left;
+  }
+  .pullquote-text {
+    font-family: var(--serif);
+    font-size: 26px;
+    line-height: 1.3;
+    font-weight: 400;
+    color: var(--ink);
+    font-style: italic;
+    letter-spacing: -0.005em;
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+  .pullquote-cite {
+    font-family: var(--serif);
+    font-size: 12px;
+    color: var(--accent);
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  /* ── In/Out scope grid ── */
+  .scope-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin: 32px 0;
+  }
+  @media (max-width: 760px) { .scope-grid { grid-template-columns: 1fr; } }
+  .scope-col {
+    border-top: 2px solid var(--ink-faint);
+    padding-top: 18px;
+  }
+  .scope-col.in { border-top-color: var(--success); }
+  .scope-col.out { border-top-color: var(--ink-faint); }
+  .scope-col h5 {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    margin-bottom: 16px;
+    color: var(--ink-dim);
+  }
+  .scope-col.in h5 { color: var(--success); }
+  .scope-col ul { margin-left: 0; list-style: none; }
+  .scope-col li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .scope-col li:last-child { border-bottom: none; }
+  .scope-col li::before {
+    flex-shrink: 0;
+    width: 14px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .scope-col.in li::before { content: "✓"; color: var(--success); font-weight: 600; }
+  .scope-col.out li::before { content: "—"; color: var(--ink-faint); }
+  .scope-col li .feature-source {
+    display: block;
+    font-family: var(--mono);
+    font-style: italic;
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Tables ── */
+  table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 15px; }
+  th, td { padding: 14px 14px 14px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th {
+    font-family: var(--serif);
+    color: var(--ink-dim);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    border-bottom: 1px solid var(--ink-faint);
+  }
+  td { color: var(--ink); }
+  td.dim { color: var(--ink-mid); font-size: 14px; }
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  td.num strong { font-family: var(--mono); }
+  tr.total td {
+    font-weight: 600;
+    border-bottom: none;
+    border-top: 2px solid var(--ink);
+    padding-top: 16px;
+  }
+  tr.total td.num { color: var(--accent); }
+
+  /* ── Reuse leverage grid ── */
+  .reuse-grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr 1.4fr;
+    gap: 0;
+    margin: 28px 0;
+  }
+  @media (max-width: 760px) { .reuse-grid { grid-template-columns: 1fr; } }
+  .reuse-row {
+    display: contents;
+  }
+  .reuse-row > div {
+    padding: 16px 18px 16px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .reuse-row.head > div {
+    font-family: var(--serif);
+    color: var(--ink-dim);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    border-bottom: 1px solid var(--ink-faint);
+    padding-bottom: 12px;
+  }
+  .reuse-row .cmp {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .reuse-row .src {
+    color: var(--ink-mid);
+    font-size: 14px;
+  }
+  .reuse-row .save {
+    font-family: var(--mono);
+    color: var(--success);
+    font-weight: 500;
+    font-size: 14px;
+    text-align: right;
+  }
+
+  /* ── Pills ── */
+  .pill {
+    display: inline-block;
+    font-family: var(--serif);
+    font-size: 11px;
+    padding: 2px 9px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    font-weight: 600;
+    border: 1px solid transparent;
+  }
+  .pill-go { color: var(--success); border-color: rgba(107, 142, 78, 0.4); background: var(--success-soft); }
+  .pill-watch { color: var(--ochre); border-color: rgba(200, 135, 45, 0.4); background: var(--ochre-soft); }
+  .pill-warn { color: var(--accent); border-color: rgba(184, 82, 45, 0.4); background: var(--accent-soft); }
+
+  /* ── Risk rows ── */
+  .risk-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 3fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+    font-size: 14px;
+  }
+  .risk-row:first-of-type { border-top: 1px solid var(--ink-faint); }
+  .risk-row .risk-name {
+    font-family: var(--serif);
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .risk-row .risk-prob, .risk-row .risk-impact {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .risk-row .risk-mit {
+    color: var(--ink-mid);
+    line-height: 1.5;
+    font-size: 14px;
+  }
+  .risk-row.head {
+    font-family: var(--serif);
+    color: var(--ink-dim);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    border-bottom: 1px solid var(--ink-faint);
+    border-top: none;
+    padding-bottom: 10px;
+  }
+  @media (max-width: 760px) {
+    .risk-row { grid-template-columns: 1fr; gap: 8px; }
+    .risk-row.head { display: none; }
+    .risk-row .risk-name::before { content: ""; }
+    .risk-row .risk-prob::before { content: "Prob: "; color: var(--ink-faint); }
+    .risk-row .risk-impact::before { content: "Impact: "; color: var(--ink-faint); }
+  }
+
+  /* ── Decision card ── */
+  .decision-list {
+    margin: 28px 0;
+  }
+  .decision-list ol {
+    list-style: none;
+    margin-left: 0;
+    counter-reset: decision;
+  }
+  .decision-list li {
+    counter-increment: decision;
+    padding: 18px 0 18px 56px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .decision-list li:last-child { border-bottom: none; }
+  .decision-list li::before {
+    content: counter(decision);
+    position: absolute;
+    left: 0;
+    top: 18px;
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    font-style: italic;
+  }
+  .decision-list li strong { display: block; margin-bottom: 4px; font-family: var(--serif); font-size: 17px; font-weight: 500; }
+
+  /* ── GTM track grid ── */
+  .gtm-track {
+    border-top: 1px solid var(--line);
+    padding: 18px 0;
+    display: grid;
+    grid-template-columns: 1.5fr 2.5fr 1.4fr 1fr;
+    gap: 18px;
+    font-size: 14px;
+    align-items: start;
+  }
+  .gtm-track:last-of-type { border-bottom: 1px solid var(--line); }
+  .gtm-track.head {
+    font-family: var(--serif);
+    color: var(--ink-dim);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    border-bottom: 1px solid var(--ink-faint);
+    border-top: none;
+    padding-bottom: 10px;
+  }
+  .gtm-track .channel {
+    font-family: var(--serif);
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 15px;
+  }
+  .gtm-track .channel .rail {
+    display: block;
+    font-family: var(--mono);
+    font-style: italic;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 400;
+  }
+  .gtm-track .channel .rail.a { color: var(--accent); }
+  .gtm-track .channel .rail.b { color: var(--ochre); }
+  .gtm-track .desc { color: var(--ink-mid); line-height: 1.5; }
+  .gtm-track .cost { font-family: var(--mono); color: var(--ink); font-size: 13px; }
+  .gtm-track .own { color: var(--ink-dim); font-size: 13px; font-style: italic; font-family: var(--serif); }
+  @media (max-width: 760px) {
+    .gtm-track { grid-template-columns: 1fr; gap: 6px; }
+    .gtm-track.head { display: none; }
+    .gtm-track .cost::before { content: "Cost: "; color: var(--ink-faint); }
+    .gtm-track .own::before { content: "Owner: "; color: var(--ink-faint); font-style: normal; }
+  }
+
+  /* ── Editorial notes ── */
+  .note {
+    margin: 28px 0;
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--accent);
+  }
+  .note-label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--accent);
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .note-body {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    font-style: italic;
+  }
+  .note-body strong { font-style: normal; color: var(--ink); font-weight: 600; }
+
+  /* ── Phased capital diagram ── */
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin: 36px 0 28px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  @media (max-width: 760px) { .phases { grid-template-columns: 1fr; border-top: none; border-bottom: none; } }
+  .phase {
+    padding: 22px 18px;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  @media (max-width: 760px) {
+    .phase { border-right: none; border-bottom: 1px solid var(--line); }
+    .phase:last-child { border-bottom: none; }
+  }
+  .phase:last-child { border-right: none; }
+  .phase .phase-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .phase .phase-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .phase .phase-amt {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .phase .phase-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-mid);
+    line-height: 1.5;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 48px 0 64px 0;
+    color: var(--ink-faint);
+    font-size: 13px;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+  }
+  footer .logo {
+    font-family: var(--serif);
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    font-variant: small-caps;
+    text-transform: uppercase;
+    font-style: normal;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 40px 0; }
+
+  /* ── Print ── */
+  @media print {
+    @page { size: A4; margin: 18mm 16mm; }
+    html, body {
+      background: #FFFFFF;
+      font-size: 11pt;
+      line-height: 1.55;
+    }
+    body::before { display: none; }
+    .wrap { padding: 0; max-width: 100%; }
+    header.hero { padding: 0 0 28px 0; page-break-after: avoid; }
+    .hero h1 { font-size: 38pt; line-height: 1.05; margin-bottom: 18px; }
+    .hero .subtitle { font-size: 13pt; margin-bottom: 24px; }
+    .hero .meta { padding-top: 18px; gap: 18px; }
+    section { padding: 28px 0; page-break-inside: auto; }
+    section.section-budget, section.section-decisions { page-break-before: auto; }
+    h3 { font-size: 22pt; margin: 6px 0 14px 0; page-break-after: avoid; }
+    h4 { font-size: 13pt; margin-top: 18px; page-break-after: avoid; }
+    p, li { font-size: 11pt; }
+    p.lead { font-size: 13pt; margin-bottom: 18px; }
+    .pullquote { margin: 28px 0; padding: 20px 0 16px 0; page-break-inside: avoid; }
+    .pullquote-text { font-size: 17pt; }
+    table, .reuse-grid, .scope-grid, .phases, .gtm-track, .risk-row, .decision-list { page-break-inside: avoid; }
+    .scope-grid { gap: 24px; }
+    .phases { grid-template-columns: repeat(4, 1fr); gap: 0; }
+    a { color: var(--accent); border-bottom: none; }
+    footer { padding: 24px 0; page-break-before: avoid; }
+    .no-print { display: none !important; }
+  }
+</style>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="plan" data-lang="en">
+<script defer src="assets/site.js"></script>
+<div class="wrap">
+
+<header class="hero">
+  <div class="version-stamp">Iteration 1 · Budget-only · v4 vision attached separately</div>
+  <div class="eyebrow">Keep Pet · MVP build envelope · for Oleg, Yulia, Sergey</div>
+  <h1>Thirty thousand euros, <em>honestly graded</em>.</h1>
+  <p class="subtitle">An MVP across two surfaces — Telegram Mini App + PWA — shipping the full Apr-21 product spine, built on Cone Red asset reuse rather than greenfield. The ceiling is firm; the mechanism that makes it firm is named, with the risks of it slipping named alongside.</p>
+  <div class="meta">
+    <div><div class="label">Anchor</div><div class="value">≤ €30,000</div></div>
+    <div><div class="label">Calendar</div><div class="value">10–12 weeks</div></div>
+    <div><div class="label">Phase-1 gate</div><div class="value">100 × $3 / mo</div></div>
+    <div><div class="label">Date</div><div class="value">2026-04-30</div></div>
+  </div>
+</header>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 1</span><span class="section-label">The Promise</span>
+    <h3>What thirty thousand euros <em>actually buys</em>.</h3>
+  </div>
+  <p class="lead">A working MVP across two surfaces — Telegram Mini App + PWA — shipping the full Apr-21-locked product spine. Software-only. Two rails. Same brain, two doors.</p>
+
+  <div class="scope-grid">
+    <div class="scope-col in">
+      <h5>In scope — v1, software-only</h5>
+      <ul>
+        <li>Brain + Passport — onboarding via OCR + MCQ + voice in 10–15 minutes; persistent per-pet knowledge graph; daily proactive check-ins<span class="feature-source"></span></li>
+        <li>Voice-first interaction — sub-second response, conversational not transactional</li>
+        <li>Vet voice-memo capture<span class="feature-source">— Yulia, Apr 21 — record vet → translate → routine extraction → memory ingestion</span></li>
+        <li>QR-shareable read-only passport view — one tap, any vet, any language</li>
+        <li>Lost-pet poster generator<span class="feature-source">— Yulia, Apr 21 — auto-flyer for Telegram / WhatsApp / Instagram</span></li>
+        <li>Subscription gate at $3 / mo, framed as "infrastructure support / early adopter"</li>
+        <li>Phase-1 success instrumentation — retention, LTV, inference-cost telemetry from day one</li>
+      </ul>
+    </div>
+    <div class="scope-col out">
+      <h5>Out of v1 — deliberate, per Apr 21 lock</h5>
+      <ul>
+        <li>Wearable hardware ingestion<span class="feature-source">— Yulia blocked v1; v3 lane, contingent</span></li>
+        <li>Native iOS / Android app<span class="feature-source">— PWA covers until limits bite</span></li>
+        <li>Smart-speaker integration<span class="feature-source">— v3 lane, gated on engagement metrics</span></li>
+        <li>Pet emotion estimation feature<span class="feature-source">— v3 lane; depends on wearable lane reopening + safe-claim envelope (RR #14)</span></li>
+        <li>Russia-territory entity / brand<span class="feature-source">— separate workstream, separate cap-table firewall</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 2</span><span class="section-label">Why €30k is honest at this scope</span>
+    <h3>The <em>reuse mechanism</em> — what makes the ceiling hold.</h3>
+  </div>
+  <p>A €30k greenfield build of this spec would not be honest. The ceiling holds <strong>only because we lift load-bearing components from existing Cone Red production assets</strong>. Reuse leverage in numbers, not adjectives:</p>
+
+  <div class="reuse-grid">
+    <div class="reuse-row head">
+      <div>Component</div>
+      <div>What we reuse</div>
+      <div>Saved vs. greenfield</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">Audio pipeline + transcription</div>
+      <div class="src">Conversa — in-house transcript-analyst, production-grade</div>
+      <div class="save">~3 weeks</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">Multi-agent orchestration</div>
+      <div class="src">A-genie pattern + EA-Agent scaffolding</div>
+      <div class="save">~2 weeks</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">Per-pet knowledge graph</div>
+      <div class="src">KG patterns from Tampere + Casino + Granat</div>
+      <div class="save">~2 weeks</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">Onboarding multi-agent verification</div>
+      <div class="src">Pattern from Conny <span style="font-family:var(--mono);font-style:italic;">/discover</span> + EA-Agent intake</div>
+      <div class="save">~1.5 weeks</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">Streaming voice TTS / ASR layer</div>
+      <div class="src">Open-source stack pre-validated in 2 prior projects</div>
+      <div class="save">~1 week</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">OCR + document parsing</div>
+      <div class="src">Vendor-evaluated in Brief #09; integration pattern reusable</div>
+      <div class="save">~1 week</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="note-label">The asymmetric honesty</span>
+    <div class="note-body"><strong>Total reuse leverage: ~10.5 engineer-weeks.</strong> That is what makes the €30k ceiling credible at this scope. If the reuse fragments do not transfer cleanly, the ceiling breaks. <strong>This risk is named in §6, not buried.</strong> Trust is built by saying so before it costs us.</div>
+  </div>
+</section>
+
+<section class="section-budget">
+  <div class="section-head">
+    <span class="section-num">§ 3</span><span class="section-label">Cost decomposition</span>
+    <h3>Where every euro <em>goes</em>.</h3>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Line item</th><th>Effort</th><th style="text-align:right">Cost</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Backend glue — auth, user model, passport persistence, voice-pipeline integration, multi-agent verification</td><td class="dim">3 senior weeks</td><td class="num" style="text-align:right">€7,500</td></tr>
+      <tr><td>Onboarding flow — OCR ingestion → MCQ rounds → first-insight delivery in 10–15 min</td><td class="dim">2 senior weeks</td><td class="num" style="text-align:right">€5,000</td></tr>
+      <tr><td>Telegram Mini App + AI bot</td><td class="dim">1.5 weeks</td><td class="num" style="text-align:right">€3,750</td></tr>
+      <tr><td>PWA — mirrors TG logic, browser-first</td><td class="dim">1.5 weeks</td><td class="num" style="text-align:right">€3,750</td></tr>
+      <tr><td>Vet voice-memo + lost-pet poster <span class="pill pill-watch">NEW Apr 21</span></td><td class="dim">1 week</td><td class="num" style="text-align:right">€2,500</td></tr>
+      <tr><td>QR-shareable read-only passport view</td><td class="dim">0.5 weeks</td><td class="num" style="text-align:right">€1,250</td></tr>
+      <tr><td>Infra setup, deployment, monitoring, telemetry</td><td class="dim">0.5 weeks</td><td class="num" style="text-align:right">€1,250</td></tr>
+      <tr><td>API + hosting + transcription / OCR vendor cost — 3 months</td><td class="dim">—</td><td class="num" style="text-align:right">€3,000</td></tr>
+      <tr><td>Buffer — testing, polish, contingency</td><td class="dim">—</td><td class="num" style="text-align:right">€2,000</td></tr>
+      <tr class="total"><td>TOTAL</td><td class="dim">~10–12 calendar weeks</td><td class="num" style="text-align:right"><strong>€30,000</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Engineer profile:</strong> 1 senior + 0.5 junior, or 1 senior solo running hot. Both are tested team configurations at Cone Red. <strong>Calendar:</strong> 10–12 weeks elapsed from kickoff. Voice-memo + lost-pet poster are last-mile additions; cuttable to v1.1 if scope or cost stress emerges.</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 4</span><span class="section-label">Go-to-market</span>
+    <h3>The €30k buys <em>build only</em>. GTM layers on top.</h3>
+  </div>
+  <p>Per Oleg's Apr 21 ask, GTM runs as <strong>two parallel rails</strong> — diaspora-bootstrap and US/EU general — with explicit budget split. The split calibrates after Brief #10 (diaspora sizing + pet-ownership estimation) returns. Until then: low-scenario start, organic-heavy.</p>
+
+  <div class="gtm-track head">
+    <div>Channel</div><div>Mechanic</div><div>Cost shape</div><div>Owner</div>
+  </div>
+  <div class="gtm-track">
+    <div class="channel"><span class="rail a">Rail A · Diaspora</span>Telegram community walking</div>
+    <div class="desc">Manual outreach to diaspora chats in pilot countries (Serbia / Armenia / Georgia + TBD)</div>
+    <div class="cost">Free + 5–10 h/week first 8 weeks</div>
+    <div class="own">Yulia + Dima</div>
+  </div>
+  <div class="gtm-track">
+    <div class="channel"><span class="rail a">Rail A · Diaspora</span>Paid Telegram channel posts</div>
+    <div class="desc">Sponsored placements in target diaspora-IT / pet / relocation chats</div>
+    <div class="cost">TBD — Yulia researching pricing per geo</div>
+    <div class="own">Yulia</div>
+  </div>
+  <div class="gtm-track">
+    <div class="channel"><span class="rail a">Rail A · Diaspora</span>Russian content-studio storytelling</div>
+    <div class="desc">Influencer-style Reels / Threads / TikTok shorts — narrative not advertorial</div>
+    <div class="cost">TBD — Yulia outreach for price + scope</div>
+    <div class="own">Yulia</div>
+  </div>
+  <div class="gtm-track">
+    <div class="channel"><span class="rail b">Rail B · US/EU</span>Subscription-led paid acquisition</div>
+    <div class="desc">Meta + Google + TikTok at controlled CAC, capped to gate Phase-1 burn</div>
+    <div class="cost">€1–3k / mo to start, calibrated post-Brief #10</div>
+    <div class="own">Sergey + Yulia</div>
+  </div>
+  <div class="gtm-track">
+    <div class="channel"><span class="rail b">Phase-2 trigger</span>Pet-insurance referral revenue-share</div>
+    <div class="desc">Signed at 200-user threshold in pilot country; revenue-share, not upfront</div>
+    <div class="cost">No upfront — revenue-share model</div>
+    <div class="own">Sergey</div>
+  </div>
+
+  <h4>Indicative GTM budget — first 3 months post-launch</h4>
+  <table>
+    <tbody>
+      <tr><td>Low scenario — diaspora-only, organic-heavy</td><td class="num" style="text-align:right">€3–5k</td></tr>
+      <tr><td>Mid scenario — diaspora + minimal US-paid track</td><td class="num" style="text-align:right">€8–12k</td></tr>
+      <tr><td>High scenario — full parallel rails</td><td class="num" style="text-align:right">€20k+</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <span class="note-label">Recommendation</span>
+    <div class="note-body">Start at the <strong>low scenario</strong>. Calibrate up only after diaspora-bootstrap shows traction and Brief #10 confirms TAM math. The high scenario is only justified <strong>after</strong> Phase-1 proof — not before.</div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 5</span><span class="section-label">Phase-1 success gate</span>
+    <h3>The <em>proof point</em> that unlocks the institutional raise.</h3>
+  </div>
+  <div class="pullquote">
+    <div class="pullquote-text">100 paying users at $3 / month within 60 days of public launch.</div>
+    <div class="pullquote-cite">The gate, locked Apr 21</div>
+  </div>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-num">Phase 0 — Build</div>
+      <div class="phase-title">€30k MVP build</div>
+      <div class="phase-amt">≤ €30,000</div>
+      <div class="phase-text">Cone Red builds. Software-only, two surfaces, 10–12 weeks. Equity-for-work or soft-capital.</div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">Phase 1 — Proof</div>
+      <div class="phase-title">100 × $3 / mo within 60 days</div>
+      <div class="phase-amt">$3,600 / mo MRR</div>
+      <div class="phase-text">Real retention, real LTV, real inference-cost. Numbers, not pitches.</div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">Phase 2 — Raise</div>
+      <div class="phase-title">Institutional round</div>
+      <div class="phase-amt">~$300,000 target</div>
+      <div class="phase-text">Sized against Phase-1 metrics. Funds full v1 — native trigger, multi-country expansion, dedicated marketing, +1 ops headcount.</div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">Phase 3 — Wedge</div>
+      <div class="phase-title">B2B partnership signed</div>
+      <div class="phase-amt">Revenue-share</div>
+      <div class="phase-text">Pet-insurance referral signed in pilot country. Wearable lane reopens. Emotion-estimation v3 lane ships.</div>
+    </div>
+  </div>
+
+  <h4>What the 100×$3 milestone gives us</h4>
+  <ul>
+    <li>Real <strong>retention</strong> curve (D7, D30) — not estimated</li>
+    <li>Real <strong>LTV vs CAC</strong> ratio per acquisition channel</li>
+    <li>Real <strong>inference cost per user</strong> at actual user behavior, not synthetic</li>
+    <li>A <strong>signed pet-insurance referral partnership</strong> in pilot country (Sergey's workstream once user count clears 200)</li>
+    <li>A <strong>defensible budget ask</strong> for the institutional raise — based on real numbers</li>
+  </ul>
+
+  <h4>What it does NOT prove</h4>
+  <ul>
+    <li>US/EU general-market viability — that's Phase-2, parallel paid track</li>
+    <li>Wearable / emotion-estimation lane viability — that's v3</li>
+    <li>Data-licensing TAM — that's Phase-3</li>
+  </ul>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 6</span><span class="section-label">Risks against the ceiling</span>
+    <h3>Seven risks, <em>named honestly</em>.</h3>
+  </div>
+
+  <div class="risk-row head">
+    <div>Risk</div><div>Likelihood</div><div>Impact</div><div>Mitigation</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">Reuse fragments don't transfer cleanly — Conversa, A-genie, KG patterns require more glue than estimated</div>
+    <div class="risk-prob"><span class="pill pill-watch">Medium</span></div>
+    <div class="risk-impact"><span class="pill pill-warn">High</span></div>
+    <div class="risk-mit">Pre-flight inventory of reuse fragments before kickoff. Abort feature scope (vet voice-memo + lost-pet poster cut to v1.1) if a fragment doesn't lift. Could push build to €40–€45k if uncaught — this is the load-bearing ceiling risk.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">OCR accuracy below demo threshold on real-world vet paperwork</div>
+    <div class="risk-prob"><span class="pill pill-watch">Medium</span></div>
+    <div class="risk-impact"><span class="pill pill-watch">Medium</span></div>
+    <div class="risk-mit">Brief #09 vendor-benchmark. Pre-curate 3 sample pets with OCR-friendly paperwork for demo. Ship MCQ gap-fill robust enough to absorb OCR misses gracefully.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">iOS Safari PWA voice / push reliability in real user devices</div>
+    <div class="risk-prob"><span class="pill pill-watch">Medium</span></div>
+    <div class="risk-impact"><span class="pill pill-watch">Medium</span></div>
+    <div class="risk-mit">Dual-channel demo (Android PWA + TG Mini App on iOS). Fall back to text-input for voice if PWA fails. Force native-app trigger earlier if widespread.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">Yulia's TG-channel ad-pricing returns too high to support diaspora-bootstrap economics</div>
+    <div class="risk-prob"><span class="pill pill-go">Low–Med</span></div>
+    <div class="risk-impact"><span class="pill pill-watch">Medium</span></div>
+    <div class="risk-mit">Brief #10 → Yulia's pricing research → decide before committing GTM track. Community-walking still works as fallback regardless of paid pricing.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">Telegram platform-policy shift restricts AI-content in mini apps</div>
+    <div class="risk-prob"><span class="pill pill-go">Low–Med</span></div>
+    <div class="risk-impact"><span class="pill pill-watch">Medium</span></div>
+    <div class="risk-mit">Architectural symmetry between TG + PWA — backends share ≥90% — means PWA absorbs the load if TG rail degrades.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">Cone Red bandwidth conflict during build — current parallel projects: Tampere · Casino · Granat · Memory Layer</div>
+    <div class="risk-prob"><span class="pill pill-watch">Medium</span></div>
+    <div class="risk-impact"><span class="pill pill-watch">Medium</span></div>
+    <div class="risk-mit">Lock 1 senior dedicated for the 10-week window before kickoff. Schedule slips, not cost — but trust slips with schedule.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">€30k ceiling commitment leaks before Iteration 2 ships — currently verbal Dima → Oleg only</div>
+    <div class="risk-prob"><span class="pill pill-watch">Medium</span></div>
+    <div class="risk-impact"><span class="pill pill-go">Low</span></div>
+    <div class="risk-mit">This document makes the ceiling visible to all four founders. Trust hygiene only — no operational impact.</div>
+  </div>
+</section>
+
+<section class="section-decisions">
+  <div class="section-head">
+    <span class="section-num">§ 7</span><span class="section-label">What we need from you</span>
+    <h3>Five decisions <em>this one-pager asks for</em>.</h3>
+  </div>
+
+  <div class="decision-list">
+    <ol>
+      <li><strong>Approve €30k ceiling</strong> as the build-only budget. Iteration 1: yes / no.</li>
+      <li><strong>Approve scope</strong> as locked Apr 21 — TG Mini App + PWA + voice + passport + vet voice-memo + lost-pet poster + QR-share. Wearable, emotion-estimation, native, speakers all out of v1.</li>
+      <li><strong>Approve GTM-budget framework</strong> — start at low scenario, calibrate up after Brief #10 returns + Phase-1 proof.</li>
+      <li><strong>Approve Phase-1 success gate</strong> — 100 paying × $3 / mo as the proof-point that unlocks the institutional raise.</li>
+      <li><strong>Confirm next review-call slot</strong> — Tuesday Apr 28 was tentative; status as of Apr 30 unknown. Re-set for the next available slot.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 8</span><span class="section-label">What's in Iteration 2</span>
+    <h3>The full polished package — <em>this week</em>.</h3>
+  </div>
+  <p>Iteration 2 is the full polished package. Drafts already in hand at <code style="font-family:var(--mono); font-size:13px; color:var(--ink-mid);">pipeline/concept/keep-pet/</code>; sequenced for the next review call:</p>
+  <ul>
+    <li><strong>vision.md v4</strong> — internationalized cases · Russia-separation as principle · two-rail GTM · subscription primary · vet voice-memo + lost-pet poster as core · wearables to v3 · pet-emotion-estimation as v3 lane · cats-first positioning · reputation-marketing GTM · Phase-1 success gate</li>
+    <li><strong>product-spec v2</strong> — post Apr-21 lock-ins folded as addendum</li>
+    <li><strong>Refreshed cost-model</strong> at <code style="font-family:var(--mono);font-size:13px;color:var(--ink-mid);">package/06-cost-model.md</code> extending this one-pager</li>
+    <li><strong>Refreshed GTM</strong> at <code style="font-family:var(--mono);font-size:13px;color:var(--ink-mid);">package/07-gtm.md</code></li>
+    <li><strong>Investor overlay</strong> at <code style="font-family:var(--mono);font-size:13px;color:var(--ink-mid);">package/04-investor-overlay.md</code> — answers "what when immigrants run out?" pre-emptively with Brief #10 §5 numbers</li>
+    <li><strong>Roundtable REVIEW</strong> — Conny + Council redteam pass before assembly</li>
+  </ul>
+
+  <div class="note">
+    <span class="note-label">Trust signal</span>
+    <div class="note-body">This one-pager is the late-but-honest first delivery on the Apr 22–23 commitment. Iteration 1 ships this document. Iteration 2 wraps the full package this week. The ceiling is firm; the mechanism is named; the risks are named alongside. <strong>That is the asymmetric honesty that compounds.</strong></div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Cone Red</div>
+  Keep Pet · MVP Budget One-Pager · Iteration 1 · 2026-04-30<br>
+  <code>pipeline/concept/keep-pet/proposal/iteration-1-budget-onepager.html</code>
+</footer>
+
+</div>
+</body>
+</html>

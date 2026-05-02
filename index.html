@@ -5,33 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
-<title>Keep Pet — Видение, стратегия, план · v2 · Для Олега и команды</title>
+<title>Keep Pet — Главная · Видение, дорожная карта, план</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F7F2E8;
-    --bg-elev: #FBF7EE;
-    --bg-card: #F0E9DB;
-    --ink: #1F262B;
-    --ink-mid: #3D4650;
-    --ink-dim: #6B737A;
-    --ink-faint: #9AA09F;
-    --accent: #B8522D;
-    --accent-deep: #8F3E20;
-    --accent-soft: rgba(184, 82, 45, 0.07);
-    --ochre: #C8872D;
-    --ochre-soft: rgba(200, 135, 45, 0.08);
-    --line: #E2D8C4;
-    --line-strong: #C9BEA5;
-    --success: #6B8E4E;
-    --success-soft: rgba(107, 142, 78, 0.1);
-    --cat: #9C7BA8;
-    --dog: #6A94BF;
-    --serif: "Fraunces", "Source Serif 4", "GT Alpina", Georgia, "Times New Roman", serif;
-    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "PT Sans", sans-serif;
-    --mono: "IBM Plex Mono", "SF Mono", "Menlo", monospace;
+    --bg: #F7F2E8; --bg-elev: #FBF7EE; --bg-card: #F0E9DB;
+    --ink: #1F262B; --ink-mid: #3D4650; --ink-dim: #6B737A; --ink-faint: #9AA09F;
+    --accent: #B8522D; --accent-deep: #8F3E20; --accent-soft: rgba(184, 82, 45, 0.07);
+    --ochre: #C8872D; --ochre-soft: rgba(200, 135, 45, 0.10);
+    --line: #E2D8C4; --line-strong: #C9BEA5;
+    --success: #6B8E4E; --success-soft: rgba(107, 142, 78, 0.12);
+    --warn: #C8872D; --warn-soft: rgba(200, 135, 45, 0.12);
+    --serif: "Fraunces", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "IBM Plex Mono", monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body {
@@ -39,1374 +28,269 @@
     color: var(--ink);
     font-family: var(--sans);
     font-size: 17px;
-    line-height: 1.65;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  /* Subtle paper grain */
   body::before {
     content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba(184, 82, 45, 0.015) 0%, transparent 40%),
-      radial-gradient(circle at 80% 70%, rgba(200, 135, 45, 0.015) 0%, transparent 40%);
-    z-index: -1;
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image: radial-gradient(ellipse at top, rgba(255,255,255,0.5), transparent 60%);
   }
-  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(184, 82, 45, 0.35); transition: border-color 0.15s ease; }
-  a:hover { border-bottom-color: var(--accent); }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 56px 32px 96px; position: relative; z-index: 1; }
 
-  .wrap { max-width: 880px; margin: 0 auto; padding: 64px 32px; }
+  /* Hero */
+  .hero { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+  .stamp { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .stamp .dot { width: 4px; height: 4px; background: var(--accent); border-radius: 50%; }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(40px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 22px; color: var(--ink); }
+  h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .lede { font-family: var(--serif); font-size: 23px; line-height: 1.5; color: var(--ink-mid); max-width: 660px; }
+  .meta-row { display: flex; gap: 28px; margin-top: 36px; flex-wrap: wrap; font-size: 14px; }
+  .meta-row .meta-cell { display: flex; flex-direction: column; gap: 4px; }
+  .meta-row .meta-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
+  .meta-row .meta-value { color: var(--ink-mid); font-weight: 500; }
 
-  /* ── Hero ── */
-  header.hero { padding: 96px 0 72px 0; border-bottom: 1px solid var(--line); }
-  .hero .eyebrow {
-    font-family: var(--mono);
-    font-style: italic;
-    color: var(--accent);
-    font-size: 13px;
-    letter-spacing: 0.04em;
-    margin-bottom: 28px;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .hero .eyebrow::before {
-    content: "";
-    width: 28px;
-    height: 1px;
-    background: var(--accent);
-  }
-  .hero h1 {
-    font-family: var(--serif);
-    font-size: 66px;
-    line-height: 1.05;
-    font-weight: 400;
-    margin-bottom: 36px;
-    letter-spacing: -0.015em;
-    color: var(--ink);
-    text-wrap: balance;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 400;
-  }
-  .hero .subtitle {
-    font-size: 20px;
-    color: var(--ink-mid);
-    max-width: 680px;
-    margin-bottom: 48px;
-    line-height: 1.55;
-  }
-  .hero .meta {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 28px;
-    padding-top: 36px;
-    border-top: 1px solid var(--line);
-    font-size: 14px;
-  }
-  .hero .meta .label {
-    font-family: var(--mono);
-    font-style: italic;
-    color: var(--ink-faint);
-    font-size: 11px;
-    margin-bottom: 8px;
-    letter-spacing: 0.02em;
-  }
-  .hero .meta .value {
-    color: var(--ink);
-    font-weight: 500;
-  }
-  .hero .version-stamp {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--accent-soft);
-    color: var(--accent-deep);
-    padding: 4px 14px;
-    border-radius: 2px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.02em;
-    margin-bottom: 28px;
-    font-weight: 400;
-    border-left: 2px solid var(--accent);
-  }
+  /* Section heads */
+  h2 { font-family: var(--serif); font-weight: 500; font-size: 30px; letter-spacing: -0.015em; margin: 64px 0 24px; }
+  h2 .num { font-family: var(--mono); font-size: 13px; color: var(--accent); margin-right: 14px; letter-spacing: 0.08em; }
 
-  /* ── Sections ── */
-  section { padding: 80px 0; border-bottom: 1px solid var(--line); }
-  section:last-of-type { border-bottom: none; }
-
-  .section-head { margin-bottom: 40px; }
-  .section-num {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 15px;
-    color: var(--accent);
-    font-weight: 400;
-    margin-right: 14px;
-  }
-  .section-label {
-    font-family: var(--serif);
-    font-size: 14px;
-    color: var(--ink-dim);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-variant: small-caps;
-    font-weight: 500;
-  }
-  h3 {
-    font-family: var(--serif);
-    font-size: 38px;
-    line-height: 1.15;
-    font-weight: 400;
-    margin: 12px 0 24px 0;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    text-wrap: balance;
-  }
-  h3 em { font-style: italic; color: var(--accent); }
-  h4 {
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 500;
-    margin-top: 36px;
-    margin-bottom: 14px;
-    color: var(--ink);
-    letter-spacing: -0.005em;
-  }
-  p { margin-bottom: 22px; color: var(--ink); }
-  p.lead {
-    font-family: var(--serif);
-    font-size: 22px;
-    line-height: 1.45;
-    color: var(--ink-mid);
-    margin-bottom: 32px;
-    font-weight: 400;
-    max-width: 720px;
-  }
-  p.lead em { font-style: italic; color: var(--accent); }
-  p.dim { color: var(--ink-dim); }
-  ul, ol { margin: 0 0 24px 24px; }
-  li { margin-bottom: 12px; color: var(--ink); }
-  strong { font-weight: 600; color: var(--ink); }
-  em { font-style: italic; }
-
-  /* ── Pull quote ── */
-  .pullquote {
-    margin: 48px 0;
-    padding: 32px 0 28px 0;
-    border-top: 1px solid var(--accent);
-    border-bottom: 1px solid var(--accent);
-    text-align: left;
-  }
-  .pullquote-text {
-    font-family: var(--serif);
-    font-size: 30px;
-    line-height: 1.3;
-    font-weight: 400;
-    color: var(--ink);
-    font-style: italic;
-    letter-spacing: -0.005em;
-    margin-bottom: 18px;
-    text-wrap: balance;
-  }
-  .pullquote-cite {
-    font-family: var(--serif);
-    font-size: 13px;
-    color: var(--accent);
-    font-variant: small-caps;
-    letter-spacing: 0.1em;
-    font-weight: 500;
-    text-transform: uppercase;
-  }
-
-  /* ── Cards ── */
-  .card {
-    background: transparent;
-    border-top: 1px solid var(--line);
-    padding: 26px 0 10px 0;
-    margin-bottom: 4px;
-  }
-  .card .title {
-    font-family: var(--serif);
-    font-size: 21px;
-    font-weight: 500;
-    margin-bottom: 10px;
-    color: var(--ink);
-    letter-spacing: -0.005em;
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .card .stage {
-    font-family: var(--mono);
-    font-style: italic;
-    font-size: 11px;
-    color: var(--accent);
-    font-weight: 400;
-    letter-spacing: 0.02em;
-  }
-  .card .stage.v1 { color: var(--ochre); }
-  .card .stage.v2 { color: var(--ink-faint); }
-  .card p { color: var(--ink-mid); font-size: 16px; margin-bottom: 0; line-height: 1.6; }
-
-  .grid { display: grid; gap: 0; margin: 32px 0; }
-  .grid-2 { grid-template-columns: 1fr 1fr; column-gap: 40px; }
-  .grid-3 { grid-template-columns: repeat(3, 1fr); column-gap: 32px; }
-  @media (max-width: 760px) {
-    .grid-2, .grid-3, .hero .meta { grid-template-columns: 1fr; column-gap: 0; }
-    .hero h1 { font-size: 40px; }
-    h3 { font-size: 28px; }
-    p.lead { font-size: 18px; }
-    .pullquote-text { font-size: 22px; }
-    .wrap { padding: 32px 20px; }
-  }
-
-  /* ── Hero stories ── */
-  .hero-story {
-    padding: 40px 0;
-    margin: 24px 0;
-    border-top: 1px solid var(--line);
-  }
-  .hero-story:last-of-type { border-bottom: 1px solid var(--line); }
-  .hero-story .persona {
-    display: grid;
-    grid-template-columns: 84px 1fr;
-    gap: 24px;
-    align-items: start;
-    margin-bottom: 28px;
-  }
-  .hero-story .persona-portrait {
-    width: 80px;
-    height: 80px;
-    color: var(--accent);
-    flex-shrink: 0;
-  }
-  .hero-story .persona-name {
-    font-family: var(--serif);
-    font-size: 24px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 4px;
-    letter-spacing: -0.005em;
-  }
-  .hero-story .persona-meta {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 14px;
-    color: var(--ink-dim);
-    line-height: 1.5;
-  }
-  .hero-story .persona-meta .tag {
-    display: inline-block;
-    font-family: var(--mono);
-    font-style: normal;
-    font-size: 10px;
-    color: var(--accent);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 2px 7px;
-    border: 1px solid var(--line-strong);
-    border-radius: 2px;
-    margin-left: 6px;
-    vertical-align: 1px;
-  }
-  .hero-story .scene-text {
-    font-size: 17px;
-    line-height: 1.75;
-    color: var(--ink);
-    max-width: 660px;
-  }
-  .hero-story .scene-text p { margin-bottom: 18px; }
-  .hero-story .scene-text p:last-child { margin-bottom: 0; }
-  .hero-story .scene-text em {
-    color: var(--accent);
-    font-style: italic;
-    font-family: var(--serif);
-    font-size: 18px;
-  }
-
-  /* ── Research findings grid ── */
-  .findings-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 24px;
-    row-gap: 32px;
-    margin: 40px 0;
-  }
-  @media (max-width: 860px) { .findings-grid { grid-template-columns: 1fr; } }
-  .finding {
-    border-top: 1px solid var(--line);
-    padding-top: 20px;
-    position: relative;
-  }
-  .finding .rr-num {
-    font-family: var(--mono);
-    font-style: italic;
-    font-size: 11px;
-    color: var(--ink-faint);
-    letter-spacing: 0.02em;
-    margin-bottom: 6px;
-  }
-  .finding .rr-title {
-    font-family: var(--serif);
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 12px;
-    line-height: 1.3;
-    letter-spacing: -0.005em;
-  }
-  .finding .rr-verdict {
-    font-family: var(--serif);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-variant: small-caps;
-    font-weight: 600;
-    margin-bottom: 12px;
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 2px;
-  }
-  .finding .rr-verdict.confirm { color: var(--success); background: var(--success-soft); }
-  .finding .rr-verdict.partial { color: var(--ochre); background: var(--ochre-soft); }
-  .finding .rr-verdict.pivot { color: var(--accent); background: var(--accent-soft); }
-  .finding .rr-text { font-size: 14px; color: var(--ink-mid); line-height: 1.6; }
-  .finding .rr-text strong { color: var(--ink); font-weight: 600; }
-
-  /* ── Competitor rows ── */
-  .competitor-row {
-    display: grid;
-    grid-template-columns: 2.5fr 3fr 2.8fr;
-    gap: 24px;
-    padding: 20px 0;
-    border-top: 1px solid var(--line);
-    align-items: start;
-  }
-  .competitor-row:last-child { border-bottom: 1px solid var(--line); }
-  @media (max-width: 760px) { .competitor-row { grid-template-columns: 1fr; gap: 12px; } }
-  .competitor-row .who {
-    font-family: var(--serif);
-    font-weight: 500;
-    color: var(--ink);
-    font-size: 18px;
-    letter-spacing: -0.005em;
-  }
-  .competitor-row .who .subtag {
-    display: block;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 13px;
-    color: var(--ink-dim);
-    font-weight: 400;
-    margin-top: 4px;
-  }
-  .competitor-row .miss {
-    font-size: 15px;
-    color: var(--ink-mid);
-    line-height: 1.55;
-  }
-  .competitor-row .we {
-    font-family: var(--serif);
-    font-size: 15px;
-    color: var(--accent-deep);
-    font-style: italic;
-    padding-left: 18px;
-    border-left: 2px solid var(--accent);
-    line-height: 1.5;
-  }
-
-  /* ── Tables ── */
-  table { width: 100%; border-collapse: collapse; margin: 32px 0; font-size: 15px; }
-  th, td { padding: 16px 16px 16px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
-  th {
-    font-family: var(--serif);
-    color: var(--ink-dim);
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-variant: small-caps;
-    border-bottom: 1px solid var(--ink-faint);
-  }
-  td { color: var(--ink); }
-  td.dim { color: var(--ink-mid); font-size: 14px; }
-
-  /* ── Pills ── */
-  .pill {
-    display: inline-block;
-    font-family: var(--serif);
-    font-size: 11px;
-    padding: 2px 9px;
-    border-radius: 2px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    font-variant: small-caps;
-    font-weight: 600;
-    border: 1px solid transparent;
-  }
-  .pill-high { color: var(--success); border-color: rgba(107, 142, 78, 0.4); background: var(--success-soft); }
-  .pill-med { color: var(--ochre); border-color: rgba(200, 135, 45, 0.4); background: var(--ochre-soft); }
-  .pill-hyp { color: var(--ink-dim); border-color: var(--line-strong); background: transparent; }
-
-  /* ── Visualization containers ── */
-  .viz {
-    margin: 48px 0;
-    padding: 36px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .viz-title {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 14px;
-    letter-spacing: 0.04em;
-    color: var(--ink-dim);
-    margin-bottom: 24px;
-    font-weight: 400;
-  }
-  .viz-title::before {
-    content: "Fig. ";
-    color: var(--accent);
-    font-weight: 500;
-  }
-  .viz-caption {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 13px;
-    color: var(--ink-faint);
-    margin-top: 20px;
-    line-height: 1.5;
-    max-width: 640px;
-  }
-
-  /* ── Diaspora monograms ── */
-  .diaspora {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin: 28px 0;
-  }
-  @media (max-width: 760px) { .diaspora { grid-template-columns: repeat(2, 1fr); } }
-  .country {
-    padding: 18px 14px 14px 14px;
-    text-align: center;
-    border: 1px solid var(--line);
-    border-radius: 2px;
-    position: relative;
+  /* Status grid */
+  .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; }
+  .doc-card {
     background: var(--bg-elev);
-  }
-  .country.target { border-color: var(--accent); }
-  .country.nontarget {
-    opacity: 0.45;
-    border-style: dashed;
-    background: transparent;
-  }
-  .country.nontarget::after {
-    content: "не таргет";
-    position: absolute;
-    top: -8px;
-    right: 10px;
-    font-family: var(--mono);
-    font-style: italic;
-    font-size: 9px;
-    letter-spacing: 0.02em;
-    background: var(--bg);
-    color: var(--ink-dim);
-    padding: 1px 6px;
-    font-weight: 400;
-  }
-  .country .code {
-    font-family: var(--serif);
-    font-size: 26px;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    font-variant: small-caps;
-    display: block;
-    margin-bottom: 2px;
-  }
-  .country.nontarget .code { color: var(--ink-dim); }
-  .country .name {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 12px;
-    color: var(--ink-dim);
-    margin-top: 4px;
-  }
-
-  /* ── Editorial notes / disclaimers ── */
-  .note {
-    margin: 28px 0;
-    padding: 4px 0 4px 22px;
-    border-left: 2px solid var(--accent);
-  }
-  .note-label {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 12px;
-    color: var(--accent);
-    font-variant: small-caps;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-  .note-body {
-    font-family: var(--serif);
-    font-size: 15px;
-    color: var(--ink-mid);
-    line-height: 1.65;
-    font-style: italic;
-  }
-  .note-body strong { font-style: normal; color: var(--ink); font-weight: 600; }
-
-  /* ── Footer ── */
-  footer {
-    padding: 56px 0 72px 0;
-    color: var(--ink-faint);
-    font-size: 13px;
-    text-align: center;
-    font-family: var(--serif);
-    font-style: italic;
-  }
-  footer .logo {
-    font-family: var(--serif);
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    font-variant: small-caps;
-    text-transform: uppercase;
-    font-style: normal;
-    margin-bottom: 12px;
-    font-size: 14px;
-  }
-  footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
-
-  hr { border: none; border-top: 1px solid var(--line); margin: 48px 0; }
-
-  /* ── Next steps ── */
-  .next-steps {
-    margin-top: 36px;
-    padding: 0;
-  }
-  .next-steps h4 { margin-top: 0; margin-bottom: 20px; }
-  .next-steps ol {
-    counter-reset: step;
-    margin-left: 0;
-    list-style: none;
-  }
-  .next-steps ol li {
-    counter-increment: step;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 26px 26px 22px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
     position: relative;
-    padding-left: 52px;
-    margin-bottom: 18px;
+  }
+  .doc-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -18px rgba(31, 38, 43, 0.18);
+  }
+  .doc-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .doc-card-name { font-family: var(--serif); font-size: 22px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
+  .badge { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; font-weight: 500; }
+  .badge-approved { background: var(--success-soft); color: var(--success); }
+  .badge-review { background: var(--warn-soft); color: var(--ochre); }
+  .badge-draft { background: var(--accent-soft); color: var(--accent); }
+  .doc-card-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--ink-faint); text-transform: uppercase; }
+  .doc-card-tagline { font-family: var(--serif); font-size: 16px; line-height: 1.45; color: var(--ink-mid); font-style: italic; flex: 1; }
+  .doc-card-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--line); margin-top: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--ink-faint); text-transform: uppercase; }
+  .doc-card-foot .arrow { font-size: 16px; color: var(--accent); transition: transform .2s; }
+  .doc-card:hover .doc-card-foot .arrow { transform: translateX(4px); }
+
+  /* Timeline */
+  .timeline { border-left: 2px solid var(--line); padding-left: 28px; margin-top: 24px; }
+  .tl-item { padding-bottom: 24px; position: relative; }
+  .tl-item::before { content: ""; position: absolute; left: -34px; top: 7px; width: 8px; height: 8px; background: var(--bg); border: 2px solid var(--accent); border-radius: 50%; }
+  .tl-item.done::before { background: var(--accent); }
+  .tl-date { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; }
+  .tl-title { font-family: var(--serif); font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .tl-body { font-size: 14px; color: var(--ink-mid); line-height: 1.55; }
+  .tl-body a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(184, 82, 45, 0.3); }
+  .tl-body a:hover { border-bottom-color: var(--accent); }
+
+  /* People grid */
+  .people-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .person {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    padding: 18px 22px;
+    border-radius: 4px;
+  }
+  .person-name { font-family: var(--serif); font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+  .person-role { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+  .person-note { font-size: 14px; color: var(--ink-mid); line-height: 1.5; }
+
+  /* Notes */
+  .note-block {
+    background: var(--bg-card);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin-top: 32px;
+    font-size: 14px;
     line-height: 1.6;
+    color: var(--ink-mid);
   }
-  .next-steps ol li::before {
-    content: counter(step, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    top: 1px;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 20px;
-    color: var(--accent);
-    font-weight: 500;
-    width: 36px;
-  }
+  .note-block strong { color: var(--ink); }
+  .note-block code { font-family: var(--mono); font-size: 13px; background: var(--bg-elev); padding: 2px 6px; border-radius: 2px; }
 
-  /* ── Cat-dog strip (used in section 04) ── */
-  .species-strip {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 36px 0 24px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .species-strip > div {
-    padding: 24px 28px 24px 0;
-  }
-  .species-strip > div + div {
-    padding-left: 36px;
-    border-left: 1px solid var(--line);
-  }
-  .species-strip .species-label {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 13px;
-    color: var(--ink-dim);
-    letter-spacing: 0.06em;
-    font-variant: small-caps;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 10px;
-  }
-  .species-strip .species-role {
-    font-family: var(--serif);
-    font-size: 24px;
-    color: var(--ink);
-    font-weight: 500;
-    line-height: 1.2;
-  }
-  .species-strip .species-role em { color: var(--accent); font-style: italic; }
-  @media (max-width: 760px) {
-    .species-strip { grid-template-columns: 1fr; }
-    .species-strip > div + div { padding-left: 0; border-left: none; border-top: 1px solid var(--line); }
-  }
-
-  .q { color: var(--ink); font-style: italic; }
-  .q::before { content: "«"; color: var(--accent); font-style: normal; }
-  .q::after { content: "»"; color: var(--accent); font-style: normal; }
-
-  /* Code */
-  code {
-    font-family: var(--mono);
-    font-size: 0.88em;
-    background: var(--accent-soft);
-    color: var(--accent-deep);
-    padding: 1px 6px;
-    border-radius: 2px;
+  @media (max-width: 600px) {
+    .wrap { padding: 36px 20px 64px; }
+    .hero { margin-bottom: 40px; padding-bottom: 28px; }
+    h2 { margin: 48px 0 20px; }
+    .meta-row { gap: 16px; }
   }
 </style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body data-page="index" data-lang="ru">
+<script defer src="assets/site.js"></script>
 
 <div class="wrap">
 
-<header class="hero">
-  <div class="version-stamp">v2 · исследования интегрированы · 2026-04-18</div>
-  <div class="eyebrow">Видение · Стратегия · План</div>
-  <h1>Keep Pet — это место, где твоего питомца <em>уже знают</em>.</h1>
-  <p class="subtitle">Голосовой спутник, который один раз учится твоему питомцу — а дальше, всю его жизнь, помнит его так, как никто другой не помнит. Один мозг. Много дверей. Живой паспорт, который питомец действительно носит с собой.</p>
-  <div class="meta">
-    <div>
-      <div class="label">Аудитория</div>
-      <div class="value">Олег · Юля · команда · советники</div>
+  <header class="hero">
+    <div class="stamp">
+      <span>Keep Pet</span>
+      <span class="dot"></span>
+      <span>Внутренний документ</span>
+      <span class="dot"></span>
+      <span>Для Олега и команды</span>
     </div>
-    <div>
-      <div class="label">Статус</div>
-      <div class="value">Видение v3 утверждено, 9 исследований интегрированы</div>
-    </div>
-    <div>
-      <div class="label">Следующая веха</div>
-      <div class="value">Пакет к 15 июля 2026</div>
-    </div>
-    <div>
-      <div class="label">Автор</div>
-      <div class="value">Cone Red × Oleg × Yulia</div>
-    </div>
-  </div>
-</header>
+    <h1>Видение, дорожная карта и план — <em>в одном месте</em>.</h1>
+    <p class="lede">Этот сайт — оперативный центр для Iteration 1: что готово, что на согласовании, что меняется. Каждая страница — отдельный документ, у каждого своя версия и свой статус. Обновления — точечные.</p>
 
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 01.</span>
-    <span class="section-label">Проблема</span>
-    <h3>Никто не знает твоего питомца, кроме тебя.</h3>
-  </div>
-
-  <p class="lead">И когда тебе нужна помощь — каждый поиск, каждый форум, каждый звонок ветеринару, каждая сессия с ChatGPT начинается с нуля. Ты снова объясняешь, кто твой пёс. Сколько ему. Что он ел вчера. Какие у него прививки. <em>Каждый раз — заново.</em></p>
-
-  <p>А паспорт питомца — если он вообще есть — лежит бумажной книжкой в ящике, и прочитать его умеет только тот ветеринар, который его подписал. Часто от руки, часто по-русски из одной страны, а читает его ветеринар из другой. Информация не накапливается; она рассыпается.</p>
-
-  <div class="pullquote">
-    <div class="pullquote-text">Паспорт, который чтобы всё это накапливалось и искусственный интеллект мог бы более точечно обрабатывать информацию.</div>
-    <div class="pullquote-cite">Олег · 2026-04-08</div>
-  </div>
-
-  <p>Keep Pet решает эту боль буквально — становясь тем единственным местом, которое уже знает твоего питомца. Голосом. Без обучения интерфейсу. Без повторных объяснений.</p>
-</section>
-
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 02.</span>
-    <span class="section-label">Три жизни</span>
-    <h3>Не презентация, не дорожная карта — <em>три реальных человека</em>, которых Keep Pet спасает от повторного объяснения.</h3>
-  </div>
-
-  <div class="hero-story">
-    <div class="persona">
-      <svg class="persona-portrait" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <!-- Mura curled cat -->
-        <path d="M20 46 Q13 32 24 23 Q38 17 50 24 Q61 33 58 47 Q53 58 40 60 Q26 60 20 46 Z"/>
-        <!-- Ears -->
-        <path d="M27 24 L25 15 L33 20"/>
-        <path d="M46 21 L51 13 L53 22"/>
-        <!-- Tail curling -->
-        <path d="M57 40 Q68 42 65 55 Q58 62 48 58"/>
-        <!-- Closed eyes -->
-        <path d="M30 33 Q32 31 34 33"/>
-        <path d="M42 32 Q44 30 46 32"/>
-        <!-- Nose + mouth -->
-        <path d="M37 38 L39 40 L37 41"/>
-        <path d="M37 41 Q35 43 33 42"/>
-        <path d="M37 41 Q39 43 41 42"/>
-        <!-- Whiskers -->
-        <path d="M30 40 L24 39" opacity="0.5"/>
-        <path d="M46 40 L52 39" opacity="0.5"/>
-      </svg>
-      <div>
-        <div class="persona-name">Дина — Алматы, год после переезда</div>
-        <div class="persona-meta">35 лет · кошка Мура, 11 лет · переехала из Москвы<span class="tag">KZ</span><span class="tag">ветпаспорт</span></div>
+    <div class="meta-row">
+      <div class="meta-cell">
+        <span class="meta-label">Последнее обновление</span>
+        <span class="meta-value">2026-05-02</span>
+      </div>
+      <div class="meta-cell">
+        <span class="meta-label">Окно обзора</span>
+        <span class="meta-value">2 — 8 мая 2026</span>
+      </div>
+      <div class="meta-cell">
+        <span class="meta-label">Автор</span>
+        <span class="meta-value">Дима Левин · Cone Red</span>
+      </div>
+      <div class="meta-cell">
+        <span class="meta-label">Доступ</span>
+        <span class="meta-value">По паролю · не индексируется</span>
       </div>
     </div>
-    <div class="scene-text">
-      <p>Дина переехала из Москвы в Алматы в 2023-м с одиннадцатилетней кошкой Мурой. Ветпаспорт — советская бумажная книжечка: четыре штампа московской клиники, две рукописные записи алматинского ветеринара, одна наклейка отклеивается с задней обложки. Когда прошлой весной у Муры поехали почки, Дина потратила четыре часа, перепечатывая паспорт в ChatGPT, прежде чем он смог сказать что-то полезное. Он сказал сходить к ветеринару. <em>Она уже сидела у ветеринара.</em></p>
-      <p>Keep Pet предлагает сфотографировать книжечку. OCR читает 60% чисто; остальное — почерк алматинского ветеринара, смазанный номер партии прививки, дата, которая может быть и 2019, и 2021 — <em>Keep Pet задаёт четыре вопроса с вариантами ответов, мягко.</em> Через десять минут паспорт Муры — поисковый, делимый, живой документ.</p>
-      <p>Когда в декабре значения креатинина снова уходят, Дина говорит: «Мура опять вялая». Голос отвечает в её имени, уже зная тренд почек из паспорта, смену корма в сентябре, и два случая, когда этот паттерн был раньше. Никакой перепечатки. Никакого старта с нуля.</p>
-      <p>Когда Дина улетает в Тбилиси на свадьбу и оставляет Муру соседке — она отправляет QR. Соседка сканирует. Ветклиника в Тбилиси, куда Мура попадёт на экстренный приём, тоже сканирует. Никто не спрашивает бумаги. <em>Мура сама носит себя.</em></p>
-    </div>
-  </div>
+  </header>
 
-  <div class="hero-story">
-    <div class="persona">
-      <svg class="persona-portrait" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <!-- Winston doodle head-tilt -->
-        <g transform="rotate(-8 40 40)">
-          <!-- Head -->
-          <path d="M22 28 Q14 42 22 56 Q40 66 58 56 Q66 42 58 28 Q40 18 22 28 Z"/>
-          <!-- Floppy ears -->
-          <path d="M20 30 Q10 38 16 52 Q20 58 24 54"/>
-          <path d="M60 30 Q70 38 64 52 Q60 58 56 54"/>
-          <!-- Curly mane tufts -->
-          <path d="M16 34 Q12 36 14 40"/>
-          <path d="M64 34 Q68 36 66 40"/>
-          <path d="M26 22 Q28 18 32 22"/>
-          <path d="M48 22 Q52 18 54 22"/>
-          <!-- Eyes -->
-          <circle cx="31" cy="38" r="1.5" fill="currentColor"/>
-          <circle cx="49" cy="38" r="1.5" fill="currentColor"/>
-          <!-- Nose -->
-          <path d="M36 46 L40 50 L44 46 Z"/>
-          <!-- Tongue out -->
-          <path d="M40 51 Q37 58 40 60 Q43 58 40 51 Z"/>
-        </g>
-      </svg>
-      <div>
-        <div class="persona-name">Джейк — Бруклин, перерос ChatGPT</div>
-        <div class="persona-meta">31 год · лабрадудл Уинстон, 2 года · инженер-разработчик<span class="tag">US+</span><span class="tag">PWA</span></div>
+  <h2><span class="num">01</span>Документы</h2>
+
+  <div class="status-grid">
+
+    <a class="doc-card" href="vision.html">
+      <div class="doc-card-head">
+        <div class="doc-card-name">Видение</div>
+        <span class="badge badge-approved">Утверждено</span>
       </div>
-    </div>
-    <div class="scene-text">
-      <p>Джейк пользовался ChatGPT для Уинстона с того момента, как его завёл. Работало — пока не перестало. В сентябре у Уинстона пошла хромота. Джейк объяснил хромоту ChatGPT — в четвёртый раз. ChatGPT предложил семь возможных причин, ни одна из них не учитывала, что Уинстон две недели назад перешёл на grain-free корм и что последние три прогулки были длиннее обычного. <em>ChatGPT не помнит.</em></p>
-      <p>Keep Pet открывается во вкладке браузера. Джейк загружает бумаги от приюта, карту прививок, три месяца данных с ошейника Fi — OAuth-пул, как с фитнес-трекерами. Каждое утро, перед кофе, тёплый голос спрашивает, как прошла ночь. Джейк мычит «нормально». Во вторник в два часа, в середине Zoom-а, Уинстон снова хромает. Джейк отключает микрофон и произносит это вслух.</p>
-      <p>Ответ приходит за полсекунды, в имени Уинстона, с опорой на смену корма, скачок активности, две предыдущие хромоты, и мягкий совет снизить нагрузку на 48 часов прежде, чем записаться к ортопеду. <em>Впервые ИИ помнит Уинстона.</em></p>
-      <p>В воскресенье приходит 15-секундный голосовой портрет — взгляд Уинстона на неделю, со ссылкой на что-то реальное. Джейк слушает дважды. Потом трижды.</p>
-    </div>
-  </div>
-
-  <div class="hero-story">
-    <div class="persona">
-      <svg class="persona-portrait" viewBox="0 0 100 80" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <!-- Cat (Bagira) left -->
-        <g>
-          <!-- Head -->
-          <path d="M12 30 Q6 38 12 48 Q22 54 30 48 Q36 38 30 30 Q22 24 12 30 Z"/>
-          <!-- Ears -->
-          <path d="M14 30 L11 20 L19 25"/>
-          <path d="M28 28 L26 18 L22 24"/>
-          <!-- Eyes -->
-          <circle cx="17" cy="36" r="1" fill="currentColor"/>
-          <circle cx="25" cy="36" r="1" fill="currentColor"/>
-          <!-- Nose -->
-          <path d="M20 41 L22 43 L20 44"/>
-          <!-- Body -->
-          <path d="M15 48 Q11 62 18 72"/>
-          <path d="M30 48 Q32 58 28 72"/>
-          <!-- Tail curling up -->
-          <path d="M33 50 Q42 44 38 34"/>
-        </g>
-        <!-- Dog (Pirat) right -->
-        <g transform="translate(48, 0)">
-          <!-- Head -->
-          <path d="M12 22 Q4 32 12 46 Q28 54 40 46 Q48 32 40 22 Q28 14 12 22 Z"/>
-          <!-- Floppy ears -->
-          <path d="M10 26 Q2 34 8 48"/>
-          <path d="M42 26 Q50 34 44 48"/>
-          <!-- Eyes -->
-          <circle cx="18" cy="32" r="1.2" fill="currentColor"/>
-          <circle cx="34" cy="32" r="1.2" fill="currentColor"/>
-          <!-- Nose -->
-          <path d="M23 40 L26 43 L29 40 Z"/>
-          <!-- Tongue -->
-          <path d="M26 44 Q24 48 26 50 Q28 48 26 44 Z"/>
-          <!-- Body -->
-          <path d="M15 46 Q9 62 18 72"/>
-          <path d="M40 46 Q46 62 36 72"/>
-          <!-- Tail -->
-          <path d="M44 52 Q52 50 50 44"/>
-        </g>
-      </svg>
-      <div>
-        <div class="persona-name">Надя — Ереван, кошка и собака и частые перелёты</div>
-        <div class="persona-meta">29 лет · кошка Багира + собака Пират · ремоут в сербский финтех<span class="tag">AM</span><span class="tag">TMA+PWA</span></div>
+      <div class="doc-card-tag">v3 · 2026-05-02 · 14 research integrated</div>
+      <div class="doc-card-tagline">«Keep Pet — это место, где твоего питомца уже знают.» Cats-first wedge, TMA+PWA MLP, Германия #1.</div>
+      <div class="doc-card-foot">
+        <span>Олег + Юлия — 21 апреля</span>
+        <span class="arrow">→</span>
       </div>
+    </a>
+
+    <a class="doc-card" href="roadmap.html">
+      <div class="doc-card-head">
+        <div class="doc-card-name">Дорожная карта</div>
+        <span class="badge badge-review">На согласовании</span>
+      </div>
+      <div class="doc-card-tag">2026-05-02 · команда Keep Pet</div>
+      <div class="doc-card-tagline">90 дней до live-паспорта. Phase-1 кошки → Phase-2 собаки → Phase-3 голос → Phase-4 wearable.</div>
+      <div class="doc-card-foot">
+        <span>Жду фидбэка к 8 мая</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a class="doc-card" href="plan.html">
+      <div class="doc-card-head">
+        <div class="doc-card-name">План — Iteration 1</div>
+        <span class="badge badge-review">На согласовании</span>
+      </div>
+      <div class="doc-card-tag">v2 · 2026-05-02 · бюджет one-pager</div>
+      <div class="doc-card-tagline">Cats wedge MLP. TMA + PWA. Vet voice-memo + lost-pet poster + live passport. 100 платящих, D30 ≥ 25%.</div>
+      <div class="doc-card-foot">
+        <span>Жду фидбэка к 8 мая</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <h2><span class="num">02</span>Хронология</h2>
+
+  <div class="timeline">
+
+    <div class="tl-item done">
+      <div class="tl-date">14 апреля 2026</div>
+      <div class="tl-title">Первый созвон по концепту</div>
+      <div class="tl-body">VFA (Voice-First AI) гипотеза; первое позиционирование. <a href="vision.html">См. видение</a>.</div>
     </div>
-    <div class="scene-text">
-      <p>Надя уехала из Питера в Ереван в 2022-м, увезя кошку Багиру и два года спустя подобрав уличную собаку, которую назвала Пират. Она работает на сербский финтех удалённо; в Белграде бывает дважды в год. Каждая поездка — ветсправки, договор с пансионом, инструктаж новому ситтеру. Бумажки не сжимаются никогда.</p>
-      <p>Она заводит в Keep Pet Багиру и Пирата вместе. Паспорт держит обоих. У Пирата истории нет — Keep Pet задаёт десять вопросов, которые задал бы ветеринар в приюте, берёт ответы как День 0 и начинает строить. Багира сложнее — записи ереванской клиники загружены по фотографиям.</p>
-      <p>Перед следующей поездкой в Белград Надя генерирует два QR-доступа. Белградский пансион сканирует QR Пирата. Алматинский кошачий ситтер, куда едет Багира, — сканирует её. Оба получают полную историю, расписание лекарств, экстренные контакты. <em>Ни один из них не звонит Наде.</em> Багира ест по расписанию. Пират спит всю ночь.</p>
+
+    <div class="tl-item done">
+      <div class="tl-date">18 апреля 2026</div>
+      <div class="tl-title">Видение v2 — опубликовано команде</div>
+      <div class="tl-body">Первая версия (RU long-read). Опубликована на dvlevin.github.io/keep-pet/. <a href="archive/v2-vision-2026-04-18.html">архив v2</a>.</div>
     </div>
-  </div>
 
-  <p class="dim"><em>Что объединяет эти три истории: паспорт — это вещь. Голос — это как с ним разговаривают. Поверхность (Telegram у Дины, PWA у Джейка, и то и другое у Нади) — просто дверь, в которую вошёл хозяин.</em></p>
-</section>
-
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 03.</span>
-    <span class="section-label">Северная звезда</span>
-    <h3>Момент <em>первого острого ответа</em>.</h3>
-  </div>
-
-  <p class="lead">Между пятым и десятым взаимодействием Keep Pet говорит то, о чём хозяин <em>не спрашивал</em>, но что паспорт уже знал — паттерн, возможный только благодаря накапливающейся памяти. Это момент, когда «полезное приложение» превращается в «что-то, что я не могу удалить».</p>
-
-  <p>Мы выбираем его вместо еженедельного голосового портрета (который живёт сверху как ускоритель удержания) по трём причинам: <strong>(а)</strong> он устойчив на 30-м взаимодействии — там, где портрет мог бы поднадоесть; <strong>(б)</strong> он неподделываем без реального паспорта — ChatGPT/Claude не смогут; <strong>(в)</strong> никакой uncanny-valley-угрозы, никакой имитации «переводчика мыслей питомца».</p>
-</section>
-
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 04.</span>
-    <span class="section-label">Вид</span>
-    <h3>Кошка — <em>клин</em>, собака — <em>рабочая лошадка</em>.</h3>
-  </div>
-
-  <p class="lead">Мы делаем собаку И кошку на MLP, с <em>кошкой впереди</em> бренда. Это сознательное перепозиционирование — и крупнейший сдвиг тезиса из исследований.</p>
-
-  <p>Наивный дефолт — начать с собак: LTV собаки в 2–3 раза выше кота, контент собак самый глубокий, голосовой fit у собаки 20/20. Но <strong>собачий AI — самый капитализированный, самый насыщенный квадрант pet-tech</strong>: Traini ($7.5M декабрь 2025, команда ex-OpenAI/Anthropic), Snout ($110M январь 2026), Fuzzy/Dogo/GoodPup/Fi/Halo — все шипают dog-first. Седьмой dog-AI без аппаратного рва = коммодитизация.</p>
-
-  <p><strong>Кошачий AI — пустой.</strong> Голосового нет вообще. Moggie делает только текстовый чат; у Cornell — кастомный GPT. Всё. И три факта, которые это доминируют:</p>
-
-  <ul>
-    <li><strong>Кошки растут быстрее собак</strong> по владению (APPA 2025) и генерируют самый быстрый рост pet-food revenue.</li>
-    <li><strong>Кошачья страховка имеет 2–3× запас роста</strong> (2.04% проникновение против 5.46% у собак).</li>
-    <li><strong>Русскоязычная диаспора — кошачье большинство.</strong> Россия: 59% владения кошками. Германия, Польша, Франция, Италия, Прибалтика — все cat-majority. Dog-first продукт культурно не попадает в нашу аудиторию.</li>
-  </ul>
-
-  <p>Академическая литература (C/DORS, FBS 2022–2025) показывает: владельцы кошек почти равны владельцам собак по эмоциональной привязанности. Конвенциональная мудрость «собаки привязываются сильнее» — артефакт тех инструментов, которые измеряют привязанность через активности, свойственные собакам (прогулки, тренировки, путешествия). Контролируя это — разрыв схлопывается.</p>
-
-  <div class="species-strip">
-    <div>
-      <span class="species-label">Клин</span>
-      <div class="species-role"><em>Кошка.</em> Определяет whitespace, ведёт бренд, 40% MLP-контента, cat-forward UX.</div>
+    <div class="tl-item done">
+      <div class="tl-date">21 апреля 2026</div>
+      <div class="tl-title">Звонок Олег + Юлия — корректировки</div>
+      <div class="tl-body">Юля: vet voice-memo и lost-pet poster — core MLP features. Wearable-полоса — gated до v3. Cats-first wedge подтверждён.</div>
     </div>
-    <div>
-      <span class="species-label">Рабочая лошадка</span>
-      <div class="species-role"><em>Собака.</em> Закрепляет юнит-экономику, 60% MLP-контента, LTV $100–$200/3yr.</div>
+
+    <div class="tl-item done">
+      <div class="tl-date">29 апреля – 1 мая 2026</div>
+      <div class="tl-title">5 research-возвратов интегрированы</div>
+      <div class="tl-body">Diaspora (#10) → Германия #1, Israel #2 · pet-population (#11) · insurance referral (#12, Tractive×Napo precedent) · Russia cap-table (#13) · pet-translator legal (#14, Traini-safe envelope).</div>
     </div>
-  </div>
 
-  <p>Архитектура с первого дня species-plural. Оба шипуются на MLP. Контр-позиция против Traini пишется сама собой:</p>
-
-  <div class="pullquote">
-    <div class="pullquote-text">Traini пытается перевести твою собаку. Keep Pet помнит твою кошку.</div>
-    <div class="pullquote-cite">Позиционный тезис · v2</div>
-  </div>
-</section>
-
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 05.</span>
-    <span class="section-label">Конкурентная география</span>
-    <h3>Пустота на воссоединении <em>голос + память про конкретного питомца</em> — реальна.</h3>
-  </div>
-
-  <div class="viz">
-    <div class="viz-title">Позиционная карта — голос × память</div>
-    <svg viewBox="0 0 720 440" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; display: block;" role="img" aria-label="Позиционная карта: голос vs память про конкретного питомца">
-      <defs>
-        <marker id="ahead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0,0 L10,5 L0,10 z" fill="#6B737A"/>
-        </marker>
-      </defs>
-      <!-- Axes -->
-      <line x1="60" y1="380" x2="680" y2="380" stroke="#6B737A" stroke-width="1" marker-end="url(#ahead)"/>
-      <line x1="60" y1="380" x2="60" y2="40" stroke="#6B737A" stroke-width="1" marker-end="url(#ahead)"/>
-      <text x="680" y="402" fill="#6B737A" font-size="12" text-anchor="end" font-family="Fraunces, Georgia, serif" font-style="italic">Память о конкретном питомце →</text>
-      <text x="50" y="40" fill="#6B737A" font-size="12" text-anchor="end" font-family="Fraunces, Georgia, serif" font-style="italic" transform="rotate(-90, 50, 40)">Голос-первый →</text>
-      <!-- Quadrant lines -->
-      <line x1="370" y1="380" x2="370" y2="40" stroke="#E2D8C4" stroke-width="1" stroke-dasharray="3 5"/>
-      <line x1="60" y1="210" x2="680" y2="210" stroke="#E2D8C4" stroke-width="1" stroke-dasharray="3 5"/>
-      <!-- Quadrant labels (small-caps feel via uppercase + letter-spacing) -->
-      <text x="215" y="60" fill="#9AA09F" font-size="10" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" letter-spacing="2">Голос без памяти</text>
-      <text x="525" y="60" fill="#B8522D" font-size="10" text-anchor="middle" font-family="Fraunces, Georgia, serif" letter-spacing="2" font-weight="600">ПУСТО — KEEP PET</text>
-      <text x="215" y="400" fill="#9AA09F" font-size="10" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" letter-spacing="2">Текст без памяти</text>
-      <text x="525" y="400" fill="#9AA09F" font-size="10" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" letter-spacing="2">Текст с памятью</text>
-      <!-- Competitors -->
-      <circle cx="160" cy="300" r="5" fill="#6B737A"/>
-      <text x="172" y="304" fill="#3D4650" font-size="13" font-family="Inter, sans-serif">ChatGPT / Claude</text>
-      <text x="172" y="320" fill="#9AA09F" font-size="11" font-family="Fraunces, Georgia, serif" font-style="italic">общий, забывает</text>
-
-      <circle cx="200" cy="150" r="5" fill="#6B737A"/>
-      <text x="212" y="154" fill="#3D4650" font-size="13" font-family="Inter, sans-serif">Alice / Alexa pet-skills</text>
-      <text x="212" y="170" fill="#9AA09F" font-size="11" font-family="Fraunces, Georgia, serif" font-style="italic">trivia + tamagotchi</text>
-
-      <circle cx="460" cy="330" r="5" fill="#6B737A"/>
-      <text x="472" y="334" fill="#3D4650" font-size="13" font-family="Inter, sans-serif">Moggie</text>
-      <text x="472" y="350" fill="#9AA09F" font-size="11" font-family="Fraunces, Georgia, serif" font-style="italic">текст, только кошки</text>
-
-      <circle cx="420" cy="278" r="5" fill="#6B737A"/>
-      <text x="432" y="282" fill="#3D4650" font-size="13" font-family="Inter, sans-serif">PawChamp</text>
-      <text x="432" y="298" fill="#9AA09F" font-size="11" font-family="Fraunces, Georgia, serif" font-style="italic">текстовый, без памяти</text>
-
-      <circle cx="540" cy="240" r="6" fill="#C8872D"/>
-      <text x="552" y="244" fill="#8F3E20" font-size="13" font-family="Inter, sans-serif" font-weight="600">Traini</text>
-      <text x="552" y="260" fill="#9AA09F" font-size="11" font-family="Fraunces, Georgia, serif" font-style="italic">переводчик, dog-only, hardware</text>
-
-      <circle cx="360" cy="340" r="5" fill="#9AA09F"/>
-      <text x="372" y="344" fill="#9AA09F" font-size="13" font-family="Inter, sans-serif" text-decoration="line-through">Fuzzy</text>
-      <text x="372" y="360" fill="#9AA09F" font-size="11" font-family="Fraunces, Georgia, serif" font-style="italic">закрыт 2023, юнит-экономика</text>
-
-      <circle cx="320" cy="280" r="5" fill="#9AA09F"/>
-      <text x="332" y="284" fill="#9AA09F" font-size="13" font-family="Inter, sans-serif" text-decoration="line-through">Kinship «Kin»</text>
-      <text x="332" y="300" fill="#9AA09F" font-size="11" font-family="Fraunces, Georgia, serif" font-style="italic">закрыт Mars 01.2025</text>
-
-      <!-- KEEP PET anchor -->
-      <circle cx="600" cy="120" r="11" fill="#B8522D"/>
-      <circle cx="600" cy="120" r="20" fill="none" stroke="#B8522D" stroke-width="1" opacity="0.45"/>
-      <circle cx="600" cy="120" r="30" fill="none" stroke="#B8522D" stroke-width="1" opacity="0.2"/>
-      <text x="600" y="96" fill="#8F3E20" font-size="17" font-family="Fraunces, Georgia, serif" font-weight="500" text-anchor="middle" font-style="italic">Keep Pet</text>
-      <text x="600" y="164" fill="#6B737A" font-size="11" font-family="Fraunces, Georgia, serif" font-style="italic" text-anchor="middle">голос-первый · паспорт-якорь · кошка-вперёд</text>
-    </svg>
-    <div class="viz-caption">Источники: RR #01 (конкурентный ландшафт, 40+ игроков), RR #06 (видовой скоп). Квадрант «голос + память про конкретного питомца» — пустой.</div>
-  </div>
-
-  <div class="competitor-row">
-    <div class="who">Traini <span class="subtag">$7.5M, декабрь 2025 · ex-OpenAI/Anthropic</span></div>
-    <div class="miss">Dog-only. Hardware-gated (требует свой ошейник). Переводческие claims оспариваются поведенческими учёными.</div>
-    <div class="we">Cat-forward голос. Без hardware lock-in. Без claims «переводить». Мы связываем — не декодируем.</div>
-  </div>
-
-  <div class="competitor-row">
-    <div class="who">Moggie <span class="subtag">только кошки, только текст</span></div>
-    <div class="miss">Текстовый чат. Нет паспорта. Нет непрерывности между сессиями.</div>
-    <div class="we">Голос-первый, паспорт-якорь, память на конкретного питомца.</div>
-  </div>
-
-  <div class="competitor-row">
-    <div class="who">ChatGPT / Claude <span class="subtag">общего назначения</span></div>
-    <div class="miss">Каждая сессия с нуля. Нет идентичности питомца. Нет памяти между сессиями.</div>
-    <div class="we">Мы — версия, которая помнит.</div>
-  </div>
-
-  <div class="competitor-row">
-    <div class="who">Fuzzy <span class="subtag">закрыт 2023 · $80M сожжено</span></div>
-    <div class="miss">Человеческая ветеринарная команда в чате, $15/мес. Юнит-экономика труда ветеринара убила компанию.</div>
-    <div class="we">AI-голос убирает стоимость труда. Тот же ценник, >90% валовой маржи.</div>
-  </div>
-
-  <div class="competitor-row">
-    <div class="who">Kinship / «The Kin» <span class="subtag">Mars, закрыт январь 2025</span></div>
-    <div class="miss">Async «Ask a Vet» за 48 часов. Async + VCPR-hedge ≠ друг.</div>
-    <div class="we">Суб-двухсекундный голос + накапливающаяся память = друг.</div>
-  </div>
-
-  <div class="competitor-row">
-    <div class="who">Fi / Tractive / Whistle <span class="subtag">wearable hardware</span></div>
-    <div class="miss">Hardware-first, без voice-first мозга. Hardware = ров, но и ловушка (Petnet 2020).</div>
-    <div class="we">Мы — мозг, который кормит ошейник. Не заменяем — усиливаем. MVP через FitBark OAuth.</div>
-  </div>
-
-  <div class="competitor-row">
-    <div class="who">Airvet / Dutch / Vetster <span class="subtag">human telehealth</span></div>
-    <div class="miss">Цена и скорость настроены под острые события, не под «безопасна ли эта крошка?».</div>
-    <div class="we">Повседневные микро-вопросы при AI-юнит-экономике.</div>
-  </div>
-
-  <div class="competitor-row">
-    <div class="who">Яндекс Alice pet-skills <span class="subtag">RU-маркет</span></div>
-    <div class="miss">Trivia + тамагочи. Без triage. Без памяти. Без голоса-как-дружбы.</div>
-    <div class="we">Голос-первый, паспорт-якорь, серьёзный кошачий-собачий компаньон в русскоязычной диаспоре — первый и всерьёз.</div>
-  </div>
-
-  <p style="margin-top:32px;">Вопрос <span class="q">почему OpenAI не запустит то же самое</span> имеет один ответ: <strong>у них не будет паспорта.</strong> Паспорт не воспроизводим из публичных корпусов. Он растёт только в цикле с хозяином.</p>
-</section>
-
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 06.</span>
-    <span class="section-label">Архитектура</span>
-    <h3>Один мозг, <em>несколько дверей</em>.</h3>
-  </div>
-
-  <p class="lead">Голос везде — северная звезда. Но умные колонки — <em>не первая версия</em>. Это крупнейший честный сдвиг из RR #02.</p>
-
-  <p>Исследование подтвердило однозначно: ни одна платформа умной колонки (Alexa, Alice, Siri, Google) не даёт нам сегодня запустить суб-500мс голос на нашем стеке. Alexa владеет ASR. Google третий-сторонний голосовой путь закрыт (Conversational Actions отключены июнь 2023). Siri на HomePod — полностью Apple. Alice — SpeechKit-locked. Колонки — это куда мы приходим, не откуда стартуем.</p>
-
-  <div class="viz">
-    <div class="viz-title">Поверхности — когда что шипуется</div>
-    <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; display: block;" role="img" aria-label="Архитектура поверхностей: один мозг, несколько дверей">
-      <!-- Center brain -->
-      <circle cx="360" cy="190" r="72" fill="#B8522D" opacity="0.08"/>
-      <circle cx="360" cy="190" r="50" fill="#F7F2E8" stroke="#B8522D" stroke-width="1.5"/>
-      <text x="360" y="186" fill="#8F3E20" font-size="16" font-family="Fraunces, Georgia, serif" font-weight="500" text-anchor="middle" font-style="italic">Один мозг</text>
-      <text x="360" y="208" fill="#B8522D" font-size="12" font-family="Fraunces, Georgia, serif" text-anchor="middle" font-style="italic">+ паспорт</text>
-
-      <!-- TMA - MLP (line from circle edge to box right-middle) -->
-      <line x1="299" y1="151" x2="220" y2="101" stroke="#B8522D" stroke-width="1.5"/>
-      <rect x="40" y="70" width="180" height="62" rx="2" fill="#FBF7EE" stroke="#B8522D" stroke-width="1.5"/>
-      <text x="130" y="90" fill="#B8522D" font-size="10" font-family="Fraunces, Georgia, serif" letter-spacing="1" font-weight="600" text-anchor="middle" font-style="italic">MLP</text>
-      <text x="130" y="110" fill="#1F262B" font-size="14" font-family="Fraunces, Georgia, serif" font-weight="500" text-anchor="middle">Telegram Mini App</text>
-      <text x="130" y="126" fill="#6B737A" font-size="11" font-family="Fraunces, Georgia, serif" text-anchor="middle" font-style="italic">+ бот · RU-диаспора</text>
-
-      <!-- PWA - MLP -->
-      <line x1="421" y1="151" x2="500" y2="101" stroke="#B8522D" stroke-width="1.5"/>
-      <rect x="500" y="70" width="180" height="62" rx="2" fill="#FBF7EE" stroke="#B8522D" stroke-width="1.5"/>
-      <text x="590" y="90" fill="#B8522D" font-size="10" font-family="Fraunces, Georgia, serif" letter-spacing="1" font-weight="600" text-anchor="middle" font-style="italic">MLP</text>
-      <text x="590" y="110" fill="#1F262B" font-size="14" font-family="Fraunces, Georgia, serif" font-weight="500" text-anchor="middle">Progressive Web App</text>
-      <text x="590" y="126" fill="#6B737A" font-size="11" font-family="Fraunces, Georgia, serif" text-anchor="middle" font-style="italic">браузер, US+ основной</text>
-
-      <!-- Native v1.0 -->
-      <line x1="300" y1="229" x2="220" y2="281" stroke="#C8872D" stroke-width="1.2" stroke-dasharray="4 4"/>
-      <rect x="40" y="250" width="180" height="62" rx="2" fill="#FBF7EE" stroke="#C8872D" stroke-width="1.2"/>
-      <text x="130" y="270" fill="#C8872D" font-size="10" font-family="Fraunces, Georgia, serif" letter-spacing="1" font-weight="600" text-anchor="middle" font-style="italic">v1.0</text>
-      <text x="130" y="290" fill="#1F262B" font-size="14" font-family="Fraunces, Georgia, serif" font-weight="500" text-anchor="middle">Нативное iOS/Android</text>
-      <text x="130" y="306" fill="#6B737A" font-size="11" font-family="Fraunces, Georgia, serif" text-anchor="middle" font-style="italic">при 1 из 7 триггеров</text>
-
-      <!-- Wearable v1.0+ -->
-      <line x1="420" y1="229" x2="500" y2="281" stroke="#C8872D" stroke-width="1.2" stroke-dasharray="4 4"/>
-      <rect x="500" y="250" width="180" height="62" rx="2" fill="#FBF7EE" stroke="#C8872D" stroke-width="1.2"/>
-      <text x="590" y="270" fill="#C8872D" font-size="10" font-family="Fraunces, Georgia, serif" letter-spacing="1" font-weight="600" text-anchor="middle" font-style="italic">v1.0+</text>
-      <text x="590" y="290" fill="#1F262B" font-size="14" font-family="Fraunces, Georgia, serif" font-weight="500" text-anchor="middle">Ошейник (data-in)</text>
-      <text x="590" y="306" fill="#6B737A" font-size="11" font-family="Fraunces, Georgia, serif" text-anchor="middle" font-style="italic">FitBark + Tractive</text>
-
-      <!-- Smart speakers v2 - subdued -->
-      <line x1="360" y1="262" x2="360" y2="335" stroke="#9AA09F" stroke-width="1" stroke-dasharray="2 4"/>
-      <rect x="180" y="335" width="360" height="40" rx="2" fill="#F7F2E8" stroke="#9AA09F" stroke-width="1" stroke-dasharray="3 3"/>
-      <text x="360" y="360" fill="#6B737A" font-size="13" font-family="Fraunces, Georgia, serif" font-style="italic" text-anchor="middle">v2 · умные колонки — gate-критерий D30 ≥ 25% + 15% voice</text>
-    </svg>
-  </div>
-
-  <div class="grid grid-2">
-    <div class="card">
-      <div class="title">Telegram Mini App + бот <span class="stage">MLP</span></div>
-      <p>Бот несёт голос (native voice-notes — доминирующий паттерн consumer-AI в Telegram 2026); TMA несёт визуальную оболочку — паспорт, онбординг, QR, настройки рутин. Быстрый выход в русскоязычную диаспору через посев в pet/релокационных каналах — $3–$8 за активированного юзера.</p>
+    <div class="tl-item done">
+      <div class="tl-date">2 мая 2026</div>
+      <div class="tl-title">Видение v3 + bundle для команды</div>
+      <div class="tl-body">Conny /redteam + /review — 5 правок интегрированы. Send-bundle: видение v3 PDF, бюджет one-pager v2, team-roadmap, cover-message.</div>
     </div>
-    <div class="card">
-      <div class="title">Progressive Web App <span class="stage">MLP</span></div>
-      <p>Тот же мозг, но в браузере. Устанавливается на главный экран, работает на iOS и Android без магазинов. Первичная поверхность для US+. Суб-1с голос на Chrome Android; tap-to-talk на iOS Safari ~1.5с (MediaRecorder ограничения).</p>
-    </div>
-    <div class="card">
-      <div class="title">Нативное iOS/Android <span class="stage v1">v1.0</span></div>
-      <p>Шипуется в течение 90 дней после срабатывания любого из 7 pre-committed триггеров (iOS DAU/MAU &lt;15%, push opt-in &lt;10%, D30 &lt;3% abs, и т.д.). Это честная архитектура «PWA хватит, пока не перестанет хватать».</p>
-    </div>
-    <div class="card">
-      <div class="title">Ошейник как data-in <span class="stage v1">v1.0+</span></div>
-      <p>FitBark OAuth2 для MVP (единственный открытый collar API; Whistle поглощён Tractive июль 2025). Tractive партнёрство параллельно (1.4M глобальных подписчиков, CEO Хурнаус публично открыт к food/supplement upsell). Ошейник — тело, паспорт — жизнь.</p>
-    </div>
-    <div class="card">
-      <div class="title">Умные колонки <span class="stage v2">v2</span></div>
-      <p>Amazon Alexa Skill (primary) + Apple App Intents через нативный iOS (secondary) для US+. Yandex Alice для диаспоры — при условии ring-fencing в CIS-entity (не Delaware parent) из-за OFAC-yellow статуса Яндекса. Sber и VK — жёсткое «нет» (SDN red). <strong>Gate:</strong> D30 ≥ 25% на TMA+PWA И ≥15% D30-юзеров инициируют голос — 2 месяца подряд.</p>
-    </div>
-    <div class="card">
-      <div class="title">Онбординг — везде одинаковый <span class="stage">ядро</span></div>
-      <p>«Расскажи всё, что знаешь» — AI-first, не form-first. 10–15 минут голосом + фото питомца + фото/PDF документов. OCR на 85–90% чистых печатных текстов; для кириллического почерка и штампов — 40–60%, MCQ-раунды заполняют gap. 30% MCQ — не баг, а UX. ~$11/мес OCR-расходов на MLP.</p>
-    </div>
-  </div>
-</section>
 
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 07.</span>
-    <span class="section-label">Паспорт</span>
-    <h3>Живой документ, <em>не схема в базе</em>.</h3>
+    <div class="tl-item">
+      <div class="tl-date">2 – 8 мая 2026</div>
+      <div class="tl-title">Окно обзора командой</div>
+      <div class="tl-body">Юля (~4 ч), Олег (24–48 ч, без пингов до 4 мая), Сергей (асинх). 3 даты для синка: вт 6 мая · ср 7 мая · чт 8 мая, 16:00 CET.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">после 8 мая 2026</div>
+      <div class="tl-title">Iteration 1 kickoff</div>
+      <div class="tl-body">При зелёных флагах от Олега и Юли — дизайн-спринт + setup стека. Подробности в <a href="roadmap.html">дорожной карте</a>.</div>
+    </div>
+
   </div>
 
-  <p class="lead">Относимся к нему как к реальному ветпаспорту — той самой бумажной книжке — но <em>живому</em>, всегда актуальному, читаемому чем угодно.</p>
+  <h2><span class="num">03</span>Команда</h2>
 
-  <ul>
-    <li><strong>Создаётся на онбординге</strong> за 10–15 минут: хозяин загружает фото питомца и фото/PDF существующих ветдокументов (паспорт, календарь прививок, справки). OCR + AI-парсинг превращают это в структурированные записи на чистых печатных текстах (85–90% точность). <strong>Для кириллического почерка, штампов и наклеек — 40–60% точность, и тут вступают MCQ-раунды, которые честно закрывают пробелы.</strong> К концу онбординга питомца уже «узнают» — а дашборда так и не появилось.</li>
-    <li><strong>Постоянно обогащается</strong> каждым взаимодействием. Утренний check-in про ночь, вечерняя запись в дневник, момент «мне кажется, ей нехорошо» в середине Zoom-а — всё это обновляет паспорт. Хозяин его не ведёт — он ведёт себя сам, из разговора.</li>
-    <li><strong>Делится по QR-коду</strong>, PWA-first. Один тап — и генерируется QR, который открывает read-only версию паспорта у любого ветеринара, pet-sitter-а или зоогостиницы с камерой в телефоне. Без аккаунта, без установки. Это «бирка на ошейнике для потеряшек» и «новая ветклиника с полной историей за 30 секунд» — в одном артефакте.</li>
-    <li><strong>Первичный wedge — места, где своей системы нет.</strong> Исследование (RR #09) уточнило: PMS-современные клиники (ezyVet, Vetspire, Provet Cloud, Digitail) уже имеют свой QR и свои records — там Keep Pet как вторичный reference. <strong>Первичный клин — пансионы, переезды, путешествия, pet-sitting.</strong> Там, где частота взаимодействия высокая, клинической инфраструктуры нет, а Keep Pet-паспорт <em>становится</em> записью.</li>
-    <li><strong>Рутины, которые наращивают паспорт, не превращая это в работу.</strong> Утренний и вечерний check-in, мягко, голосом: как прошла ночь, что ела, не хромает ли, не рвало ли, какое настроение. Хозяин отвечает одним-двумя предложениями; паспорт логирует, кластеризует и всплывает совет, когда паттерн того требует.</li>
-  </ul>
-
-  <div class="note">
-    <span class="note-label">Юридическая оговорка</span>
-    <div class="note-body">Согласно EU Regulation 576/2013 и EAEU Decision №317, термин «паспорт питомца» (pet passport) зарезервирован для официальных документов, выданных лицензированным ветеринаром для международного/трансграничного перемещения. <strong>Keep Pet — это приложение для хозяина по ведению персональных записей о здоровье питомца, не официальный ветпаспорт, и не заменяет документы, выданные лицензированным ветеринаром.</strong> Мы явно скажем это в продукте и в маркетинге. Смешение этих понятий — юридический риск, который мы не берём.</div>
-  </div>
-</section>
-
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 08.</span>
-    <span class="section-label">Два рынка</span>
-    <h3>Не две страны — одно ядро и <em>две оптики</em>.</h3>
-  </div>
-
-  <div class="grid grid-2">
-    <div class="card">
-      <div class="title">US+ (Северная Америка, Европа)</div>
-      <p>Дом TAM, платящий, англоязычный. Это рынок, под который сайзится раунд. Первичная поверхность — PWA. EN-first в MLP, платёжные рельсы — Stripe.</p>
+  <div class="people-grid">
+    <div class="person">
+      <div class="person-name">Олег</div>
+      <div class="person-role">Основатель · стратегия</div>
+      <div class="person-note">Финальное решение по видению и бюджету. Пинги — после 4 мая.</div>
     </div>
-    <div class="card">
-      <div class="title">Русскоязычная диаспора (7 стран)</div>
-      <p>Не Россия. Русскоязычное большинство, которое собралось в этих странах с 2022-го. Плотные сети, утёкший капитал, где у Олега есть рычаг. Первичная поверхность — Telegram Mini App. RU-локализация в v1.1 после валидации английского удержания.</p>
+    <div class="person">
+      <div class="person-name">Юлия</div>
+      <div class="person-role">Продукт · кошки</div>
+      <div class="person-note">Owner cats-wedge. Vet voice-memo и lost-pet poster — её feature-calls.</div>
+    </div>
+    <div class="person">
+      <div class="person-name">Сергей</div>
+      <div class="person-role">Технический</div>
+      <div class="person-note">TMA + PWA архитектура. Async-режим — фидбэк по плану письменно.</div>
+    </div>
+    <div class="person">
+      <div class="person-name">Дима Левин</div>
+      <div class="person-role">Cone Red · стратегия + видение</div>
+      <div class="person-note">Поддержка по design + research. Контакт: <a href="mailto:dima@cone.red" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(184, 82, 45, 0.3);">dima@cone.red</a>.</div>
     </div>
   </div>
 
-  <div class="diaspora">
-    <div class="country target"><span class="code">KZ</span><span class="name">Казахстан</span></div>
-    <div class="country target"><span class="code">AM</span><span class="name">Армения</span></div>
-    <div class="country target"><span class="code">GE</span><span class="name">Грузия</span></div>
-    <div class="country target"><span class="code">KG</span><span class="name">Кыргызстан</span></div>
-    <div class="country target"><span class="code">AZ</span><span class="name">Азербайджан</span></div>
-    <div class="country target"><span class="code">RS</span><span class="name">Сербия</span></div>
-    <div class="country target"><span class="code">SK</span><span class="name">Словакия</span></div>
-    <div class="country nontarget"><span class="code">RU</span><span class="name">Россия</span></div>
+  <div class="note-block">
+    <p style="margin-bottom: 8px;"><strong>Как обновлять.</strong> Каждый документ — отдельный HTML-файл в репо <code>DVLevin/keep-pet</code>. Правка — точечная: меняешь нужный файл, коммит, пуш — GitHub Pages деплоит автоматически за 1–2 минуты.</p>
+    <p><strong>Источник правды.</strong> Полные исходники — в <code>CR_sales_apr26/pipeline/concept/keep-pet/</code>. Этот сайт — отрендеренная публичная версия для команды.</p>
   </div>
-
-  <div class="note">
-    <span class="note-label">Россия — не таргет</span>
-    <div class="note-body">Telegram был эффективно заблокирован в России в марте 2026. OFAC-принуждение против фирм, размещающих капитал, отслеживаемый к санкционированным российским лицам (GVA Capital, $215M, июнь 2025), ужесточило US VC-диligence. Наша позиция: <strong>Delaware C-corp parent с IP, без российской сущности, без рублёвого прайсинга, без .ru домена, без таргетирования RF-резидентов в рекламе. Sber/VK — не интеграции</strong> (SDN red). Яндекс Alice — ring-fenced в CIS-сестру (армянское или казахское юрлицо) или отложен. Это playbook Flo и inDrive. И это же — регуляторная поза, которая держит cap-table-flip чистым.</div>
-  </div>
-
-  <p>Монетизация через <strong>Telegram Stars</strong> как первичный digital-rail — чистая в 7 из 8 стран (Россия — degraded-experience, но не таргет). Разработчик получает ~65% после Apple/Google + Telegram комиссий. <strong>Stripe</strong> параллельно для физических услуг (ветбронь, доставка) и B2B. <strong>Zero TON exposure</strong> в продукте и в деке — perception-риск с US-инвесторами.</p>
-</section>
-
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 09.</span>
-    <span class="section-label">Экономика</span>
-    <h3>Три ноги, <em>честно оценённые</em>.</h3>
-  </div>
-
-  <p class="lead">Монетизация не кладётся на одну хрупкую карту. Три ноги, каждая со своей уверенностью, названной прямо.</p>
-
-  <table>
-    <thead><tr><th style="width:22%">Нога</th><th>Что это</th><th style="width:16%">Уверенность</th><th>Подтверждение из исследования</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>1. Подписка</strong></td>
-        <td class="dim">Freemium → платный годовой. Free tier: онбординг + базовый паспорт. Платный: полный паспорт + проактивные рутины + QR-share + wearable интеграция + multi-pet. Якорь $60–$120/год (blended).</td>
-        <td><span class="pill pill-high">High</span></td>
-        <td class="dim">Replika $69.99/год, ChatGPT Plus $240/год, Pawp $288/год, Dutch $108–132/год. Нормы категории валидированы.</td>
-      </tr>
-      <tr>
-        <td><strong>2. Embedded страхование + affiliate commerce</strong></td>
-        <td class="dim">Не data licensing — <em>embedded distribution</em>. Keep Pet как acquisition-and-retention surface для пет-страховщиков (Trupanion, Lemonade Pet); revenue share на проданный полис. + 5-рекомендаций/1-партнёр affiliate для корма, лекарств, услуг.</td>
-        <td><span class="pill pill-med">Medium-High</span></td>
-        <td class="dim">Прецеденты: Tractive × Covéa (UK 2024), PetSure × FitBark (AU). Pet-insurance GWP $4.7B 2024, +21% YoY. 43% EU pet insurance продаётся через embedded. Insurer CAC-tolerance ~$150–$180/полис.</td>
-      </tr>
-      <tr>
-        <td><strong>3. Лицензирование данных (FMCG / страхование R&amp;D / pharma)</strong></td>
-        <td class="dim">Агрегированные, анонимизированные, consent-архитектурированные behavior + health данные. FMCG marketing сегменты. Insurance underwriting R&amp;D. Pharma pharmacovigilance signal.</td>
-        <td><span class="pill pill-hyp">Гипотеза · upside</span></td>
-        <td class="dim"><strong>0 consumer-pet-apps публично монетизируют это на scale.</strong> Mars продал Whistle Tractive июль 2025 после 9 лет captive-data-экспериментации — негативный сигнал, который <em>мы обязаны адресовать в деке</em>. Реалистичный range на 100K юзеров: $50K–$800K ARR (медиана), $1.5M+ upside только если insurance/pharma anchor материализуется.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p><strong>Дек говорит так же.</strong> Мы <em>не</em> ведём с data licensing. Мы ведём с подпиской + embedded commerce, а третью ногу называем опциональностью. Каждый опытный инвестор спросит про Mars/Whistle; честный ответ — единственный, который выживает в диligence.</p>
-</section>
-
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 10.</span>
-    <span class="section-label">Исследования</span>
-    <h3>Девять возвратов — <em>что они сказали</em>.</h3>
-  </div>
-
-  <p class="lead">Девять research-briefов вернулись 17–18 апреля 2026. Это раздел заменил предыдущий «research-gaps» на «research-returns» — каждый возврат привязан к конкретному решению в этом пакете.</p>
-
-  <div class="findings-grid">
-    <div class="finding">
-      <div class="rr-num">RR № 01</div>
-      <div class="rr-title">Ландшафт voice-assistant-ов для питомцев</div>
-      <div class="rr-verdict confirm">Whitespace реален</div>
-      <div class="rr-text">40+ игроков изучено. <strong>Квадрант «голос + память про конкретного питомца» — пустой.</strong> Traini ближе всех, но dog-only + hardware-gated. Mars закрыл «Kin» январь 2025, Fuzzy сгорел 2023 на ветеринарной юнит-экономике.</div>
-    </div>
-
-    <div class="finding">
-      <div class="rr-num">RR № 02</div>
-      <div class="rr-title">Умные колонки — feasibility + когда v2</div>
-      <div class="rr-verdict pivot">Колонки = v2, не MLP</div>
-      <div class="rr-text">Ни одна платформа не даёт суб-500мс голос с нашим стеком сегодня. <strong>Gate к v2: D30 ≥ 25% И ≥15% voice-attach в TMA/PWA — 2 месяца подряд.</strong> Sber/VK = жёсткое SDN red; Yandex Alice — yellow, требует ring-fencing.</div>
-    </div>
-
-    <div class="finding">
-      <div class="rr-num">RR № 03</div>
-      <div class="rr-title">Рынок умных ошейников + API</div>
-      <div class="rr-verdict confirm">FitBark wedge + Tractive параллельно</div>
-      <div class="rr-text">Mars продал Whistle Tractive (июль 2025) — одна глобальная консолидация, 1.4M юзеров. <strong>FitBark — единственный открытый API</strong> для MVP. Tractive CEO публично открыт к food/supplement upsell — это разговор, который Олег должен иметь параллельно.</div>
-    </div>
-
-    <div class="finding">
-      <div class="rr-num">RR № 04</div>
-      <div class="rr-title">Лицензирование pet-data: прецедент</div>
-      <div class="rr-verdict pivot">Upside, не база; insurance = embedded</div>
-      <div class="rr-text"><strong>0 consumer-pet-apps публично монетизируют лицензирование данных на scale.</strong> Mars/Whistle — негативный прецедент. Правильная рамка для insurance — embedded distribution (Tractive × Covéa), не data license. $150–$180 CAC-tolerance на полис >> любой data-rate.</div>
-    </div>
-
-    <div class="finding">
-      <div class="rr-num">RR № 05</div>
-      <div class="rr-title">Инвесторы в pet-tech</div>
-      <div class="rr-verdict confirm">$1–2.5M pre-seed достижим</div>
-      <div class="rr-text">Sequence A: Betaworks Spring'26 Camp + a16z speedrun → Leap Venture Studio (Mars, $200K) + Unleashed by Purina (CHF 50K) → Ani VC pre-seed lead ($0.5–$1M) → Lerer Hippeau post-accelerator. Companion Fund II — Series A, не pre-seed.</div>
-    </div>
-
-    <div class="finding">
-      <div class="rr-num">RR № 06</div>
-      <div class="rr-title">Вид: собака / кот / мульти</div>
-      <div class="rr-verdict pivot">Dog + Cat, с кошкой впереди</div>
-      <div class="rr-text">Dog-only — 7-й игрок в насыщенном квадранте. Cat-only — contrarian, но TAM-capped на 39% HH. <strong>Dog+Cat покрывает 85–90% pet HHs</strong>, и voice-first cat-AI пуст. Русскоязычная диаспора — cat-majority (59% RU).</div>
-    </div>
-
-    <div class="finding">
-      <div class="rr-num">RR № 07</div>
-      <div class="rr-title">Telegram: голос, рельсы, Russia-problem</div>
-      <div class="rr-verdict partial">Bot-voice, не in-TMA WebRTC</div>
-      <div class="rr-text">TMA шипуема как MLP, <strong>но не как voice-first через WebRTC</strong> — iOS WKWebView + отсутствие native mic API. Доминантный 2026 паттерн — bot voice-messages. CAC $3–$8/активированный юзер в 7 странах диаспоры. TON = zero user-facing, только payout rail.</div>
-    </div>
-
-    <div class="finding">
-      <div class="rr-num">RR № 08</div>
-      <div class="rr-title">PWA — voice, push, wearables, install</div>
-      <div class="rr-verdict partial">PWA валидирует, не v1.0</div>
-      <div class="rr-text">Chrome Android: суб-1с voice + WebAPK = near-native. iOS Safari: install friction + push 70–85% + 10–13% reach после funnel. <strong>7 pre-committed триггеров для native v1.0</strong>, port за 90 дней когда один срабатывает.</div>
-    </div>
-
-    <div class="finding">
-      <div class="rr-num">RR № 09</div>
-      <div class="rr-title">Passport OCR + live-document workflow</div>
-      <div class="rr-verdict partial">OCR+MCQ; boarding-wedge первичный</div>
-      <div class="rr-text">Claude Sonnet 4.5 + Azure Read: 85–90% clean print, 40–60% кириллический почерк/штампы. MCQ-gap-fill — нагрузочная UX для диаспоры. <strong>Ветеринарный клин — пансионы/переезды/путешествия</strong>, не PMS-современные клиники. OCR-стоимость ~$11/мес на MLP.</div>
-    </div>
-  </div>
-
-  <p class="dim" style="margin-top:32px;"><em>Полные тексты — 9 файлов в <code>pipeline/concept/keep-pet/research/results/</code>. Каждое решение этого пакета прослеживается к источнику.</em></p>
-</section>
-
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 11.</span>
-    <span class="section-label">Дорожная карта</span>
-    <h3>Две дорожки, <em>честно названные</em>.</h3>
-  </div>
-
-  <p class="lead">Сначала — пакет, поднимающий деньги. Потом — продукт, который эти деньги строят.</p>
-
-  <div class="grid grid-2">
-    <div class="card">
-      <div class="title">Дорожка A — Raise-pack <span class="stage">Apr 17 → Jul 15, 2026</span></div>
-      <p>2 инженера Cone Red × 3 месяца. Демо-grade инфраструктура. Поставка: рабочее голосовое демо (landing момент «первого острого ответа» вживую), инвесторский пакет (дека, one-pagers, модель), LOI-шаблоны, питч, который Олег может вести сам, и cap-table-flip структурированный чисто (sanctions rep-and-warranty, без RF-entity). <strong>Это не MVP.</strong> Это артефакт, который зарабатывает раунд, который строит MVP.</p>
-    </div>
-    <div class="card">
-      <div class="title">Дорожка B — MVP <span class="stage v1">пост-раунд</span></div>
-      <p>Финансируется раундом, который зарабатывает дорожка A. Длится ~6 месяцев. Именно здесь строится продукт, которым начнут пользоваться платящие пользователи.</p>
-    </div>
-  </div>
-
-  <p>Мы называем их честно, потому что ассиметричная честность — это и есть то, что делает пакет инвестируемым. Подрядчики, которые путают A и B, обещают MVP, который не могут штатить. Фаундеры, которые разделяют — получают финансирование на то, чтобы построить правильный.</p>
-
-  <h4>Критические gate-ы Дорожки A</h4>
-  <table>
-    <thead><tr><th>Gate</th><th>Дата</th><th>Что должно быть true</th></tr></thead>
-    <tbody>
-      <tr><td><strong>G0</strong></td><td>22 апр 2026</td><td>Инженеры-1 и -2 закреплены (Dima)</td></tr>
-      <tr><td><strong>G1</strong></td><td>18 апр 2026 ✓</td><td>Видение v3 утверждено (этот документ)</td></tr>
-      <tr><td><strong>G2</strong></td><td>25 апр 2026 ✓</td><td>9 research-возвратов интегрированы</td></tr>
-      <tr><td><strong>G3</strong></td><td>2 мая 2026</td><td>Preston-X Phase 3 драфт (Task Brief + Win Strategy Map + Investor Overlay)</td></tr>
-      <tr><td><strong>G4</strong></td><td>8 мая 2026</td><td>Олег ↔ Дима equity + cap-table сценарии закрыты</td></tr>
-      <tr><td><strong>G5</strong></td><td>15 мая 2026</td><td>Финальный roundtable red-team (Conny + Prody + Preston)</td></tr>
-      <tr><td><strong>G6</strong></td><td>12 июн 2026</td><td>Demo tempo check — 5 минут end-to-end, p95 voice latency &lt; 2с</td></tr>
-      <tr><td><strong>G7</strong></td><td>20 июн 2026</td><td>LOI traction — ≥10 писем намерения по 3 сегментам</td></tr>
-      <tr><td><strong>G8</strong></td><td>26 июн 2026</td><td>Пакет заморожен — только репетиции</td></tr>
-      <tr><td><strong>G9</strong></td><td><strong>15 июл 2026</strong></td><td><strong>Ship.</strong> Первые встречи с инвесторами забронированы на следующую неделю.</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 12.</span>
-    <span class="section-label">Команда</span>
-    <h3>Кто это строит.</h3>
-  </div>
-
-  <div class="grid grid-3">
-    <div class="card">
-      <div class="title">Олег</div>
-      <p>Co-founder. Сеть, raise, стратегия русскоязычной диаспоры, equity, инвесторские отношения. Олег ведёт раунд.</p>
-    </div>
-    <div class="card">
-      <div class="title">Юля</div>
-      <p>Co-founder. Продукт, UX, голос бренда, механики удержания. Рутины, streak-дневник, «voice portrait» — её интеллектуальная собственность.</p>
-    </div>
-    <div class="card">
-      <div class="title">Дима (Cone Red)</div>
-      <p>Технический со-founder, архитектор, лид инженерки. Ведёт Track A; запускает Preston-X lane. 50+ AI-систем для Fortune 500, $100M+ сохранено. Модель партнёрства — та же, по которой построен GetDeal (5 precedents в портфеле Cone Red).</p>
-    </div>
-    <div class="card">
-      <div class="title">Cone Red engineering</div>
-      <p>2 FTE на Track A (Engineer-1 backend + Engineer-2 frontend/UX). Gate по найму — 22 апр. Команда расширяется в Track B пост-раунд: Eng-3, Eng-4, product designer.</p>
-    </div>
-    <div class="card">
-      <div class="title">Preston-X lane</div>
-      <p>AI-персона Cone Red, отвечающая за presales-артефакты: Task Brief → Win Strategy Map → Investor Overlay → Clarification Outreach. Работает параллельно инженерке, выход к G3.</p>
-    </div>
-    <div class="card">
-      <div class="title">Советники (в работе)</div>
-      <p>1 ветеринар (США) · 1 владелец pet-tech с предыдущим exit · 1 юрист по международной инкорпорации (Armenia / Delaware) · 1 советник по OFAC/sanctions (требование из RR #02). Закрываем к G5.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="section-head">
-    <span class="section-num">Note 13.</span>
-    <span class="section-label">Следующие шаги</span>
-    <h3>Что происходит в ближайшие две недели.</h3>
-  </div>
-
-  <div class="next-steps">
-    <h4>Хронология</h4>
-    <ol>
-      <li><strong>До 22 апр</strong> · Дима закрывает штатирование инженеров-1 и -2. Без этого Track A сдвигается 1:1.</li>
-      <li><strong>До 25 апр</strong> · 9 research-возвратов интегрированы в пакет (этот документ — уже v2 после интеграции). Каскад обновлений в product-spec.md, risks-track-a.md, и package/00-11 выполняется.</li>
-      <li><strong>До 2 мая</strong> · Preston-X делает Phase 3 — Task Brief + Win Strategy Map + Investor Overlay в драфт-виде.</li>
-      <li><strong>8 мая</strong> · Дима и Олег закрывают разговор про equity. Три сценария cap-table готовятся заранее. + обсуждение: согласен ли Олег на cat-forward перепозиционирование (RR #06) и дорожка на OFAC-sensitive ring-fencing (RR #02).</li>
-      <li><strong>15 мая</strong> · Roundtable red-team — Conny + Prody + Preston проходят по собранному пакету и режут слабые места.</li>
-      <li><strong>К 26 июн</strong> · LOI-трафик набран (≥10 по трём сегментам), демо-темп выверен, пакет заморожен.</li>
-      <li><strong>15 июл</strong> · Ship. Первые встречи с инвесторами — в следующей неделе.</li>
-    </ol>
-  </div>
-
-  <h4>Что нужно от Олега — read-back запрос</h4>
-  <ul>
-    <li><strong>Прочитать этот документ и дать обратную связь там</strong>, где формулировки звучат не его голосом — или где стратегия тебе кажется не твоей. Особенно — секция 04 про cat-forward перепозиционирование. Это крупнейшее изменение, и оно должно быть твоим решением.</li>
-    <li>Отметить в календаре <strong>8 мая</strong> под equity-беседу; Дима пришлёт ссылку и три cap-table-сценария заранее.</li>
-    <li><strong>Подтвердить диаспору-карту</strong>: сеть Олега действительно охватывает KZ/AM/GE/KG/AZ/RS/SK, или концентрирована в 1–2 странах? Если второе — переоцениваем GTM-сегмент.</li>
-    <li>Начать тёплый LOI-outreach по своей сети: владельцы питомцев (2 недели), ветклиники/пансионы (2 контакта), потенциальные affiliate/insurance партнёры. Шаблоны писем — в пакете, раздел <code>08-loi-templates.md</code>.</li>
-    <li>Запустить размышление про Armenia/Delaware incorporation — это повлияет на vesting-механику в cap-table-сценариях. Добавилось требование: OFAC-counsel conversation (Covington / WSGR / Skadden) по Yandex Alice ring-fencing до flip.</li>
-  </ul>
-
-  <h4>Что нужно от Юли</h4>
-  <ul>
-    <li>Пройтись по разделу <strong>«Паспорт как живой документ»</strong> и онбординг-флоу — это её UX-зона, особенно MCQ-gap-fill паттерн. 30% MCQ — не баг, это UX-нагрузка, которую нужно спроектировать mindfully.</li>
-    <li>Прочитать <strong>«Три жизни»</strong> (секция 02) — это три персоны для MLP. Если кто-то из них не резонирует, это важный сигнал.</li>
-    <li>Участвовать в <strong>15 мая roundtable</strong>.</li>
-    <li>Опционально: отметить 2 владельцев питомцев из своей сети, которые могли бы стать одними из первых бета-подписантов LOI.</li>
-  </ul>
-</section>
-
-<footer>
-  <div class="logo">Cone Red × Keep Pet</div>
-  <div>Документ подготовлен 18 апреля 2026 · v2 — интегрированы 9 research-возвратов.</div>
-  <div style="margin-top: 8px;">Канонические источники: <code>vision.md</code> (v3) · <code>DEAL.md</code> · <code>research/results/</code> · <code>package/README.md</code></div>
-</footer>
 
 </div>
-
 </body>
 </html>
