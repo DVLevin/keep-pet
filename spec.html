@@ -390,11 +390,13 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 - LLM для summary: батч-job раз в день, использует router pattern (§ 4.2). Один call на пользователя в месяц = ~$0.001 себестоимости.<br />
 - UI: inline-кнопки в TG, обычная форма в PWA. Голос — нативные TG voice messages.</p>
 <p><strong>Variable cost оценка на 10K пользователей:</strong><br />
-- Транскрипция: 10K × 4 голосовых/мес × 30 сек × $0/мин (self-hosted) = $0 пред-инфра<br />
-- LLM summary: 10K × 1 call/мес × $0.001 = $10/мес<br />
-- Хранилище: 10K × 100 KB паспорт + лог = 1 GB total = ~$0.10/мес<br />
-- <strong>Total per-user-per-month: ~$0.001</strong> ≈ <strong>$10/мес на 10K пользователей при 100% активности</strong></p>
-<p>Это пренебрежимо мало даже без партнёрки с Xiaomi MIMO.</p>
+- Транскрипция: 10K × 4 голосовых/мес × 30 сек × $0/мин (Whisper self-hosted) = $0 переменных<br />
+- LLM summary: 10K × 1 call/мес ≈ $10/мес base, $30/мес peak когда router падает на платный fallback<br />
+- Хранилище: 10K × 100 KB паспорт + лог = ~1 GB total = ~$0.10/мес<br />
+- Self-hosted Qwen GPU idle + S3 egress + log storage: ~$30-50/мес buffer<br />
+- <strong>Public anchor: ≤ $0.01/user/month</strong> (consrvative, защищает от провайдер-сбоев и GPU-цены)<br />
+- <strong>Internal target: ~$0.001-0.005/user/month</strong> при идеальном router uptime</p>
+<p>Соответствует <code>playbooks/AI_COST_COMPRESSION.md §9</code> audit checklist для free-first продукта.</p>
 <hr />
 <h2>4 · Архитектура</h2>
 <h3>4.1 Общая схема</h3>
@@ -650,7 +652,7 @@ LLM проверяет: все 85% полей собраны?
 <tr>
 <td>CAC (paid каналы)</td>
 <td>≤ $1.50</td>
-<td>(потрачено) / (новые пользователи)</td>
+<td>(потрачено) / (новые пользователи). $1.50 = 50% margin поверх Олегова прежнего TG-channel benchmark $1/user — буфер на ухудшение.</td>
 </tr>
 <tr>
 <td>CAC (органика + рефералы)</td>
@@ -660,7 +662,7 @@ LLM проверяет: все 85% полей собраны?
 <tr>
 <td>Variable cost / user / month</td>
 <td>≤ $0.01</td>
-<td>сумма AI + хостинг / активные пользователи</td>
+<td>сумма AI + хостинг / активные пользователи (см. §3.3 cost оценку)</td>
 </tr>
 </tbody>
 </table>
@@ -753,29 +755,29 @@ LLM проверяет: все 85% полей собраны?
 <hr />
 <h2>8 · Открытые вопросы команде</h2>
 <blockquote>
-<p>Это вопросы, на которые я <strong>не могу ответить сам</strong>, и которые блокируют какие-то решения в <code>dev-plan.md</code>. Прошу ответить в Google Doc или Telegram-группе.</p>
+<p>Не блокируют kickoff (kickoff триггерится pre-payment'ом, см. <code>dev-plan.md §6.1</code>). Можно ответить в Google Doc или Telegram-группе.</p>
 </blockquote>
 <ol>
 <li>
-<p><strong>Vet voice-memo capture (Юлия, Apr 21):</strong> остаётся ли как v2 priority, или сжимаем до простого «прикрепи фото справки» как часть OCR-онбординга?</p>
+<p><strong>Vet voice-memo capture (Юля).</strong> Рекомендую <strong>держать в parking lot на v2.</strong> На созвоне 6 мая Сергей сам назвал звукозапись «дальней темой, уже далекой» (Part 2, ~15:33). Если хочешь вернуть в MVP — скажи; это +€2,500 + 1 неделя. Иначе по умолчанию остаётся в v2.</p>
 </li>
 <li>
-<p><strong>Регионы запуска:</strong> Apr 21 шортлист — Германия + Израиль (top-2 диаспора) + Грузия (B2B insurance pilot). Подтверждаем все три на MVP, или начинаем с одного?</p>
+<p><strong>Lost-pet poster (Юля).</strong> Твоя фича из Apr 21. В MVP не входит, в parking lot для v2 (после 5K пользователей). Это OK?</p>
 </li>
 <li>
-<p><strong>Язык(и) интерфейса MVP:</strong> Русский — точно. Английский — нужен ли с первого дня или можно через 2 недели после launch?</p>
+<p><strong>Язык интерфейса MVP.</strong> Русский — точно. <strong>Английский — рекомендую через 2 недели после launch</strong> (когда у нас есть baseline RU UX и не приходится дублировать тестирование). Возражения?</p>
 </li>
 <li>
-<p><strong>Имя бота / приложения:</strong> Keep Pet — финальное? (нужно проверить занятость на TG + домены)</p>
+<p><strong>Имя/домен.</strong> Keep Pet остаётся (если другое — скажи сейчас). <strong>Домены проверил:</strong> <code>keep-pet.app</code> ✅ свободен · <code>keeppet.io</code> ❌ занят · <code>keep-pet.io</code> ✅ свободен. <strong>По умолчанию беру <code>keep-pet.app</code>.</strong></p>
 </li>
 <li>
-<p><strong>Кто будет первой точкой админ-поддержки</strong> (когда у пользователей вопросы)? Запасной вариант — я + Юля по роте, но в идеале нужен один человек у Keep Pet за это.</p>
+<p><strong>Admin-support после launch.</strong> <strong>По умолчанию: я + Юля по роте на первый месяц</strong>, потом передаём designated person. Если предпочитаете другую модель — назовите.</p>
 </li>
 <li>
-<p><strong>Webhook домен / SSL:</strong> под каким доменом вы хотите видеть бота и PWA? <code>keep-pet.app</code>? <code>keeppet.io</code>? Проверим занятость.</p>
+<p><strong>Google Doc</strong> — Олег создал? Пришли инвайт на <code>dima@cone.red</code>.</p>
 </li>
 <li>
-<p><strong>Google Doc для шаринга идей</strong> (как договорились на созвоне) — Олег создал? Если да, пришли инвайт на <code>dima@cone.red</code>.</p>
+<p><strong>Регионы запуска (DE+IL+GE из Apr 21 шортлиста).</strong> Это <strong>Юля's call</strong> — обсудим отдельно когда дойдём до launch-материалов в week 6. Не блокирует kickoff.</p>
 </li>
 </ol>
 <hr />

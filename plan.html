@@ -222,6 +222,7 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 <hr />
 <h2>1 · TL;DR</h2>
 <p><strong>Сроки:</strong> 5 рабочих недель + 1 неделя буфера = <strong>6 календарных недель</strong> от kickoff до первых пользователей.<br />
+<strong>Триггер kickoff:</strong> день после получения pre-payment (см. §6.1). Это гарантирует, что инженер заблокирован под Keep Pet и не вытягивается на Tampere/Casino/Granat в момент старта.<br />
 <strong>Команда:</strong> 1 senior engineer full-time + 0.3 senior support из Cone Red (по reuse-фрагментам).<br />
 <strong>Бюджет:</strong> <strong>€19,000</strong> (ре-кост вниз с €30k anchor).<br />
 <strong>Что shippаем:</strong> TG-бот + PWA + 3 ядерные фичи (паспорт + прививки + еженедельный чек-ин). Полный feature-list в <code>mvp-spec.md</code>.</p>
@@ -288,7 +289,7 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 </tr>
 <tr>
 <td>Multi-agent верификация на онбординге</td>
-<td>2 недели (Conny <code>/discover</code> + EA-Agent intake)</td>
+<td>2 недели (heavy multi-agent intake flow)</td>
 <td>1 неделя — OCR + LLM-парсер + MCQ</td>
 <td>€2,500</td>
 </tr>
@@ -319,6 +320,80 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 </tbody>
 </table>
 <p><strong>Важно:</strong> часть экономии — не «срезали качество», а <strong>простой скоуп = простой код</strong>. Меньше edge-cases = меньше тестов = меньше времени.</p>
+<h3>2.1 Что конкретно мы переиспользуем (где экономия живёт реально)</h3>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Что лифтаем</th>
+<th>Откуда</th>
+<th>Saved</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Postgres + pgvector + RLS scaffold</strong></td>
+<td>Multi-tenant DB schema с anti-leakage policies, NULLIF guard на tenant_id</td>
+<td>Di-Mentor (Memory Layer Phase 1, production-tested 9/9 anti-leakage tests green)</td>
+<td>~2 нед</td>
+</tr>
+<tr>
+<td><strong>Auth + user-model + tenant boundaries</strong></td>
+<td>Working code из Bankstor</td>
+<td>Bankstor production деплой</td>
+<td>~1.5 нед</td>
+</tr>
+<tr>
+<td><strong>Whisper batch transcription pipeline</strong></td>
+<td>CPU-batch worker pattern + queue + storage</td>
+<td>Внутренние эксперименты CR + Vesco STT исследование</td>
+<td>~1 нед</td>
+</tr>
+<tr>
+<td><strong>OCR + LLM-парсер pipeline</strong></td>
+<td>Pattern: Tesseract → fallback GPT-4V → LLM-extract → JSON. Rendered под ID-документы в Bankstor / Granat-onboarding</td>
+<td>Bankstor + Granat-poc</td>
+<td>~1 нед</td>
+</tr>
+<tr>
+<td><strong>Router pattern для AI-провайдеров</strong></td>
+<td>Готовая логика выбора провайдеров с idempotency + confidence-gating. Документировано в <code>playbooks/AI_COST_COMPRESSION.md</code></td>
+<td>Tampere/Casino/Granat паттерны (cross-deal)</td>
+<td>~1 нед</td>
+</tr>
+<tr>
+<td><strong>Telegram-бот scaffold (aiogram + webhook)</strong></td>
+<td>Working bot template из внутренних tools</td>
+<td>CR internal</td>
+<td>~1 нед</td>
+</tr>
+<tr>
+<td><strong>Cron + queue pattern</strong></td>
+<td>Daily/weekly job runner + push delivery</td>
+<td>Множественные CR проекты</td>
+<td>~0.5 нед</td>
+</tr>
+<tr>
+<td><strong>Buffer на интеграцию</strong></td>
+<td>(некоторая часть лифта потребует адаптации)</td>
+<td>—</td>
+<td>−1 нед</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Total real reuse:</strong></td>
+<td><strong>~7 нед</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Honest read:</strong> ~7 engineer-weeks реального лифта (не 10.5 как было в апрельском плане). При €55/час × 40 час × 7 = €15,400 saved relative to greenfield. Этого хватает чтобы €30k → €19k без compromise. <strong>Если что-то не лифтится чисто — сразу скажу и пересчитаем.</strong> R-1 ниже это покрывает.</p>
+<p><strong>Что НЕ лифтуем</strong> (исправлено относительно апрельской версии плана):<br />
+- ~~Conversa~~ — это persona/prompt, не Python pipeline. Polezно для tone-of-voice промптов в summary, но не для transcription pipeline (это Whisper).<br />
+- ~~A-genie~~ — это meta-prompt для генерации других prompts, не runtime orchestration.<br />
+- ~~KG patterns from Tampere~~ — Tampere v1 Sparrow строила UCD, не CR.<br />
+- ~~Conny multi-agent verification~~ — Conny это strategy-consulting persona, не user-onboarding flow.</p>
+<p>Эти штуки полезны на уровне <em>подхода и дисциплины</em>, но не как lifted code.</p>
 <hr />
 <h2>3 · Бюджет — детально</h2>
 <h3>3.1 Build cost (€18,000 / 5 рабочих недель)</h3>
@@ -423,7 +498,7 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 </tr>
 <tr>
 <td>LLM API (router fallback на paid когда нужно)</td>
-<td>~10K calls/мес × $0.0001 = $1/мес × 3 = $3 + buffer</td>
+<td>base ~$3/мес × 3 = $10; buffer на peak fallback при провайдер-сбое (1-2 дня в месяц на платном) ~$30/мес × 3 = $90</td>
 <td>€100 / 3 мес</td>
 </tr>
 <tr>
@@ -595,7 +670,21 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 <p>Если <strong>что-то из этого не закрыто</strong> — не запускаем. Анкер бюджета не значит «ship at all costs».</p>
 <hr />
 <h2>6 · Команда + ответственности</h2>
-<h3>С нашей стороны (Cone Red)</h3>
+<h3>6.1 Триггер kickoff: pre-payment, не календарь</h3>
+<blockquote>
+<p><strong>Это самое важное в этом разделе. Прочитайте.</strong></p>
+</blockquote>
+<p>Я не называю «понедельник 12 мая» или «понедельник 19 мая» как kickoff date. Календарные обещания — это то, что мы уже два раза не сдержали (Apr 22 → 1 мая, и Friday 8 May → Saturday 9 May). Третий слип подряд убьёт операционное доверие, даже если cap-table закрыт.</p>
+<p>Вместо этого: <strong>kickoff = следующий рабочий день после того как pre-payment landed.</strong> Это:</p>
+<ul>
+<li><strong>Блокирует инженера под Keep Pet.</strong> Сейчас Cone Red parallel ведёт Tampere Horizon-prep (deadline 13 мая), Cloudmaven (Christoph follow-up), Casino Phase 01, Granat scaling. Без pre-payment-сигнала любой engineer может быть pulled на горящий проект в первый же день. Pre-payment превращает «возможно» в «забронировано».</li>
+<li><strong>Создаёт настоящую commitment симметрию.</strong> До этой точки 4 месяца работы (Apr 8 → May 9) — мои risk. Pre-payment — это первое реальное общее обязательство. После него у обеих сторон есть skin in the game.</li>
+<li><strong>Делает срыв сроков проблемой обеих сторон, а не только моей.</strong> Если инженер заблокирован, я держу 6 недель. Если не заблокирован — я честно скажу заранее.</li>
+</ul>
+<p><strong>Какой pre-payment:</strong> обсуждаем. Стандарт CR (после Pharmacy lessons) — 30–50% upfront. Для €19k это €5,700–€9,500. Я предлагаю <strong>€7,500</strong> (40%) — этого хватает чтобы заблокировать senior на 5 недель + хедж под infra первого месяца. Балансовый €11,500 — на кейс приёмки в week 6, привязан к acceptance criteria §5.</p>
+<p><strong>Equity 10%</strong> — отдельным треком, не привязано к pre-payment. Это закрытое решение от 6 мая.</p>
+<p><strong>После получения pre-payment</strong>: kickoff на следующий рабочий день. От kickoff до первых пользователей — 6 недель. Если pre-payment landed во вторник 13 мая — первые пользователи ~среда 25 июня. Если 20 мая — ~среда 1 июля. Линейно.</p>
+<h3>6.2 С нашей стороны (Cone Red)</h3>
 <table>
 <thead>
 <tr>
@@ -622,7 +711,7 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 </tr>
 </tbody>
 </table>
-<h3>С вашей стороны</h3>
+<h3>6.3 С вашей стороны</h3>
 <table>
 <thead>
 <tr>
@@ -654,7 +743,7 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 </tr>
 </tbody>
 </table>
-<h3>Что НЕ нужно от вас на MVP</h3>
+<h3>6.4 Что НЕ нужно от вас на MVP</h3>
 <ul>
 <li>❌ Партнёрки (вет-клиники, страховые, корм-бренды) — это Phase-2 после 10K пользователей</li>
 <li>❌ Фандинг-движения (мы сначала запускаем, потом идём к VC с тракшеном)</li>
@@ -710,12 +799,6 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 <td>Это уже в Phase-1 metrics — узнаем после launch. Если CAC пухнет — переключаемся на partnership-acquisition</td>
 </tr>
 <tr>
-<td><strong>Free-first аудитория не конвертится в фид-обратку</strong></td>
-<td>Low</td>
-<td>Low</td>
-<td>Weekly check-in сам по себе генерирует signal. Если люди не отвечают — это сигнал, что фича не нужна, переоцениваем</td>
-</tr>
-<tr>
 <td><strong>CAC оказался &gt; $1.50 на органике + free-first traction стопорится</strong></td>
 <td>Medium</td>
 <td>High — блокирует Phase-1 gate</td>
@@ -757,13 +840,14 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 <ol>
 <li>✅ <strong>Approve €19,000 ре-кост</strong> (или вернуть к €30k если хотите подушку)</li>
 <li>✅ <strong>Approve 6-недельный таймлайн</strong> (или предпочитаете «быстрее любой ценой» с потерей качества?)</li>
-<li>✅ <strong>Vet voice-memo capture</strong> — в parking lot или возвращаем в MVP? (cost +€2,500 если возвращаем)</li>
-<li>✅ <strong>Регионы запуска</strong> — все 3 страны (DE+IL+GE) или начинаем с одной?</li>
-<li>✅ <strong>Имя/домен</strong> — Keep Pet остаётся? Какой домен?</li>
-<li>✅ <strong>Кто будет admin support</strong> в Keep Pet после launch?</li>
-<li>✅ <strong>Google Doc для шаринга идей</strong> — Олег создал? Если да — пришли инвайт на dima@cone.red</li>
+<li>✅ <strong>Vet voice-memo capture</strong> — рекомендую держать в parking lot на v2. На созвоне 6 мая Сергей сам назвал звукозапись «дальней темой, уже далекой». Если хочешь вернуть — скажи, +€2,500 + 1 неделя; иначе по умолчанию остаётся в parking lot.</li>
+<li>✅ <strong>Имя/домен</strong> — Keep Pet остаётся (если другое — скажи сейчас). Домены проверил: <code>keep-pet.app</code> свободен · <code>keeppet.io</code> занят · <code>keep-pet.io</code> свободен. <strong>По умолчанию беру <code>keep-pet.app</code></strong> если возражений нет к моменту kickoff.</li>
+<li>✅ <strong>Кто будет admin support</strong> в Keep Pet после launch? <strong>По умолчанию: я + Юля по роте на первый месяц после launch, потом передаём designated person.</strong> Если другой план — скажи.</li>
+<li>✅ <strong>Google Doc для шаринга идей</strong> — Олег пришли инвайт на dima@cone.red.</li>
+<li>✅ <strong>Pre-payment структура</strong> — предлагаю <strong>€7,500 (40%)</strong> как kickoff-trigger, балансовый €11,500 на acceptance в week 6. Если предпочитаешь другую разбивку — назови.</li>
 </ol>
-<p>После ваших ответов — <strong>kickoff неделя 1 = понедельник 12 мая или 19 мая</strong> (на ваш выбор).</p>
+<p><strong>Регионы запуска (DE+IL+GE из Apr 21 шортлиста)</strong> — это твой call, Юля; обсудим отдельно когда дойдём до launch-материалов в week 6. Не блокирует kickoff.</p>
+<p>После ваших ответов <strong>+ pre-payment</strong> — kickoff на следующий рабочий день.</p>
 <hr />
 <p><em>План разработки 2026-05-09 by Dima + Claude. Re-cost based on May 6 narrowed scope. Anchor €30k carried as ceiling but actual estimate €19k. Sister documents: <code>mvp-spec.md</code> (фичи и архитектура) · <code>vision.md v6</code> (стратегия). Decisions §9 unblock kickoff.</em></p>
 
