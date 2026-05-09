@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Keep Pet — MVP Бюджет · Итерация 1 (v2) · €30k потолок</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F2E8;
+    --bg-elev: #FBF7EE;
+    --bg-card: #F0E9DB;
+    --ink: #1F262B;
+    --ink-mid: #3D4650;
+    --ink-dim: #6B737A;
+    --ink-faint: #9AA09F;
+    --accent: #B8522D;
+    --accent-deep: #8F3E20;
+    --accent-soft: rgba(184, 82, 45, 0.07);
+    --ochre: #C8872D;
+    --ochre-soft: rgba(200, 135, 45, 0.08);
+    --line: #E2D8C4;
+    --line-strong: #C9BEA5;
+    --success: #6B8E4E;
+    --success-soft: rgba(107, 142, 78, 0.1);
+    --serif: "Fraunces", "Source Serif 4", Georgia, serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "PT Sans", sans-serif;
+    --mono: "IBM Plex Mono", "SF Mono", "Menlo", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(184, 82, 45, 0.015) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(200, 135, 45, 0.015) 0%, transparent 40%);
+    z-index: -1;
+  }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(184, 82, 45, 0.35); }
+  a:hover { border-bottom-color: var(--accent); }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 56px 32px; }
+
+  header.hero { padding: 80px 0 64px 0; border-bottom: 1px solid var(--line); }
+  .hero .eyebrow {
+    font-family: var(--mono);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin-bottom: 24px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero .eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 60px;
+    line-height: 1.05;
+    font-weight: 400;
+    margin-bottom: 28px;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .hero .subtitle {
+    font-size: 19px;
+    color: var(--ink-mid);
+    max-width: 720px;
+    margin-bottom: 40px;
+    line-height: 1.55;
+  }
+  .hero .meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .hero .meta .label {
+    font-family: var(--mono);
+    font-style: italic;
+    color: var(--ink-faint);
+    font-size: 11px;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .hero .meta .value { color: var(--ink); font-weight: 500; }
+  .hero .version-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    padding: 4px 14px;
+    border-radius: 2px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    margin-bottom: 24px;
+    font-weight: 400;
+    border-left: 2px solid var(--accent);
+  }
+
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  .section-head { margin-bottom: 32px; }
+  .section-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--accent);
+    font-weight: 400;
+    margin-right: 14px;
+  }
+  .section-label {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--ink-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    font-weight: 500;
+  }
+  h3 {
+    font-family: var(--serif);
+    font-size: 36px;
+    line-height: 1.15;
+    font-weight: 400;
+    margin: 12px 0 22px 0;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  h3 em { font-style: italic; color: var(--accent); }
+  h4 {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  p { margin-bottom: 20px; color: var(--ink); }
+  p.lead {
+    font-family: var(--serif);
+    font-size: 21px;
+    line-height: 1.45;
+    color: var(--ink-mid);
+    margin-bottom: 28px;
+    font-weight: 400;
+    max-width: 720px;
+  }
+  p.lead em { font-style: italic; color: var(--accent); }
+  ul, ol { margin: 0 0 22px 22px; }
+  li { margin-bottom: 10px; color: var(--ink); }
+  strong { font-weight: 600; color: var(--ink); }
+  em { font-style: italic; }
+
+  .pullquote {
+    margin: 40px 0;
+    padding: 28px 0 24px 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+  .pullquote-text {
+    font-family: var(--serif);
+    font-size: 26px;
+    line-height: 1.3;
+    color: var(--ink);
+    font-style: italic;
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+  .pullquote-cite {
+    font-family: var(--serif);
+    font-size: 12px;
+    color: var(--accent);
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .scope-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin: 32px 0;
+  }
+  @media (max-width: 760px) { .scope-grid { grid-template-columns: 1fr; } }
+  .scope-col { border-top: 2px solid var(--ink-faint); padding-top: 18px; }
+  .scope-col.in { border-top-color: var(--success); }
+  .scope-col h5 {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    margin-bottom: 16px;
+    color: var(--ink-dim);
+  }
+  .scope-col.in h5 { color: var(--success); }
+  .scope-col ul { margin-left: 0; list-style: none; }
+  .scope-col li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    line-height: 1.5;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .scope-col li:last-child { border-bottom: none; }
+  .scope-col li::before {
+    flex-shrink: 0;
+    width: 14px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .scope-col.in li::before { content: "✓"; color: var(--success); font-weight: 600; }
+  .scope-col.out li::before { content: "—"; color: var(--ink-faint); }
+  .scope-col li .feature-source {
+    display: block;
+    font-family: var(--mono);
+    font-style: italic;
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 15px; }
+  th, td { padding: 14px 14px 14px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th {
+    font-family: var(--serif);
+    color: var(--ink-dim);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    border-bottom: 1px solid var(--ink-faint);
+  }
+  td { color: var(--ink); }
+  td.dim { color: var(--ink-mid); font-size: 14px; }
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  tr.total td {
+    font-weight: 600;
+    border-bottom: none;
+    border-top: 2px solid var(--ink);
+    padding-top: 16px;
+  }
+  tr.total td.num { color: var(--accent); }
+
+  .reuse-grid { display: grid; grid-template-columns: 2fr 3fr 1.4fr; gap: 0; margin: 28px 0; }
+  @media (max-width: 760px) { .reuse-grid { grid-template-columns: 1fr; } }
+  .reuse-row { display: contents; }
+  .reuse-row > div {
+    padding: 16px 18px 16px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .reuse-row.head > div {
+    font-family: var(--serif);
+    color: var(--ink-dim);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    border-bottom: 1px solid var(--ink-faint);
+    padding-bottom: 12px;
+  }
+  .reuse-row .cmp { font-family: var(--serif); font-weight: 500; font-size: 16px; color: var(--ink); }
+  .reuse-row .src { color: var(--ink-mid); font-size: 14px; }
+  .reuse-row .save {
+    font-family: var(--mono);
+    color: var(--success);
+    font-weight: 500;
+    font-size: 14px;
+    text-align: right;
+  }
+
+  .pill {
+    display: inline-block;
+    font-family: var(--serif);
+    font-size: 11px;
+    padding: 2px 9px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    font-weight: 600;
+    border: 1px solid transparent;
+  }
+  .pill-go { color: var(--success); border-color: rgba(107, 142, 78, 0.4); background: var(--success-soft); }
+  .pill-watch { color: var(--ochre); border-color: rgba(200, 135, 45, 0.4); background: var(--ochre-soft); }
+  .pill-warn { color: var(--accent); border-color: rgba(184, 82, 45, 0.4); background: var(--accent-soft); }
+
+  .risk-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 3fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+    font-size: 14px;
+  }
+  .risk-row:first-of-type { border-top: 1px solid var(--ink-faint); }
+  .risk-row .risk-name { font-family: var(--serif); font-weight: 500; color: var(--ink); font-size: 15px; line-height: 1.45; }
+  .risk-row .risk-prob, .risk-row .risk-impact {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .risk-row .risk-mit { color: var(--ink-mid); line-height: 1.5; font-size: 14px; }
+  .risk-row.head {
+    font-family: var(--serif);
+    color: var(--ink-dim);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    border-bottom: 1px solid var(--ink-faint);
+    border-top: none;
+    padding-bottom: 10px;
+  }
+  @media (max-width: 760px) {
+    .risk-row { grid-template-columns: 1fr; gap: 8px; }
+    .risk-row.head { display: none; }
+    .risk-row .risk-prob::before { content: "Вероятность: "; color: var(--ink-faint); }
+    .risk-row .risk-impact::before { content: "Импакт: "; color: var(--ink-faint); }
+  }
+
+  .decision-list ol { list-style: none; margin-left: 0; counter-reset: decision; }
+  .decision-list li {
+    counter-increment: decision;
+    padding: 18px 0 18px 56px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .decision-list li:last-child { border-bottom: none; }
+  .decision-list li::before {
+    content: counter(decision);
+    position: absolute;
+    left: 0;
+    top: 18px;
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    font-style: italic;
+  }
+  .decision-list li strong { display: block; margin-bottom: 4px; font-family: var(--serif); font-size: 17px; font-weight: 500; }
+
+  .gtm-track {
+    border-top: 1px solid var(--line);
+    padding: 18px 0;
+    display: grid;
+    grid-template-columns: 1.5fr 2.5fr 1.4fr 1fr;
+    gap: 18px;
+    font-size: 14px;
+    align-items: start;
+  }
+  .gtm-track:last-of-type { border-bottom: 1px solid var(--line); }
+  .gtm-track.head {
+    font-family: var(--serif);
+    color: var(--ink-dim);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    border-bottom: 1px solid var(--ink-faint);
+    border-top: none;
+    padding-bottom: 10px;
+  }
+  .gtm-track .channel { font-family: var(--serif); font-weight: 500; color: var(--ink); font-size: 15px; }
+  .gtm-track .channel .rail {
+    display: block;
+    font-family: var(--mono);
+    font-style: italic;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: 400;
+  }
+  .gtm-track .channel .rail.a { color: var(--accent); }
+  .gtm-track .channel .rail.b { color: var(--ochre); }
+  .gtm-track .desc { color: var(--ink-mid); line-height: 1.5; }
+  .gtm-track .cost { font-family: var(--mono); color: var(--ink); font-size: 13px; }
+  .gtm-track .own { color: var(--ink-dim); font-size: 13px; font-style: italic; font-family: var(--serif); }
+  @media (max-width: 760px) {
+    .gtm-track { grid-template-columns: 1fr; gap: 6px; }
+    .gtm-track.head { display: none; }
+  }
+
+  .note {
+    margin: 28px 0;
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--accent);
+  }
+  .note-label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--accent);
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .note-body {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    font-style: italic;
+  }
+  .note-body strong { font-style: normal; color: var(--ink); font-weight: 600; }
+
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin: 36px 0 28px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  @media (max-width: 760px) { .phases { grid-template-columns: 1fr; border: none; } }
+  .phase {
+    padding: 22px 18px;
+    border-right: 1px solid var(--line);
+  }
+  @media (max-width: 760px) {
+    .phase { border-right: none; border-bottom: 1px solid var(--line); }
+    .phase:last-child { border-bottom: none; }
+  }
+  .phase:last-child { border-right: none; }
+  .phase .phase-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .phase .phase-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .phase .phase-amt {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .phase .phase-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-mid);
+    line-height: 1.5;
+  }
+
+  .country-pick {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin: 32px 0;
+  }
+  @media (max-width: 760px) { .country-pick { grid-template-columns: 1fr; } }
+  .country-pick .pick {
+    padding: 24px 22px;
+    border-radius: 2px;
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+  }
+  .country-pick .pick.primary { border-color: var(--accent); background: var(--accent-soft); }
+  .country-pick .pick .label {
+    font-family: var(--mono);
+    font-style: italic;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .country-pick .pick .name {
+    font-family: var(--serif);
+    font-size: 24px;
+    color: var(--ink);
+    font-weight: 500;
+    margin-bottom: 10px;
+    letter-spacing: -0.005em;
+  }
+  .country-pick .pick .meta {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-mid);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .country-pick .pick .stat {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-dim);
+    line-height: 1.7;
+  }
+  .country-pick .pick .stat strong { color: var(--accent); font-weight: 600; }
+
+  footer {
+    padding: 48px 0 64px 0;
+    color: var(--ink-faint);
+    font-size: 13px;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+  }
+  footer .logo {
+    font-family: var(--serif);
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    font-variant: small-caps;
+    text-transform: uppercase;
+    font-style: normal;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 40px 0; }
+
+  @media print {
+    @page { size: A4; margin: 18mm 16mm; }
+    html, body { background: #FFFFFF; font-size: 11pt; line-height: 1.55; }
+    body::before { display: none; }
+    .wrap { padding: 0; max-width: 100%; }
+    header.hero { padding: 0 0 28px 0; page-break-after: avoid; }
+    .hero h1 { font-size: 36pt; line-height: 1.05; margin-bottom: 18px; }
+    .hero .subtitle { font-size: 13pt; margin-bottom: 24px; }
+    section { padding: 28px 0; }
+    h3 { font-size: 22pt; margin: 6px 0 14px 0; page-break-after: avoid; }
+    h4 { font-size: 13pt; margin-top: 18px; page-break-after: avoid; }
+    p, li { font-size: 11pt; }
+    p.lead { font-size: 13pt; margin-bottom: 18px; }
+    .pullquote { margin: 28px 0; padding: 20px 0 16px 0; page-break-inside: avoid; }
+    .pullquote-text { font-size: 17pt; }
+    table, .reuse-grid, .scope-grid, .phases, .gtm-track, .risk-row, .decision-list, .country-pick { page-break-inside: avoid; }
+    *, *::before, *::after { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    a { color: var(--accent); border-bottom: none; }
+    footer { padding: 24px 0; page-break-before: avoid; }
+  }
+</style>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="plan" data-lang="ru">
+<script defer src="assets/site.js"></script>
+<div class="wrap">
+
+<header class="hero">
+  <div class="version-stamp">Итерация 1 · v2.1 · только бюджет · 2026-05-02 (post-redteam)</div>
+  <div class="eyebrow">Keep Pet · MVP-инвестиция · для Олега, Юли, Сергея</div>
+  <h1>Тридцать тысяч евро — <em>с уважением, не как счёт</em>.</h1>
+  <p class="subtitle">Это не оценка от подрядчика. Это потолок, который я держу осознанно: чтобы доказать гипотезу до того, как просить капитал. Cone Red несёт стройку как партнёрский вклад под equity-alignment — не как биллинг. Объём ниже, риски названы, документы подкреплены данными свежих исследований.</p>
+  <div class="meta">
+    <div><div class="label">Потолок</div><div class="value">≤ €30,000</div></div>
+    <div><div class="label">Календарь</div><div class="value">10–12 недель</div></div>
+    <div><div class="label">Phase-1 gate</div><div class="value">100 × $3 / мес</div></div>
+    <div><div class="label">Дата</div><div class="value">2026-05-01</div></div>
+  </div>
+</header>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 0</span><span class="section-label">Trust-Recovery</span>
+    <h3>Эту бумагу я <em>должен был</em> прислать неделю назад.</h3>
+  </div>
+  <p>Итерация 1 (только бюджет) была обещана 22–23 апреля. Итерация 2 (полный пакет) — 28 апреля. Я не выполнил оба срока: в неделю после нашего созвона у Cone Red шли параллельные клиентские поставки (Casino MVP + публичный лонч AI-First Practice + Granat). Это не оправдание — это контекст. Называю задержку, чтобы стоимость доверия была видна, а не похоронена.</p>
+  <p>Эта v2 одностраничника закрывает Итерацию 1 — и одновременно вкладывает результаты пяти research-запросов, которые вернулись 30 апреля – 1 мая (диаспора, рынок питомцев, страховые партнёрки, Russia cap-table прецеденты, юридический ландшафт переводчиков). Итерация 2 (vision v4 на руках, готов к доработке после вашего фидбека) — следующим шагом.</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 1</span><span class="section-label">Что покупает 30 тысяч</span>
+    <h3>MVP на двух поверхностях, <em>только софт</em>.</h3>
+  </div>
+  <p class="lead">Telegram Mini App + AI-бот + PWA. Один мозг, две двери. Полная продуктовая ось из созвона 21 апреля.</p>
+
+  <div class="scope-grid">
+    <div class="scope-col in">
+      <h5>В скоупе MVP</h5>
+      <ul>
+        <li>Мозг + Паспорт — онбординг через OCR + MCQ + голос за 10–15 мин; персональный knowledge-graph; ежедневные проактивные касания<span class="feature-source"></span></li>
+        <li>Голос-первая интеракция — sub-second response, разговор, не форма</li>
+        <li>Vet voice-memo — диктофон ветеринара → перевод на язык хозяина → извлечение routine-напоминаний → запись в память<span class="feature-source">— Юля, 21 апреля</span></li>
+        <li>QR-shareable read-only паспорт — один тап, любой ветеринар, любой язык</li>
+        <li>Lost-pet poster generator — авто-листовка для Telegram / WhatsApp / Instagram<span class="feature-source">— Юля, 21 апреля; работает на всех владельцев, не только мигрантов</span></li>
+        <li>Subscription-gate $3/мес как «поддержка инфраструктуры / early adopter» — не коммерция</li>
+        <li>Phase-1 success-инструментирование — retention, LTV, inference-cost telemetry с нулевого дня</li>
+      </ul>
+    </div>
+    <div class="scope-col out">
+      <h5>Намеренно вне MVP</h5>
+      <ul>
+        <li>Wearable hardware (FitBark/Whistle/Tractive ingestion)<span class="feature-source">— Юля заблокировала на 21 апреля; v3, при условии traction + её согласия</span></li>
+        <li>Нативные iOS / Android приложения<span class="feature-source">— PWA до тех пор, пока его лимиты не упрутся</span></li>
+        <li>Smart-speaker интеграция (Alice / Alexa)<span class="feature-source">— v3, gate на engagement-метриках</span></li>
+        <li>Pet-emotion estimation feature<span class="feature-source">— v3; зависит от reopening wearable-полосы + safe-claim envelope (RR #14)</span></li>
+        <li>Russia-territory entity / brand<span class="feature-source">— отдельный workstream, отдельный cap-table firewall — см. § 5</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="note-label">Что показывает MVP инвестору</span>
+    <div class="note-body">Demo на $300k раунд показывает <strong>voice-first паспорт + vet voice-memo + lost-pet poster + first-sharper-answer момент</strong> — это и есть наш wedge. <strong>Pet-emotion estimation (Олегова инвестор-фишка) — НЕ в MVP demo.</strong> Она требует биометрии с wearables (Brief #14: «wearable biometrics — substantiation backbone»), а wearable-полоса заблокирована Юлей до Phase-3. Если инвестор спросит про emotion-recognition — отвечаем «v3 lane, biometric-only framing, безопасный legal envelope готов, ship после Phase-2 raise». Это честный roadmap, не дыра в продукте.</div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 2</span><span class="section-label">Почему €30k — это честно</span>
+    <h3>Reuse-механика — что держит <em>потолок</em>.</h3>
+  </div>
+  <p>Greenfield-стройка этого скоупа за €30k не была бы честной. Потолок держится только потому, что мы переиспользуем production-компоненты Cone Red, проверенные на других проектах:</p>
+
+  <div class="reuse-grid">
+    <div class="reuse-row head">
+      <div>Компонент</div>
+      <div>Что переиспользуем</div>
+      <div>Сэкономлено</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">Аудио-пайплайн + транскрипция</div>
+      <div class="src">Conversa — наш in-house transcript-аналитик, production-grade</div>
+      <div class="save">~3 недели</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">Multi-agent оркестрация</div>
+      <div class="src">A-genie pattern + EA-Agent scaffolding</div>
+      <div class="save">~2 недели</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">Per-pet knowledge graph</div>
+      <div class="src">KG-паттерны из Tampere + Casino + Granat</div>
+      <div class="save">~2 недели</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">Onboarding multi-agent верификация</div>
+      <div class="src">Pattern из Conny <span style="font-family:var(--mono);font-style:italic;">/discover</span> + EA-Agent intake</div>
+      <div class="save">~1.5 недели</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">Streaming voice TTS / ASR layer</div>
+      <div class="src">Open-source стек, валидирован на двух предыдущих проектах</div>
+      <div class="save">~1 неделя</div>
+    </div>
+    <div class="reuse-row">
+      <div class="cmp">OCR + document parsing</div>
+      <div class="src">Vendor-выбор сделан в RR #09; integration pattern переносим</div>
+      <div class="save">~1 неделя</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="note-label">Асимметричная честность</span>
+    <div class="note-body"><strong>Total reuse leverage: ~10.5 инженер-недель.</strong> Это и есть то, что делает €30k достижимым на этом скоупе. Если reuse-фрагменты не лягут чисто — потолок ломается. <strong>Этот риск назван в § 7, не похоронен.</strong> Доверие строится тем, что говорить о нём заранее.</div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 3</span><span class="section-label">Декомпозиция</span>
+    <h3>Куда уходит каждый <em>евро</em>.</h3>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Линия</th><th>Объём</th><th style="text-align:right">Стоимость</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Backend glue — auth, user model, passport persistence, voice-pipeline, multi-agent верификация</td><td class="dim">3 senior-недели</td><td class="num" style="text-align:right">€7,500</td></tr>
+      <tr><td>Onboarding flow — OCR ingestion → MCQ → first-insight delivery 10–15 мин</td><td class="dim">2 senior-недели</td><td class="num" style="text-align:right">€5,000</td></tr>
+      <tr><td>Telegram Mini App + AI бот</td><td class="dim">1.5 недели</td><td class="num" style="text-align:right">€3,750</td></tr>
+      <tr><td>PWA — зеркалит TG-логику, browser-first</td><td class="dim">1.5 недели</td><td class="num" style="text-align:right">€3,750</td></tr>
+      <tr><td>Vet voice-memo + lost-pet poster <span class="pill pill-watch">Новое 21 апр</span></td><td class="dim">1 неделя</td><td class="num" style="text-align:right">€2,500</td></tr>
+      <tr><td>QR-shareable read-only passport view</td><td class="dim">0.5 недели</td><td class="num" style="text-align:right">€1,250</td></tr>
+      <tr><td>Infra setup, deployment, мониторинг, telemetry</td><td class="dim">0.5 недели</td><td class="num" style="text-align:right">€1,250</td></tr>
+      <tr><td>API + хостинг + транскрипция / OCR vendor cost (3 мес)</td><td class="dim">—</td><td class="num" style="text-align:right">€3,000</td></tr>
+      <tr><td>Buffer — тестирование, polish, contingency</td><td class="dim">—</td><td class="num" style="text-align:right">€2,000</td></tr>
+      <tr class="total"><td>ИТОГО</td><td class="dim">~10–12 календарных недель</td><td class="num" style="text-align:right"><strong>€30,000</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Профиль команды:</strong> 1 senior + 0.5 junior, либо 1 senior solo. Обе конфигурации проверены в Cone Red. <strong>Календарь:</strong> 10–12 недель от kickoff. Vet voice-memo + lost-pet poster — last-mile добавки; cuttable до v1.1, если возникнет cost-stress.</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 4</span><span class="section-label">Первый полигон</span>
+    <h3>Германия первой, не Сербия — <em>так говорят данные</em>.</h3>
+  </div>
+  <p class="lead">На созвоне 21 апреля Сергей задал ключевой вопрос: «Почему именно Сербия?» Мой честный ответ был — «первое, что пришло в голову; нужно исследование». Исследование пришло. Серьёзное.</p>
+
+  <p>Brief #10 (диаспора 22 стран) и Brief #11 (общий рынок 20 стран) сошлись на одном выводе: <strong>Германия — единственная страна, которая попадает в обе шортлисты</strong>. По объёму осевшей русскоязычной диаспоры (3.5–4.5М человек). По post-2022 receptivity-window (~1.32М новоприбывших, в основном украинцев). По cat-first рынку (15.9М кошек — больше, чем во всей Великобритании; стабильное соотношение 1.51 кошки на собаку держится 25+ лет — единственный крупный европейский рынок, где revenue от кошачьего корма превышает собачий).</p>
+
+  <div class="note">
+    <span class="note-label">Честность в ранжировании</span>
+    <div class="note-body">Два варианта Brief #10 расходятся в деталях. <strong>v1</strong> (six-axis composite scoring) ставит <strong>Израиль на первое место</strong> с весом 8.65 vs Germany 7.55 — Israel выигрывает на concentration (60–70% когорты в TLV/Haifa) и cohesion. <strong>v2</strong> (двухракурсный shortlist) кладёт Германию как «defensible default if round narrative is unsettled». Обе позиции имеют data-backing. <strong>Наша рекомендация — Германия первой</strong>: addressable-база ~3× больше Израиля (665K vs 210K HH), и она единственная страна в обеих шортлистах. Но это не «Германия очевидно №1» — это «Германия — выбор с лучшим volume-плюс-diversified narrative trade-off для investor pack».</div>
+  </div>
+
+  <div class="country-pick">
+    <div class="pick primary">
+      <div class="label">Первый полигон · инвестор-нарратив</div>
+      <div class="name">🇩🇪 Германия</div>
+      <div class="meta">525–770K diaspora pet-HH · 19.1M total pet-owning HH · cat-first структурно · pet-tech adoption ~20% (валидирует WTP, без насыщения)</div>
+      <div class="stat">$5–9/мес empirical WTP<br>TAM $138M @ $3 / $367M @ $8<br>Берлин/Мюнхен/Гамбург ~30% когорты<br>TG penetration ~70–85% диаспоры</div>
+    </div>
+    <div class="pick">
+      <div class="label">Второй полигон · 6 мес позже</div>
+      <div class="name">🇮🇱 Израиль</div>
+      <div class="meta">120–180K diaspora pet-HH · highest-density Tel Aviv · 25%+ HH-собака (плотнейший в мире)</div>
+      <div class="stat">$5–9/мес empirical WTP<br>TG ~85%+ диаспоры<br>Aliyah cohort = voluntary, brought-pet rate выше<br>Identification cost низкий</div>
+    </div>
+    <div class="pick">
+      <div class="label">Operational sandbox</div>
+      <div class="name">🇷🇸 Сербия</div>
+      <div class="meta">14–24K diaspora pet-HH · founder-proximate · TG ~very-high · 40–45% когорты уже мигрировали дальше или вернулись</div>
+      <div class="stat">Дешёвые эксперименты<br>Высокий TG-density для outreach<br>НЕ инвестор-нарратив<br>Выжимка learnings → Германия</div>
+    </div>
+  </div>
+
+  <h4>Конкуренция в Германии</h4>
+  <p><strong>Tractive (Pasching, Австрия)</strong> — ~1.4M GPS+activity подписок, недавно поглотил Whistle у Mars (июль 2025), запустил insurance-bundle с Napo (декабрь 2025) и параллельный multi-country playbook (Spot/Uelzener/Musky 2024–25). Это <strong>adjacent hardware-игрок с уже отработанным pet-tech × insurer playbook</strong>, не direct voice-first AI. Pet-app market Германии ~$120M, +17% CAGR.</p>
+  <p>Voice-first + persistent-memory ниша глобально пуста — но это значит, что Tractive — наиболее вероятный fast-follower при подтверждённой traction. План на этот риск двоякий: <strong>(a)</strong> partnership early — наш wedge → их distribution, прежде чем они построят свою AI-полосу; <strong>(b)</strong> опередить с per-pet KG-моатом, который не повторяется без длинной user-data истории. Мы знаем, что они сделают, и идём с открытыми глазами.</p>
+
+  <div class="note">
+    <span class="note-label">Параллельный Rail B — не «опция», а условие</span>
+    <div class="note-body">Brief #10v1 явно говорит: <strong>diaspora-only TAM при credible 3% capture даёт ~$35–55M ARR</strong> — этого хватает на Series-A с retention-доказательством, но <strong>недостаточно для NASDAQ-track exit narrative</strong>. То есть наша Russia-separation principle (см. § 5) защищает exit-оптику, но без US/EU general acquisition венчур-scale story не получается. <strong>Rail B (paid acquisition в США/Европе) — не «параллельная вторая дорожка», а условие large-round economics.</strong> Это уточнение к § 7 GTM ниже: low-scenario старт оправдан только потому, что Phase-1 диаспоры даёт нам proof, на котором Rail B запускается уже с математикой, не с пустого листа.</div>
+  </div>
+
+  <h4>Зачем Италия в фоне</h4>
+  <p>Brief #11 surfaced Италию как <strong>сильнейший cats-first сигнал среди Tier-2 стран</strong>: +18% популяция кошек за 4 года, кошачий корм теперь 56% pet-food revenue, decisively flipped к cats > dogs. Италия — кандидат на третий полигон, но пока в скобках, не в инвестиции — это сигнал для v4 vision.</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 5</span><span class="section-label">Russia-разделение</span>
+    <h3>Разделение брендов — не паранойя, а <em>прецедент</em>.</h3>
+  </div>
+  <p>На 21 апреля Олег обозначил Russia-exposure как stop-factor: «сегодня инвестор зайдёт, а завтра появятся более крупные либо мы решим выходить на NASDAQ — это может помешать». Brief #13 (15+ задокументированных кейсов post-Feb 2022) превращает эту интуицию в documented playbook:</p>
+
+  <ul>
+    <li><strong>Russia-territory operations + Russia revenue + Russian investors = почти-бинарный stop-factor.</strong> Все Cyprus-domiciled эмитенты с Russia-revenue были принудительно делистнуты с Nasdaq/NYSE/LSE: HeadHunter (июнь 2023), Ozon (март 2023), Cian (июль 2023), TCS/Tinkoff (январь 2024), X5 (октябрь 2024), VK (сентябрь 2023). Forced redomiciliation в Россию для большинства. Equity wipeout для иностранных держателей.</li>
+    <li><strong>Russian-citizen основатель + полностью decoupled операции = manageable.</strong> Miro закрыл $400M @ $17.5B (январь 2022); Revolut closed secondary @ $75B (ноябрь 2025, лидеры Coatue/a16z/Greenoaks/Nvidia); Semrush sold to Adobe @ ~$1.9B (2025); inDrive получил $150M от General Catalyst (февраль 2023) <em>после</em> Russia-divestiture основателя.</li>
+    <li><strong>Структурное разделение разблокировало Western capital в ≥4 named прецедентах post-2022:</strong> Yandex → Nebius (Nasdaq relisting октябрь 2024), GDEV/Nexters (Nasdaq trading возобновлено март 2023), inDrive (General Catalyst follow-on февраль 2023), VEON (оба Western listings сохранены октябрь 2023).</li>
+  </ul>
+
+  <div class="note">
+    <span class="note-label">Operative rule для Keep Pet</span>
+    <div class="note-body"><strong>Tier-1 Western HQ</strong> (Delaware / UK / Netherlands — <strong>не Cyprus</strong>: HeadHunter и Ozon обе Cyprus-domiciled, обе forced в Калининград 2024). <strong>Никаких Russia-territory operations, revenue, или dev-team с production-доступом</strong>. <strong>Никаких Russia-domiciled или Russia-passport инвесторов с material-rights</strong> на post-money cap table. <strong>Отдельный бренд + entity для любого Russia-territory присутствия</strong> с задокументированной transfer-механикой Wargaming/Lesta-style. Под этими условиями Russian-origin angle становится manageable DD-item, а Series-A валуация сетится на merits консьюмерского pet-tech бизнеса, не на геополитике паспорта.</div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 6</span><span class="section-label">B2B-клин и страховщики</span>
+    <h3>Грузия — <em>самый быстрый путь к подписанной страховой партнёрке</em>.</h3>
+  </div>
+  <p>Brief #12 проверил пять кандидатов на pilot (Сербия, Армения, Грузия, Казахстан, Кипр). Победитель — Грузия — единственная страна, где (а) productized pet-insurance SKU активно продаётся регулятором-licensed digitally-mature insurer (IRAO / Vienna Insurance Group), и (b) местный Insurance Law содержит explicit «no-license-required» carve-out для insurer-appointed agents (Article 12) + mere-introducer exemption (Article 2(h¹)(3)).</p>
+
+  <p>Realistic time-to-signed: <strong>6–10 недель</strong>. Структура: hybrid CPL (€1–3) + CPA (€8–20 fixed ИЛИ 10–20% first-year premium). <strong>Структурный прецедент — Tractive × Napo (UK, декабрь 2025)</strong>: co-marketing бандл, страховщик финансирует acquisition-incentive. Та же логика, наш масштаб. <strong>Реальные числа</strong> Tractive × Napo не публичны — для economics-якорей берём Lemonade Pet ($10–13 CPL + $25.50 CPA), Trupanion ($1 CPL + $25 CPA), Generali Česká pojišťovna (20% от first-year premium). Грузия попадает в нижний край этих диапазонов из-за более низкого absolute premium.</p>
+
+  <p>Сербия как PRIMARY-альтернатива: DDOR Novi Sad запустил первый retail pet-продукт «Zdravo da su» в апреле 2026 — голодный, нужен volume — но регулятор NBS не имеет statutory carve-out для lead-generators, придётся либо licensing, либо sub-contracting через licensed agent. Армения — effectively single-counterparty (EFES), <strong>избегаем INGO Armenia из-за Russian Ingosstrakh-ownership</strong> (sanctions-adjacent риск).</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 7</span><span class="section-label">GTM</span>
+    <h3>Two-rail, <em>repeat after Apr 21</em>.</h3>
+  </div>
+  <p>На созвоне 21 апреля Олег закрыл pushback на single-track diaspora: «когда мигрант кончится — что делать?» — и предложил parallel rails. v2 фиксирует это:</p>
+
+  <div class="gtm-track head">
+    <div>Канал</div><div>Механика</div><div>Cost shape</div><div>Owner</div>
+  </div>
+  <div class="gtm-track">
+    <div class="channel"><span class="rail a">Rail A · Diaspora</span>Telegram community walking</div>
+    <div class="desc">Ручной outreach в diaspora-чаты в Германии (Berlin/Munich/NRW), вторая волна — Израиль</div>
+    <div class="cost">Бесплатно + 5–10 ч/нед первые 8 нед</div>
+    <div class="own">Юля + Дима</div>
+  </div>
+  <div class="gtm-track">
+    <div class="channel"><span class="rail a">Rail A · Diaspora</span>Платные TG-channel посты</div>
+    <div class="desc">Sponsored placements в target diaspora-IT / pet / релокант чатах (Юля исследует pricing после Brief #10 shortlist)</div>
+    <div class="cost">TBD по результатам Юлиного research</div>
+    <div class="own">Юля</div>
+  </div>
+  <div class="gtm-track">
+    <div class="channel"><span class="rail a">Rail A · Diaspora</span>Russian content-studio storytelling</div>
+    <div class="desc">Influencer-style Reels / Threads / TikTok shorts — нарратив, не advertorial</div>
+    <div class="cost">TBD — Юля outreach у агентства</div>
+    <div class="own">Юля</div>
+  </div>
+  <div class="gtm-track">
+    <div class="channel"><span class="rail b">Rail B · US/EU general</span>Subscription-led paid acquisition</div>
+    <div class="desc">Meta + Google + TikTok при контролируемом CAC, capped Phase-1 burn</div>
+    <div class="cost">€1–3k/мес старт, калибровка после Brief #10</div>
+    <div class="own">Сергей + Юля</div>
+  </div>
+  <div class="gtm-track">
+    <div class="channel"><span class="rail b">Phase-2 trigger</span>Pet-insurance referral revenue-share (Грузия)</div>
+    <div class="desc">Подписан на 200-user threshold; revenue-share, не upfront</div>
+    <div class="cost">No upfront — revenue-share модель</div>
+    <div class="own">Сергей</div>
+  </div>
+
+  <h4>Indicative GTM-бюджет — первые 3 мес после launch</h4>
+  <table>
+    <tbody>
+      <tr><td>Low scenario — diaspora-only, organic-heavy</td><td class="num" style="text-align:right">€3–5k</td></tr>
+      <tr><td>Mid scenario — diaspora + minimal US-paid</td><td class="num" style="text-align:right">€8–12k</td></tr>
+      <tr><td>High scenario — full parallel rails</td><td class="num" style="text-align:right">€20k+</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <span class="note-label">Рекомендация</span>
+    <div class="note-body">Стартуем на <strong>low scenario</strong>. Калибруем вверх только после того, как diaspora-bootstrap покажет traction и Brief #10 подтвердит TAM math. High scenario оправдан только <strong>после</strong> Phase-1 proof-point — не раньше.</div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 8</span><span class="section-label">Phase-1 success gate</span>
+    <h3>Точка доказательства, открывающая <em>institutional raise</em>.</h3>
+  </div>
+  <div class="pullquote">
+    <div class="pullquote-text">100 платящих × $3 / мес в течение 60 дней после публичного запуска.</div>
+    <div class="pullquote-cite">Gate, locked 21 апреля</div>
+  </div>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-num">Phase 0 — Build</div>
+      <div class="phase-title">€30k MVP build</div>
+      <div class="phase-amt">≤ €30,000</div>
+      <div class="phase-text">Cone Red строит. Software-only, две поверхности, 10–12 нед. Equity-for-work / soft-capital.</div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">Phase 1 — Proof</div>
+      <div class="phase-title">100 × $3 / мес за 60 дней</div>
+      <div class="phase-amt">$3,600 / мес MRR</div>
+      <div class="phase-text">Реальные retention, LTV, inference-cost. Числа, не питчи.</div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">Phase 2 — Raise</div>
+      <div class="phase-title">Institutional раунд</div>
+      <div class="phase-amt">~$300,000 target</div>
+      <div class="phase-text">Размер sized против Phase-1 метрик. Funds полный v1: native-app trigger при PWA-лимитах, multi-country expansion, dedicated marketing, +1 ops headcount.</div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">Phase 3 — Wedge</div>
+      <div class="phase-title">B2B-партнёрка подписана</div>
+      <div class="phase-amt">Revenue-share</div>
+      <div class="phase-text">Pet-insurance referral подписан в Грузии. Wearable-полоса reopens. Emotion-estimation v3 lane ships.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 9</span><span class="section-label">Риски</span>
+    <h3>Семь рисков, <em>названных честно</em>.</h3>
+  </div>
+
+  <div class="risk-row head">
+    <div>Риск</div><div>Вероятность</div><div>Импакт</div><div>Mitigation</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">Reuse-фрагменты не лягут чисто — Conversa, A-genie, KG-паттерны требуют больше glue, чем оценено</div>
+    <div class="risk-prob"><span class="pill pill-watch">Средняя</span></div>
+    <div class="risk-impact"><span class="pill pill-warn">Высокий</span></div>
+    <div class="risk-mit">Pre-flight inventory reuse-фрагментов до kickoff. Abort feature scope (vet voice-memo + lost-pet poster в v1.1) если фрагмент не лезет. Сломалось — €40–45k. Самый load-bearing ceiling-риск.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">OCR accuracy ниже demo-threshold на real-world ветеринарной бумаге</div>
+    <div class="risk-prob"><span class="pill pill-watch">Средняя</span></div>
+    <div class="risk-impact"><span class="pill pill-watch">Средний</span></div>
+    <div class="risk-mit">Brief #09 vendor-benchmark. Pre-curate 3 sample pets с OCR-friendly бумагой для demo. MCQ gap-fill robust enough для absorb misses gracefully.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">iOS Safari PWA voice / push reliability на реальных пользовательских девайсах</div>
+    <div class="risk-prob"><span class="pill pill-watch">Средняя</span></div>
+    <div class="risk-impact"><span class="pill pill-watch">Средний</span></div>
+    <div class="risk-mit">Dual-channel demo (Android PWA + TG Mini App на iOS). Fallback на text-input если PWA падает. Native-app trigger раньше, если widespread.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">Russia-exposure stop-factor блокирует late-stage round / exit (Олегова озабоченность)</div>
+    <div class="risk-prob"><span class="pill pill-watch">Средняя</span></div>
+    <div class="risk-impact"><span class="pill pill-warn">Критичный</span></div>
+    <div class="risk-mit">Russia-separation как hard architectural principle с дня нуля — separate brand, entity, visual identity, cap-table firewall. Brief #13: 15+ задокументированных прецедентов поддерживают эту структуру. См. § 5.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">Pet-translator legal-claim exposure (если v3 emotion-estimation не защищён правильно)</div>
+    <div class="risk-prob"><span class="pill pill-go">Низкая</span></div>
+    <div class="risk-impact"><span class="pill pill-watch">Major</span></div>
+    <div class="risk-mit">Brief #14 определил safe-claim envelope: никогда не «translator», только biometric-signal-based estimation против personal baseline, никогда не диагностируем заболевания, всегда «consult your vet» на health-implicating signals. v3 не shipping без vision v5 approval.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">Cone Red bandwidth conflict — параллельные проекты Tampere · Casino · Granat · Memory Layer</div>
+    <div class="risk-prob"><span class="pill pill-watch">Средняя</span></div>
+    <div class="risk-impact"><span class="pill pill-watch">Средний</span></div>
+    <div class="risk-mit">Lock 1 senior dedicated на 10-week окно до kickoff. Slip календаря, не cost — но trust slips with calendar. Та же причина, что вызвала Iteration 1 опоздание.</div>
+  </div>
+  <div class="risk-row">
+    <div class="risk-name">Yulia's TG-channel ad-pricing вернётся слишком высокой для diaspora-bootstrap</div>
+    <div class="risk-prob"><span class="pill pill-go">Низкая–средняя</span></div>
+    <div class="risk-impact"><span class="pill pill-watch">Средний</span></div>
+    <div class="risk-mit">Brief #10 → Юлино pricing-research → решаем до commit на GTM-track. Community-walking работает как fallback независимо от paid pricing.</div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 10</span><span class="section-label">Что нужно от вас</span>
+    <h3>Пять решений — <em>о которых просит этот документ</em>.</h3>
+  </div>
+
+  <div class="decision-list">
+    <ol>
+      <li><strong>Утвердить €30k потолок</strong> как build-only бюджет. Итерация 1 — Y/N.</li>
+      <li><strong>Утвердить scope</strong> заблокированный 21 апреля — TG + PWA + voice + passport + vet voice-memo + lost-pet poster + QR-share. Wearable, emotion-estimation, native, speakers — всё out of v1.</li>
+      <li><strong>Утвердить first-polygon</strong> — Германия (data-driven из Brief #10/#11), Израиль вторым через 6 мес, Сербия как operational sandbox. Итальянский cats-first сигнал в фоне для v4.</li>
+      <li><strong>Утвердить GTM-budget framework</strong> — старт на low scenario, калибровка вверх после Brief #10 + Phase-1 proof.</li>
+      <li><strong>Утвердить Phase-1 success gate</strong> — 100 платящих × $3/мес как proof-point, открывающий institutional raise.</li>
+    </ol>
+  </div>
+
+  <h4>Три предложения слотов на следующий созвон</h4>
+  <ul>
+    <li><strong>Вторник 6 мая, 16:00 CET</strong> · Zoom · 60 мин</li>
+    <li><strong>Среда 7 мая, 14:00 CET</strong> · Zoom · 60 мин</li>
+    <li><strong>Четверг 8 мая, 16:00 CET</strong> · Zoom · 60 мин</li>
+  </ul>
+  <p>Выбирайте один или предлагайте контр. Если все три не подходят — назову окно следующей недели.</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <span class="section-num">§ 11</span><span class="section-label">Что в Итерации 2</span>
+    <h3>Полный пакет — <em>уже на руках</em>.</h3>
+  </div>
+  <p>Иттерация 2 (полный полированный пакет) уже подготовлена параллельно с этим документом и ждёт вашего фидбека. Содержит:</p>
+  <ul>
+    <li><strong>vision.md v4</strong> — internationalized cases · Russia-separation как principle · two-rail GTM · subscription primary · vet voice-memo + lost-pet poster как core · wearables в v3 · pet-emotion-estimation как v3 lane · cats-first positioning · reputation-marketing GTM · Phase-1 success gate · обновлено с research findings</li>
+    <li><strong>product-spec v2</strong> — post Apr-21 lock-ins фиксированы как addendum</li>
+    <li><strong>team-roadmap.html</strong> — отдельный документ с per-person commitments, дедлайнами, accountability</li>
+    <li><strong>research findings</strong> — все 14 briefs (5 свежих + 9 предыдущих) в `pipeline/concept/keep-pet/research/results/`</li>
+  </ul>
+
+  <div class="note">
+    <span class="note-label">Trust signal</span>
+    <div class="note-body">Эта v2 одностраничника закрывает Itération 1 (бюджет). Полный пакет v2 идёт следом — обновлённый, с research-данными. Потолок твёрдый; механика названа; риски названы рядом. <strong>Это та асимметричная честность, которая компаундирует.</strong></div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Cone Red</div>
+  Keep Pet · MVP Бюджет One-Pager · Iteration 1 v2 · 2026-05-01<br>
+  <code>pipeline/concept/keep-pet/proposal/iteration-1-budget-onepager-ru-v2.html</code>
+</footer>
+
+</div>
+</body>
+</html>

@@ -11,15 +11,19 @@
 
 | Страница | URL | Источник | Версия |
 |---|---|---|---|
-| Главная | `/index.html` | этот репо (создаётся вручную) | live |
-| Видение | `/vision.html` | `pipeline/concept/keep-pet/package/share/oleg-team-ru.html` | v3 (2026-05-02) |
-| Дорожная карта | `/roadmap.html` | `pipeline/concept/keep-pet/proposal/team-roadmap-ru.html` | 2026-05-02 |
-| План — Iteration 1 | `/plan.html` | `pipeline/concept/keep-pet/proposal/iteration-1-budget-onepager-ru-v2.html` | v2 (2026-05-02) |
+| Главная | `/index.html` | этот репо (создаётся вручную) | 2026-05-09 |
+| **MVP Спецификация** | `/spec.html` | `pipeline/concept/keep-pet/proposal/mvp-spec-ru.html` | **v1 (2026-05-09)** |
+| **План разработки** | `/plan.html` | `pipeline/concept/keep-pet/proposal/dev-plan-ru.html` | **v1 (2026-05-09)** |
+| Видение | `/vision.html` | `pipeline/concept/keep-pet/package/share/oleg-team-ru.html` | v6 deltas (2026-05-09) |
+| Дорожная карта | `/roadmap.html` | `pipeline/concept/keep-pet/proposal/team-roadmap-ru.html` | 2026-05-02 (предыдущая) |
 | Vision (EN) | `/vision-en.html` | этот репо | summary |
 | Roadmap (EN) | `/roadmap-en.html` | этот репо | summary |
-| Plan (EN) | `/plan-en.html` | `pipeline/concept/keep-pet/proposal/iteration-1-budget-onepager.html` | v1 |
+| Plan (EN) | `/plan-en.html` | `pipeline/concept/keep-pet/proposal/iteration-1-budget-onepager.html` | v1 (предыдущая) |
 
-Старая версия (v2 от 18 апреля) сохранена в `archive/v2-vision-2026-04-18.html`.
+Архив:
+- `archive/v2-vision-2026-04-18.html` — видение v2 (18 апреля)
+- `archive/v2-plan-2026-05-02.html` — бюджет one-pager v2 (2 мая) — superseded by `/plan.html`
+- `archive/v2-roadmap-2026-05-02.html` — team roadmap v2 (2 мая)
 
 ## Общая обвязка
 

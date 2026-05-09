@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Keep Pet — MVP Спецификация v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --bg: #F7F2E8;
+  --bg-elev: #FBF7EE;
+  --bg-card: #F0E9DB;
+  --ink: #1F262B;
+  --ink-mid: #3D4650;
+  --ink-dim: #6B737A;
+  --ink-faint: #9AA09F;
+  --accent: #B8522D;
+  --accent-deep: #8F3E20;
+  --accent-soft: rgba(184, 82, 45, 0.07);
+  --ochre: #C8872D;
+  --ochre-soft: rgba(200, 135, 45, 0.08);
+  --line: #E2D8C4;
+  --line-strong: #C9BEA5;
+  --success: #6B8E4E;
+  --success-soft: rgba(107, 142, 78, 0.10);
+  --serif: "Fraunces", "Source Serif 4", Georgia, serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "PT Sans", sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", "Menlo", monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(184, 82, 45, 0.015) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(200, 135, 45, 0.015) 0%, transparent 40%);
+  z-index: -1;
+}
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(184, 82, 45, 0.35); }
+a:hover { border-bottom-color: var(--accent); }
+.wrap { max-width: 880px; margin: 0 auto; padding: 56px 32px; }
+
+header.hero { padding: 56px 0 48px 0; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+.hero .eyebrow {
+  font-family: var(--mono);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  margin-bottom: 18px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hero .eyebrow::before {
+  content: ""; width: 28px; height: 1px; background: var(--accent);
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 52px;
+  line-height: 1.06;
+  font-weight: 400;
+  margin-bottom: 22px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.hero h1 em {
+  font-style: italic; color: var(--accent); font-weight: 400;
+}
+.hero .subtitle {
+  font-size: 18px; color: var(--ink-mid); max-width: 720px; margin-bottom: 32px; line-height: 1.55;
+}
+.hero .meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+@media (max-width: 720px) { .hero .meta { grid-template-columns: repeat(2, 1fr); } }
+.hero .meta .label {
+  font-family: var(--mono); font-style: italic; color: var(--ink-faint);
+  font-size: 11px; margin-bottom: 6px; letter-spacing: 0.02em;
+}
+.hero .meta .value { color: var(--ink); font-weight: 500; }
+.hero .version-stamp {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--accent-soft); color: var(--accent-deep);
+  padding: 4px 14px; border-radius: 2px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em;
+  margin-bottom: 22px; font-weight: 400; border-left: 2px solid var(--accent);
+}
+
+h1, h2, h3, h4, h5, h6 { color: var(--ink); }
+h2 {
+  font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.18;
+  letter-spacing: -0.012em; margin: 56px 0 18px 0; text-wrap: balance;
+}
+h2 em { font-style: italic; color: var(--accent); }
+h3 {
+  font-family: var(--serif); font-size: 24px; font-weight: 500; line-height: 1.25;
+  margin: 36px 0 14px 0; letter-spacing: -0.005em;
+}
+h4 {
+  font-family: var(--serif); font-size: 19px; font-weight: 500;
+  margin-top: 28px; margin-bottom: 10px;
+}
+p { margin-bottom: 16px; color: var(--ink); }
+ul, ol { margin: 0 0 18px 22px; }
+li { margin-bottom: 8px; color: var(--ink); }
+strong { font-weight: 600; color: var(--ink); }
+em { font-style: italic; }
+
+blockquote {
+  margin: 22px 0;
+  padding: 6px 0 6px 22px;
+  border-left: 2px solid var(--accent);
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ink-mid);
+  font-size: 16px;
+  line-height: 1.6;
+}
+blockquote p { margin-bottom: 10px; }
+blockquote p:last-child { margin-bottom: 0; }
+blockquote strong { font-style: normal; color: var(--ink); }
+
+table { width: 100%; border-collapse: collapse; margin: 22px 0; font-size: 14px; }
+th, td {
+  padding: 12px 12px 12px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top;
+}
+th {
+  font-family: var(--serif); color: var(--ink-dim); font-weight: 500; font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase; font-variant: small-caps;
+  border-bottom: 1px solid var(--ink-faint);
+}
+td { color: var(--ink); }
+td code, p code, li code { font-family: var(--mono); font-size: 13px; background: var(--bg-card); padding: 1px 5px; border-radius: 2px; }
+
+pre {
+  background: var(--bg-card);
+  padding: 18px 20px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  overflow-x: auto;
+  margin: 18px 0;
+  border-left: 2px solid var(--ochre);
+}
+pre code { background: none; padding: 0; font-size: 13px; }
+
+hr { border: none; border-top: 1px solid var(--line); margin: 36px 0; }
+
+footer {
+  padding: 36px 0 56px 0;
+  color: var(--ink-faint);
+  font-size: 13px;
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  border-top: 1px solid var(--line);
+  margin-top: 32px;
+}
+footer .logo {
+  font-family: var(--serif); font-weight: 500; color: var(--accent);
+  letter-spacing: 0.1em; font-variant: small-caps; text-transform: uppercase;
+  font-style: normal; margin-bottom: 10px; font-size: 13px;
+}
+footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
+
+@media print {
+  @page { size: A4; margin: 18mm 16mm; }
+  html, body { background: #FFFFFF; font-size: 10.5pt; line-height: 1.5; }
+  body::before { display: none; }
+  .wrap { padding: 0; max-width: 100%; }
+  header.hero { padding: 0 0 22px 0; page-break-after: avoid; }
+  .hero h1 { font-size: 30pt; line-height: 1.05; margin-bottom: 14px; }
+  .hero .subtitle { font-size: 12pt; margin-bottom: 18px; }
+  h2 { font-size: 19pt; margin: 28px 0 12px 0; page-break-after: avoid; }
+  h3 { font-size: 14pt; margin: 18px 0 8px 0; page-break-after: avoid; }
+  h4 { font-size: 12pt; margin-top: 14px; page-break-after: avoid; }
+  p, li { font-size: 10.5pt; }
+  table, blockquote, pre { page-break-inside: avoid; }
+  *, *::before, *::after { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: var(--accent); border-bottom: none; }
+  footer { padding: 18px 0; page-break-before: avoid; }
+}
+
+</style>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="spec" data-lang="ru">
+<script defer src="assets/site.js"></script>
+<div class="wrap">
+
+<header class="hero">
+  <div class="version-stamp">MVP Спецификация · v1 · 2026-05-09 · после созвона 6 мая</div>
+  <div class="eyebrow">Keep Pet · MVP Спецификация · для Олега, Юли, Сергея</div>
+  <h1>Финальный скоуп MVP — <em>зафиксировано на созвоне 6 мая</em>.</h1>
+  <p class="subtitle">Три ядерные фичи: паспорт + напоминания о прививках + еженедельный голосовой чек-ин. Telegram-бот + PWA. Free-first. Архитектура с router-pattern и batch-processing для near-zero variable cost. 4–6 недель до первых пользователей.</p>
+  <div class="meta"><div><div class="label">Стадия</div><div class="value">active build readiness</div></div><div><div class="label">Скоуп</div><div class="value">3 ядерные фичи</div></div><div><div class="label">Сроки</div><div class="value">4–6 недель</div></div><div><div class="label">Анкер</div><div class="value">≤ €19,000 (re-cost)</div></div></div>
+</header>
+
+<hr />
+<h2>1 · TL;DR (на одну страницу)</h2>
+<p><strong>Что строим:</strong> Telegram-бот + PWA с тремя ядерными фичами.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Фича</th>
+<th>Что делает</th>
+<th>Зачем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Паспорт питомца</strong></td>
+<td>Авто-генерируется во время онбординга. OCR обрабатывает фото бумажного паспорта + ветсправок → структурированная карточка животного.</td>
+<td>База, к которой возвращаешься. Без паспорта остальные фичи не работают.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Напоминания о прививках</strong></td>
+<td>По данным паспорта (возраст · порода · регион) — push в TG/PWA за 2 недели до срока.</td>
+<td><strong>Якорь установки.</strong> "Поставь, чтобы не забыть привить."</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Еженедельный голосовой чек-ин</strong></td>
+<td>Воскресенье вечер: бот задаёт 3–4 закрытых вопроса + 1 открытый. Пользователь отвечает голосом. AI-ка раз в месяц выдаёт summary («твой питомец стал активнее»).</td>
+<td><strong>Ритм возврата.</strong> Раз в неделю — реалистично, не давит.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Не в MVP:</strong> lost-pet poster, vet voice-memo capture (запись разговора с ветеринаром), ежедневные рутины, real-time AI чат, фото-альбом, Яндекс/Алиса. Всё в parking lot — см. § 7.</p>
+<p><strong>Целевая метрика Phase-1:</strong> 10 000 бесплатных пользователей при стоимости привлечения &lt; $1.50/пользователя → история тракшна для VC → seed-раунд $300K.</p>
+<p><strong>Бюджет:</strong> ре-кост в <code>dev-plan.md</code>. Изначальный потолок €30k, новый скоуп уже́, ожидается €15–20k.</p>
+<p><strong>Сроки:</strong> 4–6 недель от kickoff до первых пользователей.</p>
+<hr />
+<h2>2 · Принципы, на которых стоит MVP</h2>
+<p>Эти принципы — не пожелания, а ограничения. Каждая фича сверяется с ними.</p>
+<h3>2.1 Бесплатно по умолчанию (free-first)</h3>
+<blockquote>
+<p>«Если люди за это платить не будут — мы набираем многомиллионную аудиторию, и наш стратегический план по монетизации после того, как у нас пользователей зашкалило за 10 тысяч, мы идём и партнёримся.»<br />
+— Олег, 6 мая</p>
+</blockquote>
+<p>Подписка на MVP <strong>не вводится</strong>. Платный апгрейд — только пост-фандинг, после доказательства тракшна. Это значит:</p>
+<ul>
+<li>Архитектура должна нести себя сама на бесплатном инференсе.</li>
+<li>Variable cost на пользователя стремится к нулю (см. § 4 Архитектура).</li>
+<li>Не строим биллинг, не строим payment paths, не сегментируем фичи по тарифам.</li>
+</ul>
+<h3>2.2 Еженедельный ритм, не ежедневный</h3>
+<blockquote>
+<p>«Приложения, которые заставляют тебя каждый день — ты всё равно не будешь это делать. Давайте будем реалистами.»<br />
+— Юлия, 6 мая</p>
+</blockquote>
+<p>Ежедневное взаимодействие — идеал, к которому стремимся; ежедневное <strong>навязывание</strong> — шаг к unsubscribe. MVP заложен на еженедельный пинг с возможностью пользователя ответить когда удобно (не в момент пуша).</p>
+<h3>2.3 Голос — ввод, не обязательный канал</h3>
+<p>Голосовое сообщение — <strong>самый дешёвый ввод для пользователя</strong> (нажал кнопку, наговорил, отпустил). Но не обязательный. Текст работает везде, где работает голос. Не блокируем пользователей, у которых неудобно записывать.</p>
+<h3>2.4 OCR-онбординг как анти-CAC-инфляция</h3>
+<p>Пользователь, который потратил 5 минут на загрузку фото паспорта своего животного, <strong>в 10 раз ценнее</strong> случайного клика. Это:<br />
+- Естественный gate: пройдут только те, кто реально ищет решение.<br />
+- Сразу даёт паспорт — value-delivered с первой сессии.<br />
+- Снижает variable cost: AI обработка концентрируется в один пик при онбординге, а не размазывается по всем дням.</p>
+<h3>2.5 Architecture-first для cost</h3>
+<p>Вся техническая структура подчинена одному: <strong>минимальный variable cost на пользователя в месяц</strong>. Это значит router pattern (§ 4.2), batch processing (§ 4.3), отдельный путь для real-time AI как платная фича (parking lot).</p>
+<hr />
+<h2>3 · Фичи MVP — детально</h2>
+<h3>3.1 Паспорт питомца</h3>
+<p><strong>Что это:</strong> структурированная карточка животного, доступная в TG-боте и PWA. Single source of truth для всего остального.</p>
+<p><strong>Поля паспорта (v1):</strong><br />
+- Кличка<br />
+- Вид (кошка / собака — кошки first per Apr 21 lock)<br />
+- Порода (опционально)<br />
+- Дата рождения / возраст<br />
+- Пол · стерилизация (да/нет)<br />
+- Чип (номер, опционально)<br />
+- Регион (для региональных рекомендаций)<br />
+- Прививки: что · когда сделано · когда следующая<br />
+- Аллергии / особенности (свободный текст)<br />
+- Фото (главное + дополнительные, опционально)</p>
+<p><strong>Как создаётся (онбординг flow):</strong></p>
+<pre><code>Пользователь нажимает /start в TG-боте или открывает PWA
+   │
+   ▼
+Шаг 1: «Привет! Как зовут твоего питомца?» → текст
+   │
+   ▼
+Шаг 2: «Кошка или собака?» → кнопки
+   │
+   ▼
+Шаг 3: «Есть ли у тебя бумажный паспорт или справка от ветеринара?»
+   ├─ ДА → Шаг 4А: «Сфотографируй паспорт» → OCR → автозаполнение
+   │                ↓
+   │           AI задаёт уточняющие вопросы пока не наберётся 85% полей
+   │                ↓
+   │           «Готово! Вот твой цифровой паспорт» → showcase
+   │
+   └─ НЕТ → Шаг 4Б: серия вопросов в формате MCQ (порода, возраст, прививки)
+                    ↓
+                Минимальный паспорт собран → showcase
+   │
+   ▼
+Шаг 5: «Хочешь, я буду напоминать о следующей прививке?» → ДА (всегда)
+   │
+   ▼
+Шаг 6: «Раз в неделю я буду спрашивать как дела у [Имя]. Удобное время?» → выбор
+   │
+   ▼
+Онбординг завершён. Паспорт активен.
+</code></pre>
+<p><strong>Технология:</strong><br />
+- OCR: открытая модель (Tesseract или аналог) + LLM-парсер для разбора текста. Никаких проприетарных API.<br />
+- Уточняющие вопросы: один LLM-call на всю серию (1 раз на пользователя за всё время онбординга), не итеративный чат.<br />
+- Хранение: Postgres, паспорт = JSON в одной таблице.</p>
+<p><strong>UI/UX заметки:</strong><br />
+- TG-бот: inline keyboards для кнопок, реплай-кнопка для голоса.<br />
+- PWA: пошаговая форма с прогресс-баром «3 из 6». Можно сохранить и продолжить позже.<br />
+- Время онбординга цель: &lt; 5 минут с фото паспорта, &lt; 8 минут без.</p>
+<p><strong>Паспорт как самостоятельный артефакт:</strong><br />
+- Кнопка «Поделиться паспортом» → генерирует QR-код или короткую ссылку → открывает read-only страницу для ветеринара.<br />
+- НЕТ требования регистрации у ветеринара — он просто открывает ссылку.<br />
+- Это бесплатная виральная фича: каждый поход к ветеринару = демонстрация продукта живому профессионалу.</p>
+<h3>3.2 Напоминания о прививках</h3>
+<p><strong>Что это:</strong> вычисленные на основе паспорта пуши за 2 недели до срока следующей прививки.</p>
+<p><strong>Логика:</strong><br />
+- При создании паспорта: AI смотрит возраст + породу + дату последней прививки → вычисляет следующую дату по стандартному календарю (CDC / ВОЗ для Европы / российский ветпротокол).<br />
+- За 14 дней до срока: push в TG.<br />
+- За 7 дней: повтор.<br />
+- За 1 день: финальный.<br />
+- В пуше: «Через [N] дней — прививка от [бешенства]. У тебя записан ветеринар?» + кнопка «Записан / Перенёс / Помоги найти ветеринара».</p>
+<p><strong>Опциональное:</strong><br />
+- «Помоги найти ветеринара» в v1 = просто открытая Google Map с поиском по региону (без партнёрки). В v2 — партнёрка.</p>
+<p><strong>Зачем это якорь установки:</strong></p>
+<blockquote>
+<p>«Люди часто забывают о том, что надо сделать прививку своему животному. Чтобы установили наше приложение в качестве напоминания о прививке, а дальше мы с помощью других инструментов заставляем пользователя чаще его использовать.»<br />
+— Юлия, 6 мая</p>
+</blockquote>
+<p>Это <strong>функциональная польза</strong> независимая от AI — работает даже если пользователь не отвечает на чек-ины. Создаёт reason-to-install за 5 секунд.</p>
+<p><strong>Технология:</strong><br />
+- Cron job раз в день, проходит по всем активным паспортам, считает «есть ли прививка через 14/7/1 день?»<br />
+- Никакого LLM не нужно. Простой Python.<br />
+- Variable cost: ~$0.</p>
+<h3>3.3 Еженедельный голосовой чек-ин</h3>
+<p><strong>Что это:</strong> в воскресенье вечером (или в выбранное пользователем время) бот пишет: «Привет! Как [Имя] провёл эту неделю?» + предлагает короткий опрос.</p>
+<p><strong>Структура опроса (на 3–4 минуты):</strong></p>
+<ol>
+<li>«[Имя] нормально ел эту неделю?» — кнопки: ✅ Да / ⚠️ Хуже / ❌ Совсем плохо</li>
+<li>«Сколько раз гулял? (для собак) / Активный был? (для кошек)» — кнопки: 🟢 Норма / 🟡 Меньше обычного / 🔴 Малоподвижный</li>
+<li>«Что-то заметил необычное?» — кнопки: ✅ Всё ок / 📝 Записать</li>
+<li>«Хочешь рассказать что-то ещё?» — открытый ответ голосом или текстом</li>
+</ol>
+<p><strong>Что происходит с ответами:</strong><br />
+- Закрытые ответы: записываются в timeseries-таблицу (paspas_id, дата, мелтрика, значение).<br />
+- Голос/текст ответа на открытый вопрос: транскрибируется (Whisper open-source) + сохраняется как лог-запись.<br />
+- <strong>AI не вызывается синхронно</strong> — это всё идёт в очередь.</p>
+<p><strong>Как пользователь получает обратку:</strong><br />
+- Раз в месяц (и раз в начале — после первых 4 еженедельных опросов): batch-processed AI summary.<br />
+- Пример: «За последний месяц [Кличка] стал есть на 20% меньше относительно нормы. Возможно, стоит обратить внимание на [причины]. Если это длится больше 3 дней — рекомендуем визит к ветеринару.»<br />
+- Summary доставляется как push в TG/PWA + сохраняется в истории.</p>
+<p><strong>Адаптивная часть (v1.1, не блокирует MVP):</strong></p>
+<blockquote>
+<p>«Накапливает вопросы про конкретно этого животного, и он уже выдаёт те вопросы, которые он должен задавать ему.»<br />
+— Сергей, 6 мая</p>
+</blockquote>
+<p>После 4 опросов у нас есть baseline для конкретного животного. AI начинает варьировать вопросы: «На прошлой неделе ты сказал, что [Имя] хуже ест. Ситуация улучшилась?» Это включается во второй итерации, когда у нас есть данные.</p>
+<p><strong>Технология:</strong><br />
+- Транскрипция: Whisper (open-source, self-hosted на CPU — copies-to-disk, обработка батчами).<br />
+- LLM для summary: батч-job раз в день, использует router pattern (§ 4.2). Один call на пользователя в месяц = ~$0.001 себестоимости.<br />
+- UI: inline-кнопки в TG, обычная форма в PWA. Голос — нативные TG voice messages.</p>
+<p><strong>Variable cost оценка на 10K пользователей:</strong><br />
+- Транскрипция: 10K × 4 голосовых/мес × 30 сек × $0/мин (self-hosted) = $0 пред-инфра<br />
+- LLM summary: 10K × 1 call/мес × $0.001 = $10/мес<br />
+- Хранилище: 10K × 100 KB паспорт + лог = 1 GB total = ~$0.10/мес<br />
+- <strong>Total per-user-per-month: ~$0.001</strong> ≈ <strong>$10/мес на 10K пользователей при 100% активности</strong></p>
+<p>Это пренебрежимо мало даже без партнёрки с Xiaomi MIMO.</p>
+<hr />
+<h2>4 · Архитектура</h2>
+<h3>4.1 Общая схема</h3>
+<pre><code>┌──────────────────┐    ┌──────────────────┐
+│  Telegram-бот    │    │      PWA         │
+│  (BotFather +    │    │ (React + service │
+│   webhook)       │    │     worker)      │
+└────────┬─────────┘    └────────┬─────────┘
+         │                       │
+         └───────────┬───────────┘
+                     │
+              ┌──────▼──────┐
+              │   API       │
+              │ (FastAPI    │
+              │  / Node)    │
+              └──────┬──────┘
+                     │
+        ┌────────────┼────────────┐
+        │            │            │
+   ┌────▼────┐  ┌────▼────┐  ┌────▼────┐
+   │Postgres │  │ Redis   │  │ Object  │
+   │(пасс-   │  │ (queue) │  │ Storage │
+   │ порты)  │  │         │  │ (фото,  │
+   │         │  │         │  │ голос)  │
+   └─────────┘  └────┬────┘  └─────────┘
+                     │
+            ┌────────┴────────┐
+            │                 │
+       ┌────▼────┐      ┌─────▼────┐
+       │ Realtime│      │  Batch   │
+       │ workers │      │  workers │
+       │ (OCR,   │      │ (summary,│
+       │  парсинг│      │ adaptive │
+       │  ответов│      │ Q-gen)   │
+       └────┬────┘      └─────┬────┘
+            │                 │
+            └────────┬────────┘
+                     │
+              ┌──────▼──────┐
+              │ AI Router   │
+              │ (см. §4.2)  │
+              └─────────────┘
+</code></pre>
+<h3>4.2 Router pattern (динамический выбор модели)</h3>
+<blockquote>
+<p>«Мы выстраиваем систему роутера, который на текущий момент смотрит, какие модели доступны бесплатно, и эту модель автоматически подставляет под клиента, чтобы вообще не было никаких кастов на AI.»<br />
+— Дима, 6 мая</p>
+</blockquote>
+<p><strong>Принцип:</strong> для каждого AI-задания (онбординг-парсер, summary-генератор, Q-extension в v1.1) выбирается провайдер по приоритету:</p>
+<table>
+<thead>
+<tr>
+<th>Приоритет</th>
+<th>Провайдер</th>
+<th>Условие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Xiaomi MIMO (если партнёрство сложится)</td>
+<td>бесплатные токены</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Qwen 3.6 (open weights)</td>
+<td>self-hosted на наших GPU, near-zero cost</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Любой провайдер с активным free-tier</td>
+<td>мониторим в реальном времени</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Платный fallback (если всё легло)</td>
+<td>OpenAI / Anthropic, но <strong>только</strong> для critical-path</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Заметка про надёжность:</strong></p>
+<blockquote>
+<p>«Иногда могут быть один-два дня такие, когда будет сама система давать какие-то неверные ответы. Надо подумать, как это митигировать.»<br />
+— Дима, 6 мая</p>
+</blockquote>
+<p>Митигация:<br />
+- Все AI-задания <strong>idempotent</strong> — если ответ плохой, переделываем без последствий.<br />
+- Confidence score на каждом ответе. Низкий confidence → откладываем в retry queue, ждём другого провайдера.<br />
+- Critical-path операции (создание паспорта при онбординге) <strong>должны</strong> иметь рабочий fallback на платный провайдер — здесь экономить нельзя, иначе пользователь уходит.</p>
+<p><strong>Yulia note:</strong> «На первом этапе это не нужно, это потом будем урезать.» Согласен — в первую неделю MVP можно использовать одну модель (тот же Qwen 3.6 или free-tier Anthropic), router включаем когда дойдём до 1K пользователей.</p>
+<h3>4.3 Batch processing для не-реалтайма</h3>
+<p><strong>Принцип:</strong> всё, что не требует ответа сейчас, идёт в очередь и обрабатывается раз в день.</p>
+<p><strong>Что в batch:</strong><br />
+- Еженедельные summary<br />
+- Адаптивные Q-extension (v1.1)<br />
+- Cleanup транскриптов<br />
+- Регенерация паспорта если пользователь добавил новые данные</p>
+<p><strong>Что в realtime:</strong><br />
+- Онбординг (пользователь ждёт)<br />
+- Кнопочные ответы в чек-ине (просто запись в БД, без AI)<br />
+- Push-уведомления о прививках (cron, не AI)</p>
+<p><strong>Экономика:</strong> batch-цены у всех провайдеров в 2–3 раза ниже realtime. + мы можем выбирать самый дешёвый в момент обработки.</p>
+<h3>4.4 OCR-pipeline</h3>
+<pre><code>Пользователь загружает фото паспорта/справки
+         │
+         ▼
+Object storage сохраняет оригинал
+         │
+         ▼
+OCR (Tesseract или GPT-4V вначале, потом self-hosted)
+         │
+         ▼
+LLM-парсер: «Извлеки из этого текста: кличка, порода,
+            возраст, прививки → JSON»
+         │
+         ▼
+Postgres: добавляем в паспорт
+         │
+         ▼
+LLM проверяет: все 85% полей собраны?
+         ├─ ДА → онбординг завершён
+         └─ НЕТ → задаём уточняющие вопросы
+</code></pre>
+<p><strong>Цена:</strong> один call на пользователя за всё время онбординга. На 10K пользователей = ~$10–30 за всё время (одноразово).</p>
+<h3>4.5 Стек</h3>
+<table>
+<thead>
+<tr>
+<th>Слой</th>
+<th>Выбор</th>
+<th>Обоснование</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Языки</td>
+<td>Python (API + workers) + TypeScript (PWA)</td>
+<td>Стандарт Cone Red. Reuse.</td>
+</tr>
+<tr>
+<td>API</td>
+<td>FastAPI</td>
+<td>Reuse: используем в Conversa, A-genie, Granat.</td>
+</tr>
+<tr>
+<td>TG-бот</td>
+<td>aiogram (async)</td>
+<td>Стандарт.</td>
+</tr>
+<tr>
+<td>PWA</td>
+<td>React + Vite + service worker</td>
+<td>Стандарт.</td>
+</tr>
+<tr>
+<td>БД</td>
+<td>Postgres + pgvector (на будущее, для эмбеддингов)</td>
+<td>Reuse: Granat, Memory Layer.</td>
+</tr>
+<tr>
+<td>Очередь</td>
+<td>Redis + RQ (или Celery)</td>
+<td>Простое.</td>
+</tr>
+<tr>
+<td>Объектное хранилище</td>
+<td>S3-совместимое (DigitalOcean Spaces)</td>
+<td>Дёшево, без vendor lock-in.</td>
+</tr>
+<tr>
+<td>Транскрипция</td>
+<td>Whisper open-source (CPU-batch)</td>
+<td>$0 variable cost.</td>
+</tr>
+<tr>
+<td>LLM (router)</td>
+<td>Qwen 3.6 / Xiaomi MIMO / paid fallback</td>
+<td>См. §4.2</td>
+</tr>
+<tr>
+<td>Хостинг</td>
+<td>DigitalOcean / Hetzner</td>
+<td>Дёшево, простое, под €30k бюджет.</td>
+</tr>
+<tr>
+<td>Мониторинг</td>
+<td>Sentry + Grafana</td>
+<td>Стандарт.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>5 · User journeys (концептуально)</h2>
+<h3>5.1 Сценарий: «У меня кошка, и я забыла, когда последняя прививка»</h3>
+<ol>
+<li>Видит пост в TG-канале «Жизнь с котиком в Берлине»: «Бесплатный сервис — паспорт твоей кошки + напомнит о прививках».</li>
+<li>Нажимает на ссылку → открывается TG-бот.</li>
+<li>Вводит «Муся», «кошка», «5 лет», фотографирует свежую справку от ветеринара.</li>
+<li>OCR извлекает: «прививка от бешенства 2026-02-15».</li>
+<li>Бот считает: следующая через год → push на 2027-02-01.</li>
+<li>«Готово, Муся записана. Я напомню тебе про прививку 1 февраля 2027.»</li>
+<li>Через 7 дней: первый чек-ин в воскресенье вечером.</li>
+</ol>
+<p><strong>Время до value:</strong> ~3 минуты от клика до «готового паспорта».</p>
+<h3>5.2 Сценарий: «Сергей хочет понять, как его пёс себя чувствует»</h3>
+<ol>
+<li>Установил приложение 3 недели назад, заполнил паспорт.</li>
+<li>Воскресенье 19:00, push: «Как [Кличка] провёл эту неделю?»</li>
+<li>Открывает PWA, отвечает на 3 кнопки за 30 секунд.</li>
+<li>На последний открытый вопрос: «Что-то заметил?» — наговаривает голосом 1 минуту: «На прошлой неделе он не хотел гулять в дождь, но в остальном всё ок».</li>
+<li>Закрывает приложение.</li>
+<li><strong>Через 4 недели</strong>: push: «За месяц [Кличка] стал есть на 15% меньше относительно начала. Возможно стоит проверить с ветеринаром. Также — он стал менее активен в дождливые дни, что нормально для его породы.»</li>
+</ol>
+<p><strong>Value-loop:</strong> короткие пять чек-инов → один полезный инсайт.</p>
+<h3>5.3 Сценарий: «У ветеринара»</h3>
+<ol>
+<li>Анна привела Мурку к ветеринару.</li>
+<li>На приёме: «Покажите карту вашей кошки.»</li>
+<li>Анна открывает Keep Pet → нажимает «Поделиться паспортом» → QR-код.</li>
+<li>Ветеринар сканирует → читает паспорт на своём планшете.</li>
+<li>Ветеринар: «А что это за приложение?» → Анна объясняет → ветеринар записывает себе.</li>
+<li><strong>Виральный hop без затрат</strong> — ветеринар становится рекомендатором.</li>
+</ol>
+<hr />
+<h2>6 · Метрики Phase-1</h2>
+<p><strong>Главная метрика:</strong> <strong>число активных пользователей</strong> (зашёл и заполнил паспорт + ответил хотя бы на 1 чек-ин).</p>
+<p><strong>Цель Phase-1:</strong> 10 000 активных пользователей в течение 6 месяцев после публичного запуска.</p>
+<p><strong>Под-метрики:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Метрика</th>
+<th>Цель</th>
+<th>Измеряем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Onboarding completion rate</td>
+<td>≥ 60%</td>
+<td>(создали паспорт) / (открыли бот)</td>
+</tr>
+<tr>
+<td>Week-1 retention</td>
+<td>≥ 50%</td>
+<td>ответили на первый чек-ин</td>
+</tr>
+<tr>
+<td>Week-4 retention</td>
+<td>≥ 30%</td>
+<td>ответили на 4-й чек-ин</td>
+</tr>
+<tr>
+<td>CAC (paid каналы)</td>
+<td>≤ $1.50</td>
+<td>(потрачено) / (новые пользователи)</td>
+</tr>
+<tr>
+<td>CAC (органика + рефералы)</td>
+<td>~ $0</td>
+<td>трекаем UTM из TG-каналов и referral links</td>
+</tr>
+<tr>
+<td>Variable cost / user / month</td>
+<td>≤ $0.01</td>
+<td>сумма AI + хостинг / активные пользователи</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Что НЕ метрика Phase-1:</strong><br />
+- DAU (намеренно — еженедельный ритм)<br />
+- Revenue (намеренно — free-first)<br />
+- Number of vet partnerships (вет-канал killed)<br />
+- App-store rating (PWA, нет store)</p>
+<p><strong>Когда переходим в Phase-2:</strong><br />
+- 10K активных пользователей зафиксировано<br />
+- CAC stability подтверждён (доллар не уплыл)<br />
+- Variable cost validation (можем кормить 100K без bankruptcy)<br />
+- → seed pitch к VC с тракшн-стори</p>
+<hr />
+<h2>7 · Out-of-MVP (parking lot)</h2>
+<p>Эти фичи <strong>не блокируют запуск</strong>, но описаны, чтобы:<br />
+- Архитектура их закладывала (никаких рефакторингов потом)<br />
+- Команда не возвращалась к спорам «а почему этого нет»</p>
+<table>
+<thead>
+<tr>
+<th>Фича</th>
+<th>Источник</th>
+<th>Куда</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lost-pet poster generator</strong></td>
+<td>Юлия, Apr 21</td>
+<td>v2 — после 5K пользователей</td>
+</tr>
+<tr>
+<td><strong>Vet voice-memo capture</strong> (запись разговора с ветеринаром)</td>
+<td>Юлия, Apr 21</td>
+<td>v2 — спросить Юлю явно, остаётся ли в приоритетах</td>
+</tr>
+<tr>
+<td><strong>Ежедневные рутины + проактивные напоминания играть/гулять</strong></td>
+<td>Сергей, May 6</td>
+<td>v2 — когда у нас будут данные о per-pet baseline</td>
+</tr>
+<tr>
+<td><strong>Real-time AI чат («поговори с виртуальным ветеринаром»)</strong></td>
+<td>Дима + Олег</td>
+<td>v2 — как <strong>платная</strong> фича post-monetization</td>
+</tr>
+<tr>
+<td><strong>Фото-альбом / Memories video</strong></td>
+<td>Юлия, May 6</td>
+<td>v2 — viral retention loop</td>
+</tr>
+<tr>
+<td><strong>Yandex Alice integration</strong></td>
+<td>Дима, May 6</td>
+<td>v2 — триггер: prototype готов, идём к Яндексу</td>
+</tr>
+<tr>
+<td><strong>Pet emotion estimation</strong> (биометрия, не «переводчик»)</td>
+<td>Олег, Apr 21</td>
+<td>v3 — зависит от reopened wearable lane</td>
+</tr>
+<tr>
+<td><strong>Wearable / collar ingestion</strong></td>
+<td>Юлия blocked Apr 21</td>
+<td>v3 — contingent on traction + Yulia re-opening</td>
+</tr>
+<tr>
+<td><strong>B2B страховые партнёрки</strong> (IRAO Georgia · Lemonade Pet · Tractive×Napo precedent)</td>
+<td>Brief #12</td>
+<td>Phase-2 — после 10K-user gate</td>
+</tr>
+<tr>
+<td><strong>B2B food brand партнёрки</strong> (Mayoring · Nestle/Purina · Mars)</td>
+<td>Олег + Anton Reznikov</td>
+<td>Phase-2 — после 10K-user gate</td>
+</tr>
+<tr>
+<td><strong>Карты ветеринаров с записью</strong></td>
+<td>Дима, May 6 (отбился от вет-channel)</td>
+<td>v2 — базовый Google Maps в v1, partnership-based в v2</td>
+</tr>
+<tr>
+<td><strong>Сезонные алерты</strong> (клещи, жара, сезонные риски)</td>
+<td>Юлия, May 6</td>
+<td>v2 — региональные fact-checks</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>8 · Открытые вопросы команде</h2>
+<blockquote>
+<p>Это вопросы, на которые я <strong>не могу ответить сам</strong>, и которые блокируют какие-то решения в <code>dev-plan.md</code>. Прошу ответить в Google Doc или Telegram-группе.</p>
+</blockquote>
+<ol>
+<li>
+<p><strong>Vet voice-memo capture (Юлия, Apr 21):</strong> остаётся ли как v2 priority, или сжимаем до простого «прикрепи фото справки» как часть OCR-онбординга?</p>
+</li>
+<li>
+<p><strong>Регионы запуска:</strong> Apr 21 шортлист — Германия + Израиль (top-2 диаспора) + Грузия (B2B insurance pilot). Подтверждаем все три на MVP, или начинаем с одного?</p>
+</li>
+<li>
+<p><strong>Язык(и) интерфейса MVP:</strong> Русский — точно. Английский — нужен ли с первого дня или можно через 2 недели после launch?</p>
+</li>
+<li>
+<p><strong>Имя бота / приложения:</strong> Keep Pet — финальное? (нужно проверить занятость на TG + домены)</p>
+</li>
+<li>
+<p><strong>Кто будет первой точкой админ-поддержки</strong> (когда у пользователей вопросы)? Запасной вариант — я + Юля по роте, но в идеале нужен один человек у Keep Pet за это.</p>
+</li>
+<li>
+<p><strong>Webhook домен / SSL:</strong> под каким доменом вы хотите видеть бота и PWA? <code>keep-pet.app</code>? <code>keeppet.io</code>? Проверим занятость.</p>
+</li>
+<li>
+<p><strong>Google Doc для шаринга идей</strong> (как договорились на созвоне) — Олег создал? Если да, пришли инвайт на <code>dima@cone.red</code>.</p>
+</li>
+</ol>
+<hr />
+<h2>9 · Что меняется относительно Apr 21 — changelog</h2>
+<table>
+<thead>
+<tr>
+<th>Тема</th>
+<th>Apr 21</th>
+<th>May 6 (now)</th>
+<th>Где описано</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cap-table</td>
+<td>в обсуждении</td>
+<td><strong>10% Cone Red закрыто</strong></td>
+<td>DEAL.md At-a-Glance</td>
+</tr>
+<tr>
+<td>Монетизация</td>
+<td>Subscription primary $3–8/mo</td>
+<td><strong>Free-first, монетизация пост-фандинг</strong></td>
+<td>§ 2.1 + § 6</td>
+</tr>
+<tr>
+<td>Phase-1 gate</td>
+<td>100 платящих × $3/mo</td>
+<td><strong>10K free users at &lt;$1.50 CAC</strong></td>
+<td>§ 6</td>
+</tr>
+<tr>
+<td>MVP скоуп</td>
+<td>passport + vet voice-memo + lost-pet poster + voice routines</td>
+<td><strong>passport + vaccinations + weekly check-in</strong></td>
+<td>§ 3</td>
+</tr>
+<tr>
+<td>Vet-clinic B2B channel</td>
+<td>в работе</td>
+<td><strong>killed</strong> (Sergey, multi-year operator data)</td>
+<td>§ 7 (parking lot, "карты ветеринаров")</td>
+</tr>
+<tr>
+<td>Engagement loop</td>
+<td>daily</td>
+<td><strong>weekly</strong> (Yulia push-back)</td>
+<td>§ 3.3 + § 2.2</td>
+</tr>
+<tr>
+<td>Real-time AI</td>
+<td>core</td>
+<td><strong>future paid tier</strong></td>
+<td>§ 7 + § 4.3</td>
+</tr>
+<tr>
+<td>Cost architecture</td>
+<td>ad-hoc</td>
+<td><strong>router + batch + OCR-gate</strong></td>
+<td>§ 4</td>
+</tr>
+<tr>
+<td>Yandex Alice</td>
+<td>v2-roadmap</td>
+<td><strong>v2 confirmed warm path</strong></td>
+<td>§ 7</td>
+</tr>
+<tr>
+<td>MVP бюджет</td>
+<td>€30k anchor</td>
+<td><strong>€30k carried as ceiling, ре-кост downward</strong></td>
+<td><code>dev-plan.md</code></td>
+</tr>
+<tr>
+<td>MVP timeline</td>
+<td>10–12 нед</td>
+<td><strong>4–6 недель</strong></td>
+<td><code>dev-plan.md</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Spec assembled 2026-05-09 by Dima + Claude post-May-6 review. Locked features per call consensus. Source: full transcripts (part 1 + 2) + <code>debriefs/2026-05-06_debrief.md</code>. Sister documents: <code>dev-plan.md</code> for build plan + costs, <code>vision.md v6</code> for strategic frame.</em></p>
+
+<footer>
+  <div class="logo">Cone Red</div>
+  <div>Внутренний документ Keep Pet · 2026-05-09 · <code>dvlevin.github.io/keep-pet/</code></div>
+</footer>
+
+</div>
+</body>
+</html>
