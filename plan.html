@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
-<title>Keep Pet — План разработки MVP v1</title>
+<title>Keep Pet — План разработки MVP v2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -56,43 +56,21 @@ a:hover { border-bottom-color: var(--accent); }
 
 header.hero { padding: 56px 0 48px 0; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
 .hero .eyebrow {
-  font-family: var(--mono);
-  font-style: italic;
-  color: var(--accent);
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  margin-bottom: 18px;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  gap: 14px;
+  font-family: var(--mono); font-style: italic; color: var(--accent);
+  font-size: 13px; letter-spacing: 0.04em; margin-bottom: 18px;
+  font-weight: 400; display: flex; align-items: center; gap: 14px;
 }
-.hero .eyebrow::before {
-  content: ""; width: 28px; height: 1px; background: var(--accent);
-}
+.hero .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
 .hero h1 {
-  font-family: var(--serif);
-  font-size: 52px;
-  line-height: 1.06;
-  font-weight: 400;
-  margin-bottom: 22px;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-  text-wrap: balance;
+  font-family: var(--serif); font-size: 52px; line-height: 1.06;
+  font-weight: 400; margin-bottom: 22px; letter-spacing: -0.015em;
+  color: var(--ink); text-wrap: balance;
 }
-.hero h1 em {
-  font-style: italic; color: var(--accent); font-weight: 400;
-}
-.hero .subtitle {
-  font-size: 18px; color: var(--ink-mid); max-width: 720px; margin-bottom: 32px; line-height: 1.55;
-}
+.hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+.hero .subtitle { font-size: 18px; color: var(--ink-mid); max-width: 720px; margin-bottom: 32px; line-height: 1.55; }
 .hero .meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  padding-top: 26px;
-  border-top: 1px solid var(--line);
-  font-size: 14px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 24px; padding-top: 26px; border-top: 1px solid var(--line); font-size: 14px;
 }
 @media (max-width: 720px) { .hero .meta { grid-template-columns: repeat(2, 1fr); } }
 .hero .meta .label {
@@ -108,6 +86,18 @@ header.hero { padding: 56px 0 48px 0; border-bottom: 1px solid var(--line); marg
   margin-bottom: 22px; font-weight: 400; border-left: 2px solid var(--accent);
 }
 
+.actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+.actions .btn {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em;
+  padding: 10px 18px; border: 1px solid var(--accent);
+  color: var(--accent); border-radius: 2px;
+  text-decoration: none; border-bottom: 1px solid var(--accent);
+  transition: background 0.2s;
+}
+.actions .btn:hover { background: var(--accent-soft); }
+.actions .btn.primary { background: var(--accent); color: white; }
+.actions .btn.primary:hover { background: var(--accent-deep); }
+
 h1, h2, h3, h4, h5, h6 { color: var(--ink); }
 h2 {
   font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.18;
@@ -118,10 +108,7 @@ h3 {
   font-family: var(--serif); font-size: 24px; font-weight: 500; line-height: 1.25;
   margin: 36px 0 14px 0; letter-spacing: -0.005em;
 }
-h4 {
-  font-family: var(--serif); font-size: 19px; font-weight: 500;
-  margin-top: 28px; margin-bottom: 10px;
-}
+h4 { font-family: var(--serif); font-size: 19px; font-weight: 500; margin-top: 28px; margin-bottom: 10px; }
 p { margin-bottom: 16px; color: var(--ink); }
 ul, ol { margin: 0 0 18px 22px; }
 li { margin-bottom: 8px; color: var(--ink); }
@@ -129,23 +116,17 @@ strong { font-weight: 600; color: var(--ink); }
 em { font-style: italic; }
 
 blockquote {
-  margin: 22px 0;
-  padding: 6px 0 6px 22px;
+  margin: 22px 0; padding: 6px 0 6px 22px;
   border-left: 2px solid var(--accent);
-  font-family: var(--serif);
-  font-style: italic;
-  color: var(--ink-mid);
-  font-size: 16px;
-  line-height: 1.6;
+  font-family: var(--serif); font-style: italic;
+  color: var(--ink-mid); font-size: 16px; line-height: 1.6;
 }
 blockquote p { margin-bottom: 10px; }
 blockquote p:last-child { margin-bottom: 0; }
 blockquote strong { font-style: normal; color: var(--ink); }
 
 table { width: 100%; border-collapse: collapse; margin: 22px 0; font-size: 14px; }
-th, td {
-  padding: 12px 12px 12px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top;
-}
+th, td { padding: 12px 12px 12px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
 th {
   font-family: var(--serif); color: var(--ink-dim); font-weight: 500; font-size: 11px;
   letter-spacing: 0.08em; text-transform: uppercase; font-variant: small-caps;
@@ -155,29 +136,32 @@ td { color: var(--ink); }
 td code, p code, li code { font-family: var(--mono); font-size: 13px; background: var(--bg-card); padding: 1px 5px; border-radius: 2px; }
 
 pre {
-  background: var(--bg-card);
-  padding: 18px 20px;
-  border-radius: 4px;
-  font-family: var(--mono);
-  font-size: 13px;
-  line-height: 1.55;
-  overflow-x: auto;
-  margin: 18px 0;
-  border-left: 2px solid var(--ochre);
+  background: var(--bg-card); padding: 18px 20px; border-radius: 4px;
+  font-family: var(--mono); font-size: 13px; line-height: 1.55;
+  overflow-x: auto; margin: 18px 0; border-left: 2px solid var(--ochre);
 }
 pre code { background: none; padding: 0; font-size: 13px; }
 
 hr { border: none; border-top: 1px solid var(--line); margin: 36px 0; }
 
+.callout { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 18px 22px; margin: 24px 0; font-family: var(--serif); font-size: 17px; line-height: 1.55; color: var(--ink); }
+.callout strong { color: var(--accent-deep); }
+.callout.ochre { background: var(--ochre-soft); border-left-color: var(--ochre); }
+.callout.success { background: var(--success-soft); border-left-color: var(--success); }
+
+.price-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+@media (max-width: 720px) { .price-row { grid-template-columns: 1fr; } }
+.price-cell { background: var(--bg-card); padding: 18px 20px; border-radius: 4px; border: 1px solid var(--line); }
+.price-cell .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--ink-faint); margin-bottom: 6px; }
+.price-cell .value { font-family: var(--serif); font-size: 28px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.price-cell .value .accent { color: var(--accent); }
+.price-cell .desc { font-size: 13px; color: var(--ink-mid); line-height: 1.45; }
+
 footer {
-  padding: 36px 0 56px 0;
-  color: var(--ink-faint);
-  font-size: 13px;
-  text-align: center;
-  font-family: var(--serif);
-  font-style: italic;
-  border-top: 1px solid var(--line);
-  margin-top: 32px;
+  padding: 36px 0 56px 0; color: var(--ink-faint);
+  font-size: 13px; text-align: center;
+  font-family: var(--serif); font-style: italic;
+  border-top: 1px solid var(--line); margin-top: 32px;
 }
 footer .logo {
   font-family: var(--serif); font-weight: 500; color: var(--accent);
@@ -194,11 +178,12 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
   header.hero { padding: 0 0 22px 0; page-break-after: avoid; }
   .hero h1 { font-size: 30pt; line-height: 1.05; margin-bottom: 14px; }
   .hero .subtitle { font-size: 12pt; margin-bottom: 18px; }
+  .actions { display: none; }
   h2 { font-size: 19pt; margin: 28px 0 12px 0; page-break-after: avoid; }
   h3 { font-size: 14pt; margin: 18px 0 8px 0; page-break-after: avoid; }
   h4 { font-size: 12pt; margin-top: 14px; page-break-after: avoid; }
   p, li { font-size: 10.5pt; }
-  table, blockquote, pre { page-break-inside: avoid; }
+  table, blockquote, pre, .callout, .price-row { page-break-inside: avoid; }
   *, *::before, *::after { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   a { color: var(--accent); border-bottom: none; }
   footer { padding: 18px 0; page-break-before: avoid; }
@@ -212,619 +197,415 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 <div class="wrap">
 
 <header class="hero">
-  <div class="version-stamp">План разработки · v1 · 2026-05-09 · ре-кост −€11k</div>
-  <div class="eyebrow">Keep Pet · План разработки + ре-кост · для Олега, Юли, Сергея</div>
-  <h1>€19,000 за 6 недель — <em>скоуп уменьшился, бюджет тоже</em>.</h1>
-  <p class="subtitle">Ре-кост вниз с €30k anchor: новый скоуп от 6 мая (3 ядерные фичи без vet voice-memo и lost-pet poster) даёт реальный чек €19k. План по неделям, 7 acceptance criteria до launch, 7 рисков с митигацией, 7 решений нужны от вас для kickoff.</p>
-  <div class="meta"><div><div class="label">Build cost</div><div class="value">€18,000</div></div><div><div class="label">Runtime (3 мес)</div><div class="value">€1,000</div></div><div><div class="label">Сроки</div><div class="value">6 недель</div></div><div><div class="label">Команда</div><div class="value">1 senior + support</div></div></div>
+  <div class="version-stamp">План v2 · 2026-05-16 · post-call 15 мая · ре-кост −€7k</div>
+  <div class="eyebrow">Keep Pet · План разработки + бюджет · для Олега, Юли, Сергея</div>
+  <h1>€12,000 за 6 недель — <em>скоуп сужен ещё, ценник тоже</em>.</h1>
+  <p class="subtitle">Ре-кост вниз с €19k anchor после звонка 15 мая: PWA отложена на Phase-2, runtime near-zero через free credit programs, тяжёлый reuse (Di-Mentor memory + Bankstor TMA + Granat OCR), Murgav добавлен как параллельный TG-бот для России. 8 acceptance criteria до launch, 3 транша оплаты привязаны к AC, коммерческая гибкость открыта к обсуждению.</p>
+  <div class="meta">
+    <div><div class="label">Ceiling</div><div class="value">€12,000</div></div>
+    <div><div class="label">Floor</div><div class="value">€10,000</div></div>
+    <div><div class="label">Сроки</div><div class="value">6 недель</div></div>
+    <div><div class="label">Pre-payment</div><div class="value">€4,000</div></div>
+  </div>
+  <div class="actions">
+    <a class="btn primary" href="sow.html">📄 Скачать SOW (контракт)</a>
+    <a class="btn" href="spec.html">MVP Спецификация</a>
+    <a class="btn" href="vision.html">Видение v6</a>
+    <a class="btn" href="index.html">На главную</a>
+  </div>
 </header>
 
 <hr />
+
 <h2>1 · TL;DR</h2>
+
+<div class="price-row">
+  <div class="price-cell">
+    <div class="label">Ceiling</div>
+    <div class="value"><span class="accent">€12,000</span></div>
+    <div class="desc">Если buffer использован полностью</div>
+  </div>
+  <div class="price-cell">
+    <div class="label">Floor</div>
+    <div class="value">€10,000</div>
+    <div class="desc">Если buffer не понадобился</div>
+  </div>
+  <div class="price-cell">
+    <div class="label">Pre-payment</div>
+    <div class="value">€4,000</div>
+    <div class="desc">Триггер kickoff</div>
+  </div>
+</div>
+
 <p><strong>Сроки:</strong> 5 рабочих недель + 1 неделя буфера = <strong>6 календарных недель</strong> от kickoff до первых пользователей.<br />
-<strong>Триггер kickoff:</strong> день после получения pre-payment (см. §6.1). Это гарантирует, что инженер заблокирован под Keep Pet и не вытягивается на Tampere/Casino/Granat в момент старта.<br />
+<strong>Триггер kickoff:</strong> next business day после прихода pre-payment €4,000 (см. §6.1).<br />
 <strong>Команда:</strong> 1 senior engineer full-time + 0.3 senior support из Cone Red (по reuse-фрагментам).<br />
-<strong>Бюджет:</strong> <strong>€19,000</strong> (ре-кост вниз с €30k anchor).<br />
-<strong>Что shippаем:</strong> TG-бот + PWA + 3 ядерные фичи (паспорт + прививки + еженедельный чек-ин). Полный feature-list в <code>mvp-spec.md</code>.</p>
+<strong>Бюджет:</strong> <strong>€12,000 ceiling</strong> · <strong>€10,000 floor</strong> (ре-кост вниз с €19k anchor после звонка 15 мая).<br />
+<strong>Что shippаем:</strong> TG-бот Keep Pet + TG-бот Murgav (RU) + 6 ядерных функций + memory layer + QR-share. PWA отложена на Phase-2.</p>
+
 <table>
 <thead>
-<tr>
-<th>Метрика</th>
-<th>Apr 21 план</th>
-<th>May 6 план (сейчас)</th>
-<th>Дельта</th>
-</tr>
+<tr><th>Метрика</th><th>Apr 21 план</th><th>May 9 план</th><th>May 16 SOW (сейчас)</th><th>Дельта от Apr 21</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>Сроки</td>
-<td>10–12 недель</td>
-<td><strong>6 недель</strong></td>
-<td><strong>−40–50%</strong></td>
-</tr>
-<tr>
-<td>Бюджет</td>
-<td>€30,000</td>
-<td><strong>€19,000</strong></td>
-<td><strong>−€11,000 (−37%)</strong></td>
-</tr>
-<tr>
-<td>Engineer profile</td>
-<td>1 senior + 0.5 junior</td>
-<td>1 senior + 0.3 senior support</td>
-<td>проще</td>
-</tr>
-<tr>
-<td>Фич в скоупе</td>
-<td>7 (включая vet voice-memo + lost-pet poster)</td>
-<td><strong>3 ядерные + read-only паспорт по QR</strong></td>
-<td>уже́</td>
-</tr>
+<tr><td>Сроки</td><td>10–12 недель</td><td>6 недель</td><td><strong>6 недель</strong></td><td><strong>−40–50%</strong></td></tr>
+<tr><td>Бюджет</td><td>€30,000</td><td>€19,000</td><td><strong>€12,000 ceiling / €10,000 floor</strong></td><td><strong>−€18–20k (−60–67%)</strong></td></tr>
+<tr><td>Engineer profile</td><td>1 senior + 0.5 junior</td><td>1 senior + 0.3 support</td><td>1 senior + 0.3 support</td><td>проще</td></tr>
+<tr><td>Каналы</td><td>TMA + PWA + Apple/Android</td><td>TMA + PWA</td><td><strong>TMA only (PWA → Phase-2)</strong></td><td>TG-first</td></tr>
+<tr><td>Регионы</td><td>1 deployment</td><td>1 deployment</td><td><strong>2 deployments (Keep Pet + Murgav)</strong></td><td>Russia + intl</td></tr>
+<tr><td>Memory Layer</td><td>не упомянут</td><td>implied</td><td><strong>explicit AC #5</strong></td><td>per-pet personalization</td></tr>
 </tbody>
 </table>
-<p><strong>Почему ре-кост:</strong> скоуп уменьшился (vet voice-memo и lost-pet poster в parking lot, ежедневные рутины убраны, real-time AI вынесен в paid-tier на потом). Архитектура проще (нет heavy multi-agent онбординга — OCR + LLM-парсер + MCQ-вопросы). Open-source стек (Whisper + Qwen/router) — variable cost near-zero.</p>
+
+<div class="callout">
+<strong>Почему ещё ре-кост от €19k к €12k.</strong> На звонке 15 мая зафиксированы дельты: PWA отложена (Юля + Олег: TG-first), runtime закрывается через бесплатные программы LLM-кредитов (Codex/GPT + Xiaomi MIMO + Anthropic partner + Z.AI), Murgav как параллельный TG-бот для России без переписывания (1 день инженера), QR-share inline в TMA через reuse внутреннего scaffold. Memory Layer переносим из Di-Mentor — это <strong>lift, не greenfield</strong>.
+</div>
+
 <hr />
-<h2>2 · Что меняется относительно апрельского плана</h2>
+
+<h2>2 · Что изменилось от мая к маю</h2>
+
+<h3>2.1 Дельты после звонка 15 мая (vs. dev-plan v1 от 9 мая)</h3>
+
 <table>
 <thead>
-<tr>
-<th>Тема</th>
-<th>Было (Apr 21)</th>
-<th>Стало (May 6)</th>
-<th>Экономия</th>
-</tr>
+<tr><th>Тема</th><th>9 мая (dev-plan v1)</th><th>16 мая (SOW v1)</th><th>Эффект на бюджет</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>Vet voice-memo capture</td>
-<td>1 неделя инженерной работы</td>
-<td>parking lot</td>
-<td>€2,500</td>
-</tr>
-<tr>
-<td>Lost-pet poster generator</td>
-<td>(входило в ту же €2,500 строку)</td>
-<td>parking lot</td>
-<td>(та же строка)</td>
-</tr>
-<tr>
-<td>Multi-agent верификация на онбординге</td>
-<td>2 недели (heavy multi-agent intake flow)</td>
-<td>1 неделя — OCR + LLM-парсер + MCQ</td>
-<td>€2,500</td>
-</tr>
-<tr>
-<td>Streaming voice TTS/ASR (real-time)</td>
-<td>1 неделя</td>
-<td>parking lot (paid-tier на потом)</td>
-<td>€2,500</td>
-</tr>
-<tr>
-<td>Daily proactive check-ins</td>
-<td>предполагалось daily AI engagement</td>
-<td>weekly batch — cron-job</td>
-<td>€1,500</td>
-</tr>
-<tr>
-<td>API + cloud + transcription</td>
-<td>€3,000 (3 месяца)</td>
-<td>€1,000 (Whisper self-hosted + Qwen/router)</td>
-<td>€2,000</td>
-</tr>
-<tr>
-<td><strong>Total saved</strong></td>
-<td></td>
-<td></td>
-<td><strong>~€11,000</strong></td>
-</tr>
+<tr><td><strong>PWA</strong></td><td>в скоупе (€2,500)</td><td>parking lot — отложено на Phase-2</td><td><strong>−€2,500</strong></td></tr>
+<tr><td><strong>Murgav (RU)</strong></td><td>не упомянут</td><td>параллельный TG-бот, те же фичи, отдельный сервер (Питер ~€30/мес)</td><td>+€250 work + €30/мес infra</td></tr>
+<tr><td><strong>Memory Layer</strong></td><td>implied без AC</td><td>explicit AC #5, lift из Di-Mentor Phase 1</td><td>+€750 integration</td></tr>
+<tr><td><strong>Read-only паспорт + QR-share</strong></td><td>€750 в «хочется»</td><td>inline в TMA через reuse внутреннего scaffold</td><td><strong>−€750</strong></td></tr>
+<tr><td><strong>Runtime</strong></td><td>€1,000 (3 мес)</td><td>€250 — через free credit programs</td><td><strong>−€750</strong></td></tr>
+<tr><td><strong>Backend glue</strong></td><td>€3,750</td><td>€2,250 — harder Bankstor reuse</td><td><strong>−€1,500</strong></td></tr>
+<tr><td><strong>Buffer</strong></td><td>€1,750</td><td>€2,000</td><td>+€250</td></tr>
+<tr><td><strong>Payment structure</strong></td><td>€7,500 pre + €11,500 final</td><td>€4k pre + €4k mid + €2–4k final</td><td>3 транша привязаны к AC</td></tr>
+<tr><td><strong>Коммерческая гибкость</strong></td><td>не описана</td><td>+ §10 — credit mechanism + raise-revert</td><td>new</td></tr>
+<tr><td colspan="3"><strong>Чистый эффект на ceiling</strong></td><td><strong>−€7,000 (€19k → €12k)</strong></td></tr>
 </tbody>
 </table>
-<p><strong>Важно:</strong> часть экономии — не «срезали качество», а <strong>простой скоуп = простой код</strong>. Меньше edge-cases = меньше тестов = меньше времени.</p>
-<h3>2.1 Что конкретно мы переиспользуем (где экономия живёт реально)</h3>
+
+<h3>2.2 Что конкретно мы переиспользуем</h3>
+
 <table>
 <thead>
-<tr>
-<th>Компонент</th>
-<th>Что лифтаем</th>
-<th>Откуда</th>
-<th>Saved</th>
-</tr>
+<tr><th>Компонент</th><th>Что лифтаем</th><th>Откуда</th><th>Saved</th></tr>
 </thead>
 <tbody>
-<tr>
-<td><strong>Postgres + pgvector + RLS scaffold</strong></td>
-<td>Multi-tenant DB schema с anti-leakage policies, NULLIF guard на tenant_id</td>
-<td>Di-Mentor (Memory Layer Phase 1, production-tested 9/9 anti-leakage tests green)</td>
-<td>~2 нед</td>
-</tr>
-<tr>
-<td><strong>Auth + user-model + tenant boundaries</strong></td>
-<td>Working code из Bankstor</td>
-<td>Bankstor production деплой</td>
-<td>~1.5 нед</td>
-</tr>
-<tr>
-<td><strong>Whisper batch transcription pipeline</strong></td>
-<td>CPU-batch worker pattern + queue + storage</td>
-<td>Внутренние эксперименты CR + Vesco STT исследование</td>
-<td>~1 нед</td>
-</tr>
-<tr>
-<td><strong>OCR + LLM-парсер pipeline</strong></td>
-<td>Pattern: Tesseract → fallback GPT-4V → LLM-extract → JSON. Rendered под ID-документы в Bankstor / Granat-onboarding</td>
-<td>Bankstor + Granat-poc</td>
-<td>~1 нед</td>
-</tr>
-<tr>
-<td><strong>Router pattern для AI-провайдеров</strong></td>
-<td>Готовая логика выбора провайдеров с idempotency + confidence-gating. Документировано в <code>playbooks/AI_COST_COMPRESSION.md</code></td>
-<td>Tampere/Casino/Granat паттерны (cross-deal)</td>
-<td>~1 нед</td>
-</tr>
-<tr>
-<td><strong>Telegram-бот scaffold (aiogram + webhook)</strong></td>
-<td>Working bot template из внутренних tools</td>
-<td>CR internal</td>
-<td>~1 нед</td>
-</tr>
-<tr>
-<td><strong>Cron + queue pattern</strong></td>
-<td>Daily/weekly job runner + push delivery</td>
-<td>Множественные CR проекты</td>
-<td>~0.5 нед</td>
-</tr>
-<tr>
-<td><strong>Buffer на интеграцию</strong></td>
-<td>(некоторая часть лифта потребует адаптации)</td>
-<td>—</td>
-<td>−1 нед</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td><strong>Total real reuse:</strong></td>
-<td><strong>~7 нед</strong></td>
-</tr>
+<tr><td><strong>Postgres + pgvector + RLS scaffold</strong></td><td>Multi-tenant DB schema с anti-leakage policies, NULLIF guard на tenant_id</td><td>Di-Mentor (Memory Layer Phase 1, production-tested 9/9 anti-leakage tests green)</td><td>~2 нед</td></tr>
+<tr><td><strong>Memory Layer integration</strong></td><td>Полный per-pet memory pipeline (storage + retrieval + adaptive prompts)</td><td>Di-Mentor Phase 1 (NULLIF-guarded RLS, production-tested)</td><td>~1.5 нед</td></tr>
+<tr><td><strong>Auth + user-model + tenant boundaries</strong></td><td>Working code</td><td>Bankstor production деплой</td><td>~1.5 нед</td></tr>
+<tr><td><strong>OCR + LLM-парсер pipeline</strong></td><td>Tesseract → fallback GPT-4V → LLM-extract → JSON. Rendered под ID-документы.</td><td>Bankstor + Granat-poc</td><td>~1 нед</td></tr>
+<tr><td><strong>Telegram Mini App scaffold</strong></td><td>Working TMA template с user-integration + QR-share patterns</td><td>CR internal tools</td><td>~1 нед</td></tr>
+<tr><td><strong>Router pattern для AI-провайдеров</strong></td><td>Готовая логика выбора провайдеров с idempotency + confidence-gating. Документировано в <code>playbooks/AI_COST_COMPRESSION.md</code></td><td>Tampere/Casino/Granat паттерны (cross-deal)</td><td>~1 нед</td></tr>
+<tr><td><strong>Telegram-бот scaffold (aiogram + webhook)</strong></td><td>Working bot template</td><td>CR internal</td><td>~1 нед</td></tr>
+<tr><td><strong>Cron + queue pattern</strong></td><td>Daily/weekly job runner + push delivery</td><td>Множественные CR проекты</td><td>~0.5 нед</td></tr>
+<tr><td><strong>Buffer на интеграцию</strong></td><td>(некоторая часть лифта потребует адаптации)</td><td>—</td><td>−1.5 нед</td></tr>
+<tr><td></td><td></td><td><strong>Total real reuse:</strong></td><td><strong>~8 нед</strong></td></tr>
 </tbody>
 </table>
-<p><strong>Honest read:</strong> ~7 engineer-weeks реального лифта (не 10.5 как было в апрельском плане). При €55/час × 40 час × 7 = €15,400 saved relative to greenfield. Этого хватает чтобы €30k → €19k без compromise. <strong>Если что-то не лифтится чисто — сразу скажу и пересчитаем.</strong> R-1 ниже это покрывает.</p>
-<p><strong>Что НЕ лифтуем</strong> (исправлено относительно апрельской версии плана):<br />
-- ~~Conversa~~ — это persona/prompt, не Python pipeline. Polezно для tone-of-voice промптов в summary, но не для transcription pipeline (это Whisper).<br />
-- ~~A-genie~~ — это meta-prompt для генерации других prompts, не runtime orchestration.<br />
-- ~~KG patterns from Tampere~~ — Tampere v1 Sparrow строила UCD, не CR.<br />
-- ~~Conny multi-agent verification~~ — Conny это strategy-consulting persona, не user-onboarding flow.</p>
-<p>Эти штуки полезны на уровне <em>подхода и дисциплины</em>, но не как lifted code.</p>
+
+<p><strong>Honest read:</strong> ~8 engineer-weeks реального лифта. При €55/час × 40 час × 8 = €17,600 saved relative to greenfield. Этого хватает чтобы €30k → €12k без compromise. <strong>Если что-то не лифтится чисто — сразу скажу и пересчитаем.</strong> R-1 ниже это покрывает.</p>
+
 <hr />
+
 <h2>3 · Бюджет — детально</h2>
-<h3>3.1 Build cost (€18,000 / 5 рабочих недель)</h3>
+
+<h3>3.1 Build cost (€9,750 / 4 рабочих недели)</h3>
+
 <table>
 <thead>
-<tr>
-<th>#</th>
-<th>Задача</th>
-<th>Effort</th>
-<th>Cost</th>
-</tr>
+<tr><th>#</th><th>Задача</th><th>Effort</th><th>Cost</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>1</td>
-<td><strong>Backend glue</strong> — auth, user-model, паспорт persistence, schema, API skeleton</td>
-<td>1.5 senior нед</td>
-<td>€3,750</td>
-</tr>
-<tr>
-<td>2</td>
-<td><strong>Онбординг flow</strong> — OCR pipeline (Tesseract или GPT-4V → self-hosted) + LLM-парсер + MCQ-расспрос до 85% полей</td>
-<td>1 senior нед</td>
-<td>€2,500</td>
-</tr>
-<tr>
-<td>3</td>
-<td><strong>Telegram-бот</strong> — aiogram, inline keyboards, voice capture, webhook, deeplinks</td>
-<td>1 senior нед</td>
-<td>€2,500</td>
-</tr>
-<tr>
-<td>4</td>
-<td><strong>PWA</strong> — React + Vite, service worker, mirror логики бота, форма онбординга, паспорт-вью</td>
-<td>1 senior нед</td>
-<td>€2,500</td>
-</tr>
-<tr>
-<td>5</td>
-<td><strong>Read-only passport view + QR-share</strong> — публичная страница, защита от индексирования, QR-генератор</td>
-<td>0.3 нед</td>
-<td>€750</td>
-</tr>
-<tr>
-<td>6</td>
-<td><strong>Cron: vaccination reminders</strong> — daily-job, проход по паспортам, push в TG/PWA</td>
-<td>0.3 нед</td>
-<td>€750</td>
-</tr>
-<tr>
-<td>7</td>
-<td><strong>Weekly check-in flow</strong> — voice capture, форма, очередь записей в БД (без AI на этом шаге)</td>
-<td>0.7 нед</td>
-<td>€1,750</td>
-</tr>
-<tr>
-<td>8</td>
-<td><strong>Batch worker: monthly summary</strong> — Whisper транскрипция + Qwen/router LLM call + push доставка</td>
-<td>0.4 нед</td>
-<td>€1,000</td>
-</tr>
-<tr>
-<td>9</td>
-<td><strong>Инфра, деплой, мониторинг, telemetry</strong></td>
-<td>0.3 нед</td>
-<td>€750</td>
-</tr>
-<tr>
-<td></td>
-<td><strong>SUBTOTAL build</strong></td>
-<td><strong>5.0 нед</strong></td>
-<td><strong>€16,250</strong></td>
-</tr>
-<tr>
-<td>10</td>
-<td><strong>Buffer (testing, polish, contingency)</strong></td>
-<td>1.0 нед</td>
-<td>€1,750</td>
-</tr>
-<tr>
-<td></td>
-<td><strong>TOTAL build</strong></td>
-<td><strong>6.0 нед</strong></td>
-<td><strong>€18,000</strong></td>
-</tr>
+<tr><td>1</td><td><strong>Backend glue</strong> — auth, user-model, паспорт persistence, schema, API skeleton. <em>Hard reuse Bankstor + Di-Mentor.</em></td><td>1.0 senior нед</td><td>€2,250</td></tr>
+<tr><td>2</td><td><strong>Онбординг flow</strong> — OCR pipeline (Tesseract + GPT-4V fallback) + LLM-парсер + MCQ-расспрос до 85% полей. <em>Reuse Granat OCR pipeline.</em></td><td>0.8 senior нед</td><td>€2,000</td></tr>
+<tr><td>3</td><td><strong>TG-бот scaffold + read-only passport + QR-share</strong> — aiogram, inline keyboards, TMA с просмотром паспорта, QR-генератор. <em>Reuse CR internal TMA scaffold.</em></td><td>0.8 senior нед</td><td>€2,000</td></tr>
+<tr><td>4</td><td><strong>Прививочный календарь + push (cron, без AI)</strong> — daily-job, проход по паспортам, расчёт следующих дат, push в TG</td><td>0.3 нед</td><td>€750</td></tr>
+<tr><td>5</td><td><strong>Weekly check-in flow</strong> — голос + кнопки, очередь записей в БД (без AI на этом шаге)</td><td>0.5 нед</td><td>€1,250</td></tr>
+<tr><td>6</td><td><strong>Memory Layer integration</strong> — per-pet history, adaptive Q-extension foundation. <em>Lift из Di-Mentor Phase 1.</em></td><td>0.3 нед</td><td>€750</td></tr>
+<tr><td>7</td><td><strong>Murgav branding + parallel deploy</strong> — отдельный TG-бот, российский сервер (TimeWeb Питер), logo swap, smoke-test</td><td>0.1 нед</td><td>€250</td></tr>
+<tr><td>8</td><td><strong>Инфра, deploy, мониторинг, telemetry</strong></td><td>0.2 нед</td><td>€500</td></tr>
+<tr><td></td><td><strong>SUBTOTAL build</strong></td><td><strong>4.0 нед</strong></td><td><strong>€9,750</strong></td></tr>
+<tr><td>9</td><td><strong>Buffer (testing, polish, contingency, free credit applications)</strong></td><td>1.5 нед</td><td>€2,000</td></tr>
+<tr><td>10</td><td><strong>Runtime 3 мес</strong> (hosting Amsterdam + Питер; LLM через free credits)</td><td>—</td><td>€250</td></tr>
+<tr><td></td><td><strong>GRAND CEILING</strong></td><td><strong>5.5 нед</strong></td><td><strong>€12,000</strong></td></tr>
+<tr><td></td><td><strong>GRAND FLOOR</strong> (если buffer не использован)</td><td></td><td><strong>€10,000</strong></td></tr>
 </tbody>
 </table>
-<h3>3.2 Runtime cost (€1,000 / 3 месяца после launch)</h3>
+
+<h3>3.2 Runtime cost (€250 / 3 месяца после launch)</h3>
+
 <table>
 <thead>
-<tr>
-<th>Статья</th>
-<th>Расчёт</th>
-<th>Cost</th>
-</tr>
+<tr><th>Статья</th><th>Расчёт</th><th>Cost</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>Хостинг (DigitalOcean / Hetzner)</td>
-<td>small Postgres + Redis + 2 workers + S3-storage</td>
-<td>€450 / 3 мес</td>
-</tr>
-<tr>
-<td>LLM API (router fallback на paid когда нужно)</td>
-<td>base ~$3/мес × 3 = $10; buffer на peak fallback при провайдер-сбое (1-2 дня в месяц на платном) ~$30/мес × 3 = $90</td>
-<td>€100 / 3 мес</td>
-</tr>
-<tr>
-<td>Транскрипция (Whisper self-hosted)</td>
-<td>uses our own infra, no external cost</td>
-<td>€0</td>
-</tr>
-<tr>
-<td>OCR (Tesseract self-hosted или ad-hoc GPT-4V на онбординге)</td>
-<td>один call per user, ~10K users в Phase-1</td>
-<td>€150 / 3 мес</td>
-</tr>
-<tr>
-<td>Telegram-bot: бесплатно</td>
-<td>0</td>
-<td>€0</td>
-</tr>
-<tr>
-<td>Domain + SSL</td>
-<td>один раз ~€20 + €0</td>
-<td>€20</td>
-</tr>
-<tr>
-<td>Sentry / monitoring</td>
-<td>free tier до 5K events</td>
-<td>€0</td>
-</tr>
-<tr>
-<td>Telemetry / analytics (PostHog self-hosted)</td>
-<td>0</td>
-<td>€0</td>
-</tr>
-<tr>
-<td>Buffer</td>
-<td>непредвиденное (новый провайдер, peak load, etc.)</td>
-<td>€280</td>
-</tr>
-<tr>
-<td><strong>TOTAL runtime (3 месяца)</strong></td>
-<td></td>
-<td><strong>€1,000</strong></td>
-</tr>
+<tr><td>Хостинг Amsterdam (Keep Pet)</td><td>DigitalOcean/Hetzner — small Postgres + Redis + 2 workers + S3</td><td>€100 / 3 мес</td></tr>
+<tr><td>Хостинг Питер (Murgav)</td><td>TimeWeb — обрезанный mirror, ~3,500₽/мес ≈ €30</td><td>€90 / 3 мес</td></tr>
+<tr><td>LLM API</td><td><strong>Через free credit programs</strong>: Codex/GPT credits + Xiaomi MIMO + Anthropic partner ($200/мес) + Z.AI subscription fallback</td><td>€0 (надеемся) / €100 (если только Z.AI)</td></tr>
+<tr><td>Транскрипция (Whisper self-hosted)</td><td>uses our own infra</td><td>€0</td></tr>
+<tr><td>OCR (Tesseract self-hosted + ad-hoc GPT-4V)</td><td>один call per user</td><td>€20 / 3 мес</td></tr>
+<tr><td>Domain + SSL</td><td>один раз ~€20</td><td>€20</td></tr>
+<tr><td>Sentry / monitoring / PostHog</td><td>free tier</td><td>€0</td></tr>
+<tr><td><strong>TOTAL runtime (3 мес)</strong></td><td></td><td><strong>€250</strong></td></tr>
 </tbody>
 </table>
-<p><strong>Проекция runtime после 3 месяцев</strong> (если хочется планировать дальше): variable cost &lt;$0.01/user/mo (см. spec §3.3) → 10K активных = ~$100/mo runtime ongoing → €100/mo × 12 = <strong>€1,200/год</strong> при 10K-user gate. Эти деньги идут уже из seed-раунда, не из текущего бюджета.</p>
-<h3>3.3 Grand total</h3>
+
+<p><strong>Если все 3 free credit programs откажут</strong> — runtime поднимается до €550 (Z.AI subscription $100/мес × 3 = €270 + хостинг). Buffer §3.1 это покрывает.</p>
+
+<h3>3.3 Возможные доплаты (если станет нужно — называю заранее)</h3>
+
 <table>
 <thead>
-<tr>
-<th>Блок</th>
-<th>€</th>
-</tr>
+<tr><th>Случай</th><th>Доп.cost</th><th>Когда триггерится</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>Build (с буфером)</td>
-<td>18,000</td>
-</tr>
-<tr>
-<td>Runtime (3 месяца после launch)</td>
-<td>1,000</td>
-</tr>
-<tr>
-<td><strong>GRAND TOTAL</strong></td>
-<td><strong>€19,000</strong></td>
-</tr>
+<tr><td>Native iOS / Android app (если PWA-лимиты бьют после Phase-2)</td><td>€8–12k</td><td>Phase-2 после раунда</td></tr>
+<tr><td>PWA (стандартное web-приложение)</td><td>€2,500–3,000</td><td>Phase-2 — когда меняем каналы привлечения</td></tr>
+<tr><td>Heavy custom OCR (если бумажные паспорта в RU/IL/DE плохо OCR-ятся)</td><td>€1–2k</td><td>После первых 100 пользователей</td></tr>
+<tr><td>Real-time AI чат как paid-tier</td><td>€4–5k</td><td>После фандинга, не сейчас</td></tr>
+<tr><td>Дополнительные локали (более 2-х языков)</td><td>€500/локаль</td><td>По запросу</td></tr>
 </tbody>
 </table>
-<h3>3.4 Возможные доплаты (если станет нужно — называю заранее)</h3>
-<table>
-<thead>
-<tr>
-<th>Случай</th>
-<th>Доп.cost</th>
-<th>Когда триггерится</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Native iOS / Android app (если PWA-лимиты бьют)</td>
-<td>€8–12k</td>
-<td>Только после публичного запуска и видения реальных limit</td>
-</tr>
-<tr>
-<td>Heavy custom OCR (если бумажные паспорта в RU/IL/DE окажутся плохо OCR-ятся)</td>
-<td>€1–2k</td>
-<td>После первых 100 пользователей с реальными бумагами</td>
-</tr>
-<tr>
-<td>Дополнительные локали (более 2-х языков)</td>
-<td>€500/локаль</td>
-<td>По запросу</td>
-</tr>
-<tr>
-<td>Real-time AI чат как paid-tier</td>
-<td>€4–5k</td>
-<td>Уже после фандинга, не сейчас</td>
-</tr>
-</tbody>
-</table>
+
 <p><strong>Никаких сюрпризов:</strong> если что-то сверху анкера — называю <strong>до</strong> того, как трачу.</p>
+
 <hr />
+
 <h2>4 · План по неделям (calendar 6 недель)</h2>
-<h3>Week 1: Kickoff + Backend skeleton</h3>
+
+<h3>Week 1 · Pre-flight + Backend skeleton</h3>
 <ul>
-<li>✅ Финализировать имя бота / домен (zavisi от ответов на §8 в spec)</li>
-<li>✅ Развернуть infra: Postgres + Redis + S3 + workers на Hetzner/DO</li>
+<li>✅ <strong>Pre-flight reuse inventory:</strong> подтверждаем что Bankstor TMA + Di-Mentor memory + Granat OCR подхватываются чисто. Если нет — raise immediately + re-cost.</li>
+<li>✅ Apply на 4 free credit programs (Codex/GPT + Xiaomi MIMO + Anthropic partner + Z.AI)</li>
+<li>✅ Развернуть infra: Postgres + Redis + S3 + workers (Amsterdam) + базовый Питер mirror</li>
 <li>✅ Auth + user-model + паспорт schema</li>
 <li>✅ API skeleton + webhook bot endpoint</li>
 <li>✅ Sentry + базовый telemetry</li>
-<li><strong>Acceptance:</strong> API работает, может зарегистрировать пользователя, может сохранить пустой паспорт.</li>
+<li><strong>Acceptance:</strong> API работает, может зарегистрировать пользователя, может сохранить пустой паспорт. Reuse-инвентаризация подтверждена ИЛИ flag raised.</li>
 </ul>
-<h3>Week 2: Онбординг + OCR</h3>
+
+<h3>Week 2 · Онбординг + OCR</h3>
 <ul>
-<li>✅ TG-бот: команда /start, базовая FSM-машина онбординга (вопросы по шагам)</li>
-<li>✅ OCR pipeline: получить фото → Tesseract → LLM-парсер → JSON → паспорт в БД</li>
-<li>✅ MCQ-fallback если OCR пропустил поля или нет фото у пользователя</li>
-<li>✅ "Готовый паспорт" showcase в TG</li>
-<li><strong>Acceptance:</strong> реальный пользователь (тестер из команды) проходит онбординг за &lt; 5 минут с фото и &lt; 8 без.</li>
+<li>✅ TG-бот: команда <code>/start</code>, базовая FSM-машина онбординга</li>
+<li>✅ OCR pipeline: фото → Tesseract → GPT-4V fallback → LLM-парсер → JSON → паспорт в БД</li>
+<li>✅ MCQ-fallback если OCR пропустил поля или нет фото</li>
+<li>✅ Готовый паспорт showcase в TG</li>
+<li><strong>Acceptance:</strong> AC #2 (time-to-passport ≤ 5 мин с фото / ≤ 8 без), AC #3 (OCR работает на 5 фейковых паспортах с разными форматами) closed.</li>
 </ul>
-<h3>Week 3: PWA + read-only passport view</h3>
+
+<h3>Week 3 · Read-only passport + QR-share + Vaccination cron · MID-MILESTONE</h3>
 <ul>
-<li>✅ PWA скелет: React + Vite + service worker</li>
-<li>✅ Авторизация через TG-login или email-magic-link</li>
-<li>✅ Паспорт UI (просмотр + редактирование)</li>
+<li>✅ Read-only passport view внутри TMA (через reuse внутреннего scaffold)</li>
 <li>✅ QR-share: одна кнопка → ссылка на read-only страницу</li>
-<li>✅ Read-only passport view (без авторизации)</li>
-<li><strong>Acceptance:</strong> пользователь может открыть PWA, видит свой паспорт, может поделиться через QR. Тестер ветеринар (любой, кого мы попросим) открывает QR-ссылку и видит чистый паспорт.</li>
-</ul>
-<h3>Week 4: Прививки + еженедельный чек-ин</h3>
-<ul>
 <li>✅ Vaccination calendar logic (стандартный календарь по виду + породе + региону)</li>
 <li>✅ Cron: ежедневная проверка «есть ли прививка через 14/7/1 день?»</li>
-<li>✅ Push-уведомление в TG/PWA с кнопками</li>
-<li>✅ Weekly check-in: форма с 3-4 закрытыми вопросами + 1 открытым (текст + voice)</li>
-<li>✅ Voice capture → S3 (без транскрипции пока)</li>
-<li><strong>Acceptance:</strong> пользователь получает push с прививкой за 14 дней. Пользователь получает push в воскресенье вечером, может ответить за 30 секунд.</li>
+<li>✅ Push-уведомление в TG с кнопками</li>
+<li>✅ Memory layer schema готова (НЕ интеграция, schema only)</li>
+<li><strong>Acceptance:</strong> AC #1 (онбординг conversion ≥ 60% на 10 тестерах), AC #4 (vaccination push fires correctly) closed. <strong>MID-MILESTONE PAYMENT €4,000.</strong></li>
 </ul>
-<h3>Week 5: Batch worker + summary</h3>
+
+<h3>Week 4 · Weekly check-in + Memory Layer</h3>
 <ul>
-<li>✅ Cron worker: транскрипция голосовых через Whisper (CPU batch)</li>
-<li>✅ Cron worker: monthly summary через router LLM (Qwen 3.6 self-hosted)</li>
-<li>✅ Push доставка summary в TG/PWA</li>
-<li>✅ Internal admin-page для просмотра логов и проверки качества summary</li>
-<li>✅ End-to-end QA на 5 фейковых паспортах (с разными видами/возрастами/прививками)</li>
-<li><strong>Acceptance:</strong> через 4 еженедельных опроса пользователь получает осмысленный summary. Качество summary проверено на 5 фейковых животных.</li>
+<li>✅ Weekly check-in: форма с 3-4 закрытыми вопросами + 1 открытым (текст + voice)</li>
+<li>✅ Voice capture → S3 (без транскрипции пока — данные собираются)</li>
+<li>✅ Memory Layer integration: per-pet history, adaptive Q-baseline (4-week baseline накапливается)</li>
+<li>✅ Push в воскресенье вечером (или выбранное время)</li>
+<li><strong>Acceptance:</strong> AC #5 (memory layer active — AI summary использует per-pet историю) closed.</li>
 </ul>
-<h3>Week 6: Buffer / polish / launch prep</h3>
+
+<h3>Week 5 · Murgav deploy + QA</h3>
+<ul>
+<li>✅ Murgav branding + развёртывание на Питерский сервер</li>
+<li>✅ Logo swap, name swap, smoke-test российской версии</li>
+<li>✅ End-to-end QA на 5 фейковых паспортах (с разными видами/возрастами/прививками) на обоих deployments</li>
+<li>✅ Internal admin-page для просмотра логов</li>
+<li>🔵 <strong>Опционально</strong> (если buffer позволяет): Cron worker для monthly summary через Whisper + Qwen router</li>
+<li><strong>Acceptance:</strong> AC #7 (Murgav deployed + smoke-test green) closed.</li>
+</ul>
+
+<h3>Week 6 · Buffer / polish / launch prep · FINAL</h3>
 <ul>
 <li>✅ Bug fixes из QA week 5</li>
 <li>✅ UX polish (Onboarding micro-copy, push-tone, error states)</li>
 <li>✅ Подготовка launch-материалов: 2-3 поста для TG-каналов (Юлия)</li>
-<li>✅ Smoke-test на 10 живых пользователях из ближайшего круга</li>
+<li>✅ Smoke-test на 10 живых пользователях из ближайшего круга — на обоих deployments</li>
 <li>✅ Документация (README, deployment guide, basic ops doc)</li>
-<li><strong>Acceptance:</strong> ничего критичного в Sentry, smoke-test 10/10 пользователей завершили онбординг, paspport-share работает, прививочный пуш приходит в эмуляции.</li>
+<li><strong>Acceptance:</strong> AC #6 (QR-share работает Safari + Chrome + vet-планшет), AC #8 (Sentry 0 critical errors 48ч) closed. <strong>FINAL PAYMENT €2,000–€4,000</strong> (зависит от buffer).</li>
 </ul>
+
 <hr />
-<h2>5 · Acceptance Criteria — Phase-1 launch ready</h2>
-<p>Мы запускаемся в публичный пилот <strong>только когда выполнены все 7 пунктов:</strong></p>
+
+<h2>5 · Acceptance Criteria — 8 пунктов</h2>
+
+<p>Мы запускаемся в публичный пилот <strong>только когда выполнены все 8 пунктов:</strong></p>
+
 <ol>
-<li>✅ Онбординг конверсия на 10 тестерах ≥ 60% (создали паспорт от клика)</li>
-<li>✅ Time-to-paspport ≤ 5 минут с фото / ≤ 8 минут без на средних тестерах</li>
-<li>✅ QR-share работает в Safari + Chrome + любом vet-планшете (3 устройства проверены)</li>
-<li>✅ Vaccination reminder приходит точно (тестер увидел push в эмуляции 14/7/1 день)</li>
-<li>✅ Weekly check-in: тестер прошёл 4 опроса, получил summary, summary осмыслен (subjective check by Юля)</li>
-<li>✅ Sentry: 0 critical errors за 48 часов smoke-test</li>
-<li>✅ Variable cost после 10 тестеров × 4 недели — посчитан, в пределах $0.01/user/mo</li>
+<li>✅ Онбординг конверсия на 10 тестерах <strong>≥ 60%</strong> (создали паспорт от клика)</li>
+<li>✅ Time-to-passport <strong>≤ 5 минут</strong> с фото / <strong>≤ 8 минут</strong> без на средних тестерах</li>
+<li>✅ OCR + LLM-парсер + MCQ работает на <strong>5 фейковых паспортах</strong> с разными форматами (RU + DE + IL bilingual)</li>
+<li>✅ Vaccination reminder приходит точно (тестер увидел push в эмуляции 14/7/1 день — <strong>3 случая</strong>)</li>
+<li>✅ <strong>Memory Layer active</strong> — AI summary использует per-pet историю чек-инов, не общий контекст</li>
+<li>✅ QR-share работает в <strong>Safari + Chrome + любом vet-планшете</strong> (3 устройства проверены)</li>
+<li>✅ <strong>Murgav deployed</strong> на Питерский сервер, branding swapped, smoke-test green</li>
+<li>✅ Sentry: <strong>0 critical errors</strong> за 48 часов smoke-test на 10 пользователях</li>
 </ol>
+
 <p>Если <strong>что-то из этого не закрыто</strong> — не запускаем. Анкер бюджета не значит «ship at all costs».</p>
+
 <hr />
+
 <h2>6 · Команда + ответственности</h2>
+
 <h3>6.1 Триггер kickoff: pre-payment, не календарь</h3>
-<blockquote>
-<p><strong>Это самое важное в этом разделе. Прочитайте.</strong></p>
-</blockquote>
-<p>Я не называю «понедельник 12 мая» или «понедельник 19 мая» как kickoff date. Календарные обещания — это то, что мы уже два раза не сдержали (Apr 22 → 1 мая, и Friday 8 May → Saturday 9 May). Третий слип подряд убьёт операционное доверие, даже если cap-table закрыт.</p>
-<p>Вместо этого: <strong>kickoff = следующий рабочий день после того как pre-payment landed.</strong> Это:</p>
+
+<blockquote><strong>Это самое важное в этом разделе. Прочитайте.</strong></blockquote>
+
+<p>Я не называю «понедельник 19 мая» как kickoff date. Календарные обещания — это то, что мы уже два раза не сдержали (Apr 22 → 1 мая, и Fri 8 May → Sat 9 May). Третий слип подряд убьёт операционное доверие, даже если cap-table закрыт.</p>
+
+<p>Вместо этого: <strong>kickoff = next business day после того как pre-payment €4,000 landed.</strong> Это:</p>
+
 <ul>
-<li><strong>Блокирует инженера под Keep Pet.</strong> Сейчас Cone Red parallel ведёт Tampere Horizon-prep (deadline 13 мая), Cloudmaven (Christoph follow-up), Casino Phase 01, Granat scaling. Без pre-payment-сигнала любой engineer может быть pulled на горящий проект в первый же день. Pre-payment превращает «возможно» в «забронировано».</li>
-<li><strong>Создаёт настоящую commitment симметрию.</strong> До этой точки 4 месяца работы (Apr 8 → May 9) — мои risk. Pre-payment — это первое реальное общее обязательство. После него у обеих сторон есть skin in the game.</li>
+<li><strong>Блокирует инженера под Keep Pet.</strong> Сейчас Cone Red parallel ведёт Tampere Horizon-prep, Cloudmaven (Christoph follow-up), Casino Phase 01, Granat scaling. Без pre-payment-сигнала любой engineer может быть pulled на горящий проект в первый же день. Pre-payment превращает «возможно» в «забронировано».</li>
+<li><strong>Создаёт настоящую commitment симметрию.</strong> До этой точки 5 недель работы (Apr 8 → May 16) — мои risk. Pre-payment — это первое реальное общее обязательство. После него у обеих сторон есть skin in the game.</li>
 <li><strong>Делает срыв сроков проблемой обеих сторон, а не только моей.</strong> Если инженер заблокирован, я держу 6 недель. Если не заблокирован — я честно скажу заранее.</li>
 </ul>
-<p><strong>Какой pre-payment:</strong> обсуждаем. Стандарт CR (после Pharmacy lessons) — 30–50% upfront. Для €19k это €5,700–€9,500. Я предлагаю <strong>€7,500</strong> (40%) — этого хватает чтобы заблокировать senior на 5 недель + хедж под infra первого месяца. Балансовый €11,500 — на кейс приёмки в week 6, привязан к acceptance criteria §5.</p>
+
+<p><strong>Pre-payment €4,000</strong> — 33% от ceiling. Этого хватает чтобы заблокировать senior на первые 3 недели + хедж под infra первого месяца.</p>
+
+<p><strong>Mid-milestone €4,000</strong> — после week 3 (AC #1, #2, #3, #4 closed).</p>
+
+<p><strong>Final €2,000–€4,000</strong> — после week 6 (AC #5, #6, #7, #8 closed). Размер зависит от buffer: €2k если buffer не использован, €4k если использован полностью.</p>
+
 <p><strong>Equity 10%</strong> — отдельным треком, не привязано к pre-payment. Это закрытое решение от 6 мая.</p>
-<p><strong>После получения pre-payment</strong>: kickoff на следующий рабочий день. От kickoff до первых пользователей — 6 недель. Если pre-payment landed во вторник 13 мая — первые пользователи ~среда 25 июня. Если 20 мая — ~среда 1 июля. Линейно.</p>
+
+<p>Если pre-payment landed Sat 17 May → kickoff <strong>Mon 19 May</strong> → первые пользователи <strong>~Mon 30 June</strong>. Линейно.</p>
+
 <h3>6.2 С нашей стороны (Cone Red)</h3>
+
 <table>
 <thead>
-<tr>
-<th>Кто</th>
-<th>Что делает</th>
-<th>Доля</th>
-</tr>
+<tr><th>Кто</th><th>Что делает</th><th>Доля</th></tr>
 </thead>
 <tbody>
-<tr>
-<td><strong>Senior Engineer</strong> (Cone Red, full-time на 5 нед)</td>
-<td>Build по weekly plan §4</td>
-<td>100%</td>
-</tr>
-<tr>
-<td><strong>Дима Левин</strong></td>
-<td>Архитектурные решения, integration с reuse-фрагментами, redteam ревью</td>
-<td>~10–15%</td>
-</tr>
-<tr>
-<td><strong>Senior support</strong> (тот, кто знает Conversa / A-genie / KG patterns)</td>
-<td>Reuse-кодbase, helps with <code>transcript→summary</code> pipeline</td>
-<td>~5–10% по запросу</td>
-</tr>
+<tr><td><strong>Senior Engineer</strong> (Cone Red, full-time)</td><td>Build по weekly plan §4</td><td>100% × 5 нед</td></tr>
+<tr><td><strong>Дима Левин</strong></td><td>Архитектурные решения, integration с reuse-фрагментами, memory layer lift, redteam ревью</td><td>~10–15%</td></tr>
+<tr><td><strong>Senior support</strong> (Di-Mentor / Bankstor / Granat reuse)</td><td>Reuse-codebase, помощь с интеграцией</td><td>~5–10% on-demand</td></tr>
 </tbody>
 </table>
+
 <h3>6.3 С вашей стороны</h3>
+
 <table>
 <thead>
-<tr>
-<th>Кто</th>
-<th>Что нужно</th>
-<th>Когда</th>
-</tr>
+<tr><th>Кто</th><th>Что нужно</th><th>Когда</th></tr>
 </thead>
 <tbody>
-<tr>
-<td><strong>Олег</strong></td>
-<td>(1) ответ на 7 вопросов в <code>mvp-spec.md</code> §8, (2) 1-2 страт.слайда по фандингу (когда раунд)</td>
-<td>Week 1–2</td>
-</tr>
-<tr>
-<td><strong>Юля</strong></td>
-<td>(1) ответ Yes/No на vet voice-memo (parking lot или нет?) (2) launch-копирайтинг для постов в TG-каналах (3) подбор 10 тестеров из существующей аудитории</td>
-<td>Week 1, 5–6</td>
-</tr>
-<tr>
-<td><strong>Сергей</strong></td>
-<td>Холодный взгляд на unit-economics после первого месяца тестинга</td>
-<td>Week 6+</td>
-</tr>
-<tr>
-<td><strong>Все</strong></td>
-<td>Ответы в Google Doc общего бэклога когда возникают идеи</td>
-<td>Постоянно</td>
-</tr>
+<tr><td><strong>Олег</strong></td><td>(1) pre-payment €4,000, (2) ответ на 7 вопросов в spec §8, (3) 1-2 страт.слайда по фандингу</td><td>Week 0–2</td></tr>
+<tr><td><strong>Юля</strong></td><td>(1) launch-копирайтинг для постов в TG-каналах, (2) подбор 10 тестеров из 700-юзерной аудитории, (3) регион-стратегия</td><td>Week 5–6</td></tr>
+<tr><td><strong>Сергей</strong></td><td>Холодный взгляд на unit-economics после первого месяца тестинга</td><td>Week 6+</td></tr>
+<tr><td><strong>Все</strong></td><td>Ответы в Google Doc общего бэклога когда возникают идеи</td><td>Постоянно</td></tr>
 </tbody>
 </table>
-<h3>6.4 Что НЕ нужно от вас на MVP</h3>
-<ul>
-<li>❌ Партнёрки (вет-клиники, страховые, корм-бренды) — это Phase-2 после 10K пользователей</li>
-<li>❌ Фандинг-движения (мы сначала запускаем, потом идём к VC с тракшеном)</li>
-<li>❌ Маркетинг-бюджет на CPC (free-first, идём через TG-каналы и referral)</li>
-<li>❌ Юридическая регистрация компании (это можно отложить до момента раунда)</li>
-</ul>
+
 <hr />
+
 <h2>7 · Риски (честно)</h2>
+
 <table>
 <thead>
-<tr>
-<th>Риск</th>
-<th>Вероятность</th>
-<th>Воздействие</th>
-<th>Митигация</th>
-</tr>
+<tr><th>Риск</th><th>Вероятность</th><th>Воздействие</th><th>Митигация</th></tr>
 </thead>
 <tbody>
-<tr>
-<td><strong>Reuse-фрагменты не подхватываются чисто</strong> (Conversa transcription wrapper, KG patterns, Conny verification)</td>
-<td>Medium</td>
-<td>High — может уйти в €22–24k</td>
-<td>Pre-flight inventory во week 1; abort feature scope если фрагмент не подхватывается</td>
-</tr>
-<tr>
-<td><strong>OCR качество на бумажных паспортах ниже ожиданий</strong> (особенно русскоязычные / израильские bilingual)</td>
-<td>Medium</td>
-<td>Medium — UX hit</td>
-<td>MCQ-fallback в spec работает в любом случае; pre-curate 3 паспорта для smoke-test</td>
-</tr>
-<tr>
-<td><strong>iOS Safari PWA voice/push limited</strong></td>
-<td>Medium</td>
-<td>Medium — половина US/EU rail</td>
-<td>Dual-channel: TG-бот для iOS, PWA для Android. Если PWA push не работает — TG несёт</td>
-</tr>
-<tr>
-<td><strong>Cone Red bandwidth conflict</strong> (Memory Layer + Granat scaling + Tampere в эту неделю)</td>
-<td>Medium</td>
-<td>Medium — slip 1-2 недели</td>
-<td>Lock 1 senior dedicated до kickoff; параллельные проекты не блокируют</td>
-</tr>
-<tr>
-<td><strong>Скоуп просочится</strong> (новые идеи в Google Doc запросятся в MVP)</td>
-<td>Medium</td>
-<td>Low</td>
-<td>Жёсткое правило: всё в Google Doc после kickoff = parking lot, в MVP не идёт. Disciplined product manager (Юля or me)</td>
-</tr>
-<tr>
-<td><strong>CAC выше $1.50 на органике</strong> (TG-каналы оказались холоднее)</td>
-<td>Low-Medium</td>
-<td>Medium — но не блокирует MVP</td>
-<td>Это уже в Phase-1 metrics — узнаем после launch. Если CAC пухнет — переключаемся на partnership-acquisition</td>
-</tr>
-<tr>
-<td><strong>CAC оказался &gt; $1.50 на органике + free-first traction стопорится</strong></td>
-<td>Medium</td>
-<td>High — блокирует Phase-1 gate</td>
-<td><strong>Fallback (если 3 месяца после launch &lt; 2K active):</strong> включаем «small paying cohort» гипотезу как параллельный track. 100 пользователей × $3/mo через soft paywall в realtime AI чате. Это не подписка на продукт, а добровольный support — Apr 21 framing. Старт через 4 недели после Phase-1 launch.</td>
-</tr>
+<tr><td><strong>Reuse не подхватывается чисто</strong> (Bankstor TMA / Di-Mentor memory / Granat OCR)</td><td>Medium</td><td>High — может уйти к €14–16k вместо €12k</td><td><strong>Week 1 pre-flight inventory</strong> — если фрагмент не подхватывается, raise immediately + re-cost before тратим. Buffer покрывает первый wave.</td></tr>
+<tr><td><strong>Free credit programs не одобряют все 4</strong></td><td>Medium</td><td>Low — runtime +€300 max</td><td>Z.AI subscription $100/мес платный fallback. Если только Z.AI работает — runtime поднимется до €550, buffer покрывает.</td></tr>
+<tr><td><strong>OCR качество на бумажных паспортах</strong> (особенно RU + IL bilingual)</td><td>Medium</td><td>Medium — UX hit</td><td>MCQ-fallback в spec работает в любом случае; pre-curate 3 паспорта для smoke-test week 1.</td></tr>
+<tr><td><strong>Murgav инфраструктура (Питер) не работает параллельно</strong></td><td>Low</td><td>Low</td><td>Параллельная база, не зеркало; deploy 1-day engineer test первым делом week 5. Murgav можно отложить если что-то идёт не так — Keep Pet international доминирует.</td></tr>
+<tr><td><strong>Slip третий раз подряд</strong> (после Apr 22 + Fri 8 May)</td><td>Medium-Low</td><td>Critical — операционное доверие</td><td><strong>Pre-payment triggered kickoff</strong> (§6.1) — без денег on the table не обещаю календарную дату.</td></tr>
+<tr><td><strong>Scope creep</strong> (новые идеи в Google Doc запросятся в MVP)</td><td>Medium</td><td>Low</td><td>Жёсткое правило: всё в Google Doc после kickoff = parking lot, в v1 не идёт. Disciplined product manager (Юля или я).</td></tr>
+<tr><td><strong>CAC выше $1.50 на органике</strong> (TG-каналы оказались холоднее)</td><td>Low-Medium</td><td>Medium — но не блокирует MVP</td><td>Это уже в Phase-1 metrics — узнаем после launch. Если CAC пухнет — fallback в риск ниже.</td></tr>
+<tr><td><strong>Free-first traction стопорится</strong> (3 мес после launch &lt; 2K active)</td><td>Medium</td><td>High — блокирует Phase-1 gate</td><td><strong>Fallback:</strong> small paying cohort гипотеза параллельно. 100 пользователей × $3/mo через soft paywall в realtime AI чате — добровольный support, Apr 21 framing.</td></tr>
 </tbody>
 </table>
+
 <hr />
-<h2>8 · Что после MVP (Phase-1 → Phase-2)</h2>
+
+<h2>8 · Коммерческая гибкость — <em>открыто к обсуждению</em></h2>
+
+<div class="callout">
+Текущий ценник <strong>€12,000</strong> — это deep discount от изначальных market-rate estimations (~€40–45k за такой скоуп greenfield + buffer + 3-month runtime).
+</div>
+
+<p>Скидка живёт за счёт:</p>
+<ul>
+<li>Тяжёлого reuse-pile (Di-Mentor Phase 1 memory layer + Bankstor TMA scaffold + Granat OCR pipeline)</li>
+<li>Free credit programs на LLM (Codex/GPT + Xiaomi MIMO + Anthropic partner + Z.AI fallback)</li>
+<li>Friend-rate + cap-table commitment (10% Cone Red, закрыто 6 мая)</li>
+</ul>
+
+<h3>8.1 Механизм A · Development credit от будущих стадий</h3>
+
+<p>Часть €12k можно зафиксировать как <strong>dev-credit от будущего seed-раунда</strong> — формат convertible (получаем equity или приоритетную выплату при closing), не cash сейчас. Структура обсуждаема:</p>
+<ul>
+<li><strong>Minimum cash сейчас</strong> — достаточно чтобы заблокировать senior engineer (~€4–6k)</li>
+<li><strong>Balance отложен</strong> до закрытия seed-раунда — конвертируется в equity или приоритетную выплату по соглашению</li>
+<li>Подписываем простой promissory note или конвертируем в SAFE если хочется чище</li>
+</ul>
+
+<p>Это даёт Keep Pet возможность стартовать MVP без полного cash-burden + сохраняет skin in the game с обеих сторон.</p>
+
+<h3>8.2 Механизм B · Trigger-revert при подъёме раунда</h3>
+
+<p>Если Keep Pet поднимает seed-раунд (€300K+ из <a href="vision.html">Vision §Phase-2</a>), ценник на <strong>оставшиеся фазы работы</strong> пересчитывается по изначальным estimations (до anchor €30k friend-rate, ближе к market €40–45k за эквивалентный объём работ).</p>
+
+<p>Это касается:</p>
+<ul>
+<li>Phase-2 build (PWA + native app + B2B partnerships integrations)</li>
+<li>Real-time AI чат как paid-tier (€4–5k → market: €6–8k)</li>
+<li>Дополнительные локали и регионы</li>
+<li>Yandex Alice integration</li>
+</ul>
+
+<div class="callout ochre">
+<strong>Принцип.</strong> Мы хотим, чтобы у Keep Pet был cleanest possible MVP-старт без cash-давления, и <strong>at the same time</strong> не оказаться в позиции «сделали за бесплатно, а они подняли $300K и взяли другого подрядчика на Phase-2». Trigger-revert защищает обе стороны.
+</div>
+
+<h3>8.3 Что обсуждаемо</h3>
+
+<ul>
+<li>Exact split между cash и credit (можем уйти даже к 30% cash / 70% credit если хочется)</li>
+<li>Trigger threshold — что считается «raised» (signed term sheet vs. money landed)</li>
+<li>Конкретный коэффициент пересчёта в Phase-2 (1.5×, 1.8×, 2×?)</li>
+<li>Структура конвертации (promissory note vs. SAFE vs. прямой equity adjustment)</li>
+</ul>
+
+<p><strong>Что не обсуждаемо:</strong> ничего. Назови предпочтительную структуру, отстроим вокруг неё.</p>
+
+<hr />
+
+<h2>9 · Что после MVP (Phase-1 → Phase-2)</h2>
+
 <p><strong>Phase-1: 6 месяцев после launch — 10K free users target</strong></p>
 <ul>
 <li>Build выпущен (это эти 6 недель)</li>
-<li>Launch на 3 страны (Германия + Израиль + Грузия — top diaspora countries из Brief #10)</li>
+<li>Launch на 3 страны (Германия + Израиль + Грузия — top diaspora countries из Brief #10) + Russia (Murgav)</li>
 <li>Юля + Дима ходят руками по диаспора-чатам</li>
 <li>Никакого CPC. Только community + referral + content-studio в Russian-speaking Telegram</li>
-<li>Метрики собираем (см. <code>mvp-spec.md</code> §6)</li>
+<li>Метрики собираем (см. <a href="spec.html#metrics">spec §6</a>)</li>
 <li><strong>Гейт триггерит Phase-2</strong>: 10K активных + CAC &lt; $1.50 + variable cost &lt; $0.01/user/mo</li>
 </ul>
+
 <p><strong>Phase-2: Seed-раунд $300K</strong></p>
 <ul>
 <li>Идём к VC с тракшн-стори: «10К бесплатных пользователей за $0.X CAC, рост Y%/нед, retention Z%»</li>
 <li>$300K даёт: 1 dedicated full-time у Keep Pet (1.5k$/мес), 12 месяцев runway, расширение на 5+ стран, native app trigger</li>
 <li>B2B партнёрки активируются (insurance Tractive×Napo precedent + Mayoring/Nestle warm intro Anton Reznikov)</li>
-<li>Real-time AI чат как paid-tier (€4-5k доп.work)</li>
+<li>Real-time AI чат как paid-tier (после raise — €6–8k market rate по §8.2)</li>
 <li>Yandex Alice integration (Дима ведёт когда прототип готов)</li>
+<li>PWA build (deferred from MVP)</li>
 </ul>
+
 <p><strong>Phase-3: реальный рост</strong></p>
 <ul>
 <li>Wearable lane reopens (Юля's call)</li>
@@ -832,28 +613,35 @@ footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
 <li>Data licensing</li>
 <li>M&amp;A interest (Carrefour Group, Tractive, etc.)</li>
 </ul>
+
 <hr />
-<h2>9 · Решения, которые мне нужно от вас (для kickoff)</h2>
-<blockquote>
-<p><strong>Если откладываем эти решения — kickoff Tue/Wed 12-13 мая откладывается соответственно.</strong></p>
-</blockquote>
+
+<h2>10 · Решения, которые нужны от вас</h2>
+
+<blockquote>Большая часть решений уже зафиксирована на звонке 15 мая. Осталось только pre-payment + комм.структура.</blockquote>
+
 <ol>
-<li>✅ <strong>Approve €19,000 ре-кост</strong> (или вернуть к €30k если хотите подушку)</li>
-<li>✅ <strong>Approve 6-недельный таймлайн</strong> (или предпочитаете «быстрее любой ценой» с потерей качества?)</li>
-<li>✅ <strong>Vet voice-memo capture</strong> — рекомендую держать в parking lot на v2. На созвоне 6 мая Сергей сам назвал звукозапись «дальней темой, уже далекой». Если хочешь вернуть — скажи, +€2,500 + 1 неделя; иначе по умолчанию остаётся в parking lot.</li>
-<li>✅ <strong>Имя/домен</strong> — Keep Pet остаётся (если другое — скажи сейчас). Домены проверил: <code>keep-pet.app</code> свободен · <code>keeppet.io</code> занят · <code>keep-pet.io</code> свободен. <strong>По умолчанию беру <code>keep-pet.app</code></strong> если возражений нет к моменту kickoff.</li>
-<li>✅ <strong>Кто будет admin support</strong> в Keep Pet после launch? <strong>По умолчанию: я + Юля по роте на первый месяц после launch, потом передаём designated person.</strong> Если другой план — скажи.</li>
-<li>✅ <strong>Google Doc для шаринга идей</strong> — Олег пришли инвайт на dima@cone.red.</li>
-<li>✅ <strong>Pre-payment структура</strong> — предлагаю <strong>€7,500 (40%)</strong> как kickoff-trigger, балансовый €11,500 на acceptance в week 6. Если предпочитаешь другую разбивку — назови.</li>
+<li>✅ <strong>Approve €12,000 ре-кост</strong> — обсудили на звонке 15 мая, ОК.</li>
+<li>✅ <strong>Approve 6-недельный таймлайн</strong> — ОК.</li>
+<li>✅ <strong>Vet voice-memo capture</strong> — parking lot (Сергей сам подтвердил «далёкая тема» на 6 мая).</li>
+<li>✅ <strong>Имя/домен</strong> — Keep Pet (international) + Murgav (RU). Домены: <code>keep-pet.app</code> + <code>murgav.app</code> или <code>murgav.ru</code> — по умолчанию беру <code>keep-pet.app</code> и <code>murgav.app</code> если возражений нет.</li>
+<li>✅ <strong>Admin support после launch</strong> — Дима + Юля по роте на первый месяц.</li>
+<li>⏳ <strong>Google Doc</strong> для шаринга идей — Олег, пришли инвайт на <a href="mailto:dima@cone.red">dima@cone.red</a>.</li>
+<li>⏳ <strong>Pre-payment €4,000</strong> — sign на эту сумму триггерит kickoff. Если предпочитаешь Mechanism A (credit от seed) — назови split (например €2k cash + €2k credit) и я отстрою.</li>
+<li>⏳ <strong>Коммерческая структура</strong> (см. §8) — какую структуру предпочитаете? Cash-only? Credit mix? Trigger-revert agreement?</li>
 </ol>
-<p><strong>Регионы запуска (DE+IL+GE из Apr 21 шортлиста)</strong> — это твой call, Юля; обсудим отдельно когда дойдём до launch-материалов в week 6. Не блокирует kickoff.</p>
-<p>После ваших ответов <strong>+ pre-payment</strong> — kickoff на следующий рабочий день.</p>
+
+<p><strong>Регионы запуска</strong> — Юля's call; обсудим отдельно когда дойдём до launch-материалов в week 6. Не блокирует kickoff.</p>
+
+<p>После ответов на пункты 6–8 <strong>+ pre-payment</strong> — kickoff на следующий рабочий день.</p>
+
 <hr />
-<p><em>План разработки 2026-05-09 by Dima + Claude. Re-cost based on May 6 narrowed scope. Anchor €30k carried as ceiling but actual estimate €19k. Sister documents: <code>mvp-spec.md</code> (фичи и архитектура) · <code>vision.md v6</code> (стратегия). Decisions §9 unblock kickoff.</em></p>
+
+<p><em>План разработки v2 · 2026-05-16 · post-call 15 мая · by Dima Levin · Cone Red. Re-cost from €19k → €12k ceiling based on: PWA deferred + runtime free via credit programs + heavy reuse + Murgav added. Sister documents: <a href="sow.html">SOW.md</a> (контракт) · <a href="spec.html">MVP Спецификация v1</a> · <a href="vision.html">Видение v6</a>. <strong>If reuse doesn't catch in Week 1 inventory — communicated immediately + re-cost discussion before spending.</strong></em></p>
 
 <footer>
   <div class="logo">Cone Red</div>
-  <div>Внутренний документ Keep Pet · 2026-05-09 · <code>dvlevin.github.io/keep-pet/</code></div>
+  <div>Внутренний документ Keep Pet · 2026-05-16 · <code>dvlevin.github.io/keep-pet/plan.html</code></div>
 </footer>
 
 </div>

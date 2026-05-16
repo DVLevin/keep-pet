@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Keep Pet — Statement of Work v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F2E8; --bg-elev: #FBF7EE; --bg-card: #F0E9DB;
+  --ink: #1F262B; --ink-mid: #3D4650; --ink-dim: #6B737A; --ink-faint: #9AA09F;
+  --accent: #B8522D; --accent-deep: #8F3E20; --accent-soft: rgba(184, 82, 45, 0.07);
+  --ochre: #C8872D; --ochre-soft: rgba(200, 135, 45, 0.08);
+  --line: #E2D8C4; --line-strong: #C9BEA5;
+  --success: #6B8E4E; --success-soft: rgba(107, 142, 78, 0.10);
+  --serif: "Fraunces", "Source Serif 4", Georgia, serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", "Menlo", monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle at 20% 30%, rgba(184, 82, 45, 0.015) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(200, 135, 45, 0.015) 0%, transparent 40%); z-index: -1; }
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(184, 82, 45, 0.35); }
+a:hover { border-bottom-color: var(--accent); }
+.wrap { max-width: 880px; margin: 0 auto; padding: 56px 32px; }
+
+header.hero { padding: 36px 0 36px 0; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+.eyebrow { font-family: var(--mono); font-style: italic; color: var(--accent); font-size: 13px; letter-spacing: 0.04em; margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
+.eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+.hero h1 { font-family: var(--serif); font-size: 48px; line-height: 1.06; font-weight: 400; margin-bottom: 22px; letter-spacing: -0.015em; color: var(--ink); text-wrap: balance; }
+.hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+.hero .subtitle { font-size: 17px; color: var(--ink-mid); max-width: 720px; margin-bottom: 26px; line-height: 1.55; }
+.hero .meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding-top: 26px; border-top: 1px solid var(--line); font-size: 14px; }
+@media (max-width: 720px) { .hero .meta { grid-template-columns: repeat(2, 1fr); } }
+.hero .meta .label { font-family: var(--mono); font-style: italic; color: var(--ink-faint); font-size: 11px; margin-bottom: 6px; letter-spacing: 0.02em; }
+.hero .meta .value { color: var(--ink); font-weight: 500; }
+.version-stamp { display: inline-flex; align-items: center; gap: 10px; background: var(--accent-soft); color: var(--accent-deep);
+  padding: 4px 14px; border-radius: 2px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em; margin-bottom: 22px; font-weight: 400; border-left: 2px solid var(--accent); }
+
+.actions { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+.actions .btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em; padding: 10px 18px; border: 1px solid var(--accent); color: var(--accent); border-radius: 2px; text-decoration: none; border-bottom: 1px solid var(--accent); transition: background 0.2s; }
+.actions .btn:hover { background: var(--accent-soft); }
+.actions .btn.primary { background: var(--accent); color: white; }
+.actions .btn.primary:hover { background: var(--accent-deep); }
+
+h2 { font-family: var(--serif); font-weight: 400; font-size: 30px; line-height: 1.2; letter-spacing: -0.012em; margin: 48px 0 16px 0; }
+h2 .num { font-family: var(--mono); font-size: 13px; color: var(--accent); margin-right: 14px; letter-spacing: 0.08em; }
+h3 { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.25; margin: 32px 0 12px 0; }
+h4 { font-family: var(--serif); font-size: 18px; font-weight: 500; margin-top: 24px; margin-bottom: 8px; }
+p { margin-bottom: 14px; color: var(--ink); }
+ul, ol { margin: 0 0 16px 22px; }
+li { margin-bottom: 6px; color: var(--ink); }
+strong { font-weight: 600; color: var(--ink); }
+
+blockquote { margin: 22px 0; padding: 6px 0 6px 22px; border-left: 2px solid var(--accent); font-family: var(--serif); font-style: italic; color: var(--ink-mid); font-size: 16px; line-height: 1.6; }
+blockquote strong { font-style: normal; color: var(--ink); }
+
+table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 14px; }
+th, td { padding: 12px 12px 12px 0; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--serif); color: var(--ink-dim); font-weight: 500; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--ink-faint); }
+td code, p code, li code { font-family: var(--mono); font-size: 13px; background: var(--bg-card); padding: 1px 5px; border-radius: 2px; }
+
+hr { border: none; border-top: 1px solid var(--line); margin: 36px 0; }
+
+.callout { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 18px 22px; margin: 24px 0; font-family: var(--serif); font-size: 17px; line-height: 1.55; color: var(--ink); }
+.callout strong { color: var(--accent-deep); }
+.callout.ochre { background: var(--ochre-soft); border-left-color: var(--ochre); }
+.callout.success { background: var(--success-soft); border-left-color: var(--success); }
+
+.price-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+@media (max-width: 720px) { .price-row { grid-template-columns: 1fr; } }
+.price-cell { background: var(--bg-card); padding: 18px 20px; border-radius: 4px; border: 1px solid var(--line); }
+.price-cell .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--ink-faint); margin-bottom: 6px; }
+.price-cell .value { font-family: var(--serif); font-size: 28px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.price-cell .value .accent { color: var(--accent); }
+.price-cell .desc { font-size: 13px; color: var(--ink-mid); line-height: 1.45; }
+
+footer { padding: 36px 0 56px 0; color: var(--ink-faint); font-size: 13px; text-align: center; font-family: var(--serif); font-style: italic; border-top: 1px solid var(--line); margin-top: 32px; }
+footer .logo { font-family: var(--serif); font-weight: 500; color: var(--accent); letter-spacing: 0.1em; font-variant: small-caps; text-transform: uppercase; font-style: normal; margin-bottom: 10px; font-size: 13px; }
+footer code { font-family: var(--mono); font-style: normal; font-size: 12px; }
+
+@media print {
+  @page { size: A4; margin: 18mm 16mm; }
+  html, body { background: #FFFFFF; font-size: 10.5pt; line-height: 1.5; }
+  body::before { display: none; }
+  .wrap { padding: 0; max-width: 100%; }
+  header.hero { padding: 0 0 22px 0; page-break-after: avoid; }
+  .hero h1 { font-size: 30pt; line-height: 1.05; margin-bottom: 14px; }
+  .hero .subtitle { font-size: 12pt; margin-bottom: 18px; }
+  .actions { display: none; }
+  h2 { font-size: 19pt; margin: 28px 0 12px 0; page-break-after: avoid; }
+  h3 { font-size: 14pt; margin: 18px 0 8px 0; page-break-after: avoid; }
+  h4 { font-size: 12pt; margin-top: 14px; page-break-after: avoid; }
+  p, li { font-size: 10.5pt; }
+  table, blockquote, .callout, .price-row { page-break-inside: avoid; }
+  *, *::before, *::after { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: var(--accent); border-bottom: none; }
+  footer { padding: 18px 0; page-break-before: avoid; }
+}
+</style>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="sow" data-lang="ru">
+<script defer src="assets/site.js"></script>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="version-stamp">SOW · v1 · 2026-05-16 · post-call 15 мая</div>
+  <div class="eyebrow">Keep Pet · Statement of Work · контракт</div>
+  <h1>€12,000 за 6 недель — <em>locked scope, 8 acceptance criteria</em>.</h1>
+  <p class="subtitle">Statement of Work между Cone Red и Keep Pet после звонка 15 мая. Re-cost €19k → €12k за счёт PWA-deferred + free credit programs + heavy reuse (Bankstor TMA + Di-Mentor memory + Granat OCR). Murgav как параллельный TG-бот для России включён.</p>
+  <div class="meta">
+    <div><div class="label">Ceiling</div><div class="value">€12,000</div></div>
+    <div><div class="label">Floor</div><div class="value">€10,000</div></div>
+    <div><div class="label">Сроки</div><div class="value">6 недель</div></div>
+    <div><div class="label">Pre-payment</div><div class="value">€4,000</div></div>
+  </div>
+  <div class="actions">
+    <a class="btn primary" href="javascript:window.print()">Скачать PDF (Cmd+P)</a>
+    <a class="btn" href="plan.html">← План разработки</a>
+    <a class="btn" href="spec.html">MVP Спецификация</a>
+    <a class="btn" href="index.html">На главную</a>
+  </div>
+</header>
+
+<hr />
+
+<h2><span class="num">0</span>TL;DR</h2>
+
+<div class="price-row">
+  <div class="price-cell">
+    <div class="label">Ceiling</div>
+    <div class="value"><span class="accent">€12,000</span></div>
+    <div class="desc">Если buffer использован полностью</div>
+  </div>
+  <div class="price-cell">
+    <div class="label">Floor</div>
+    <div class="value">€10,000</div>
+    <div class="desc">Если buffer не понадобился</div>
+  </div>
+  <div class="price-cell">
+    <div class="label">Pre-payment</div>
+    <div class="value">€4,000</div>
+    <div class="desc">Триггер kickoff</div>
+  </div>
+</div>
+
+<table>
+<tr><th>Параметр</th><th>Значение</th></tr>
+<tr><td>Скоуп</td><td>TG-бот Keep Pet + TG-бот Murgav (RU) + 6 ядерных функций + Memory Layer + QR-share</td></tr>
+<tr><td>Сроки</td><td>6 календарных недель от kickoff</td></tr>
+<tr><td>Бюджет</td><td><strong>€10,000 floor · €12,000 ceiling</strong> (включая €2k buffer)</td></tr>
+<tr><td>Pre-payment</td><td>€4,000 (триггер kickoff)</td></tr>
+<tr><td>Mid-milestone</td><td>€4,000 (week 3, AC #1-4 closed)</td></tr>
+<tr><td>Final</td><td>€2,000–€4,000 (week 6, AC #5-8 closed, зависит от buffer)</td></tr>
+<tr><td>Что НЕ входит</td><td>PWA, vet voice-memo, lost-pet poster, real-time AI, ежедневные рутины, native app, Alice, фото-альбом — всё parking lot для v2</td></tr>
+</table>
+
+<hr />
+
+<h2><span class="num">1</span>Что мы строим (locked scope)</h2>
+
+<h3>1.1 Ядро — TG-бот Keep Pet</h3>
+
+<table>
+<tr><th>#</th><th>Функция</th><th>Описание</th></tr>
+<tr><td>1</td><td><strong>Онбординг flow</strong></td><td>Команда <code>/start</code> → серия вопросов → OCR-распознавание бумажного паспорта (Tesseract + GPT-4V fallback) → LLM-парсер → MCQ-уточнения для непонятных полей → готовый паспорт за 3–5 минут</td></tr>
+<tr><td>2</td><td><strong>Паспорт питомца</strong></td><td>Структурированная карточка: кличка, вид, порода, возраст, пол/стерилизация, чип, регион, прививки, аллергии, фото. Single source of truth.</td></tr>
+<tr><td>3</td><td><strong>Прививочный календарь + push</strong></td><td>Cron-job: проход по всем активным паспортам ежедневно, расчёт следующей даты прививки по возрасту/породе/региону, push в TG за 14/7/1 день</td></tr>
+<tr><td>4</td><td><strong>Read-only паспорт + QR-share</strong></td><td>Кнопка «Поделиться» внутри Telegram Mini App → QR-код → ветеринар сканирует → видит паспорт без регистрации. Reuse внутреннего CR Telegram MiniApp scaffold.</td></tr>
+<tr><td>5</td><td><strong>Еженедельный чек-ин</strong></td><td>Воскресенье 19:00 (или выбранное время): бот задаёт 3 закрытых + 1 открытый вопрос. Ответы (голос или текст) идут в очередь, без real-time AI.</td></tr>
+<tr><td>6</td><td><strong>Memory Layer (per-pet)</strong></td><td>Postgres + pgvector + RLS (NULLIF-guarded). <strong>Lift из Di-Mentor Phase 1</strong> (production-tested 9/9 anti-leakage). AI summary и адаптивные вопросы используют per-pet историю, не общий контекст.</td></tr>
+</table>
+
+<p><strong>Опциональное в v1 (если buffer позволяет):</strong> monthly summary batch worker — Whisper транскрипция + Qwen/router LLM summary, push доставка раз в месяц. Если scope давит — переносим на v1.1.</p>
+
+<h3>1.2 Murgav — российская версия</h3>
+
+<p><strong>Те же 6 функций</strong>, отдельный TG-бот, отдельный сервер (TimeWeb Питер ~€30/мес infra), отдельный логотип. Параллельное развёртывание = 1 день инженера на branding swap + smoke-test.</p>
+
+<p><strong>Почему отдельно:</strong> Telegram в России работает с особенностями (VPN, замедления), плюс часть внешних сервисов недоступна. Параллельная инфраструктура решает технически.</p>
+
+<p><strong>Кому адресован:</strong> существующая аудитория Олега (~700 пользователей, ~400 активных) на территории России. Start с них — лояльны, известны команде.</p>
+
+<h3>1.3 Архитектура (high-level)</h3>
+
+<ul>
+<li><strong>TMA (Telegram Mini App)</strong> — единственный канал в v1. PWA отложена на Phase-2.</li>
+<li><strong>OCR:</strong> Tesseract self-hosted + GPT-4V fallback + LLM-парсер</li>
+<li><strong>AI:</strong> router pattern — Codex/GPT credits + Xiaomi MIMO + Anthropic partner program + Z.AI subscription ($100/мес) fallback. <strong>Apply на free credit programs week 1.</strong></li>
+<li><strong>Memory layer:</strong> Postgres + pgvector + RLS NULLIF-guarded (Di-Mentor Phase 1 lift)</li>
+<li><strong>Two-region deployment:</strong> Amsterdam (Keep Pet international) + Питер (Murgav RU)</li>
+<li><strong>Runtime cost:</strong> near-zero за счёт free credit programs + small hosting (~€100/мес total)</li>
+</ul>
+
+<hr />
+
+<h2><span class="num">2</span>Acceptance Criteria</h2>
+
+<p>Все 8 пунктов должны быть закрыты до публичного запуска. Если что-то не закрыто — не запускаем, не invoicе final транш.</p>
+
+<ol>
+<li><strong>Онбординг conversion ≥ 60%</strong> на 10 тестерах (создали паспорт от клика)</li>
+<li><strong>Time-to-passport ≤ 5 мин</strong> с фото / ≤ 8 мин без фото на средних тестерах</li>
+<li><strong>OCR + LLM-парсер + MCQ</strong> работает на 5 фейковых паспортах с разными форматами (RU + DE + IL bilingual)</li>
+<li><strong>Прививочный календарь fires correctly</strong> — push приходит за 14/7/1 день (emulated test на 3 случая)</li>
+<li><strong>Memory layer active</strong> — AI summary использует per-pet историю чек-инов (не общий контекст)</li>
+<li><strong>QR-share работает</strong> в Safari + Chrome + любом vet-планшете (3 устройства проверены)</li>
+<li><strong>Murgav deployed</strong> — Питерский сервер активен, branding swapped, smoke-test green</li>
+<li><strong>0 critical errors в Sentry</strong> за 48 часов smoke-test на 10 пользователях</li>
+</ol>
+
+<hr />
+
+<h2><span class="num">3</span>Сроки — 6 недель</h2>
+
+<table>
+<tr><th>Неделя</th><th>Главное</th><th>Acceptance triggers</th></tr>
+<tr><td><strong>1</strong></td><td>Pre-flight reuse inventory (Bankstor TMA + Di-Mentor memory + Granat OCR) · Backend skeleton · Infra ready · Apply на free credit programs</td><td>Backend live · reuse-инвентаризация подтверждена ИЛИ flag raised</td></tr>
+<tr><td><strong>2</strong></td><td>Онбординг flow + OCR pipeline + LLM-парсер + MCQ</td><td><strong>AC #2, #3 closed</strong></td></tr>
+<tr><td><strong>3</strong></td><td>Read-only passport + QR-share via TMA · Vaccination cron · Memory layer schema</td><td><strong>AC #1, #4 closed</strong> · <strong>MID-MILESTONE PAYMENT</strong></td></tr>
+<tr><td><strong>4</strong></td><td>Weekly check-in flow · Memory layer integration · Adaptive Q baseline</td><td><strong>AC #5 closed</strong></td></tr>
+<tr><td><strong>5</strong></td><td>Murgav deployment + branding swap · End-to-end QA · Monthly summary (если buffer)</td><td><strong>AC #7 closed</strong></td></tr>
+<tr><td><strong>6</strong></td><td>Buffer / polish · Smoke-test 10 пользователей · Документация</td><td><strong>AC #6, #8 closed</strong> · <strong>FINAL PAYMENT</strong></td></tr>
+</table>
+
+<hr />
+
+<h2><span class="num">4</span>Бюджет и оплата</h2>
+
+<h3>4.1 Скоуп — build cost</h3>
+
+<table>
+<tr><th>Блок</th><th>Effort</th><th>€</th></tr>
+<tr><td>Backend glue (auth, БД, API, паспорт schema — <strong>hard reuse</strong> Bankstor + Di-Mentor)</td><td>1.0 нед</td><td>2,250</td></tr>
+<tr><td>Онбординг flow (OCR + LLM-парсер + MCQ — <strong>reuse</strong> Granat OCR pipeline)</td><td>0.8 нед</td><td>2,000</td></tr>
+<tr><td>TG-бот scaffold + read-only passport + QR-share (<strong>reuse</strong> CR internal TMA scaffold)</td><td>0.8 нед</td><td>2,000</td></tr>
+<tr><td>Прививочный календарь + push (cron, без AI)</td><td>0.3 нед</td><td>750</td></tr>
+<tr><td>Weekly check-in flow (голос + кнопки, без AI на этом шаге)</td><td>0.5 нед</td><td>1,250</td></tr>
+<tr><td>Memory Layer integration (<strong>lift</strong> Di-Mentor Phase 1)</td><td>0.3 нед</td><td>750</td></tr>
+<tr><td>Murgav branding + parallel deploy</td><td>0.1 нед</td><td>250</td></tr>
+<tr><td>Инфра, deploy, мониторинг, telemetry</td><td>0.2 нед</td><td>500</td></tr>
+<tr><td><strong>Subtotal build</strong></td><td><strong>4.0 нед</strong></td><td><strong>€9,750</strong></td></tr>
+<tr><td>Buffer (testing, polish, contingency, free credit applications)</td><td>1.5 нед</td><td>2,000</td></tr>
+<tr><td>Runtime 3 мес (hosting Amsterdam + Питер, LLM через free credits)</td><td>—</td><td>250</td></tr>
+<tr><td><strong>GRAND CEILING</strong></td><td></td><td><strong>€12,000</strong></td></tr>
+<tr><td><strong>GRAND FLOOR</strong> (если buffer не использован)</td><td></td><td><strong>€10,000</strong></td></tr>
+</table>
+
+<h3>4.2 График оплаты</h3>
+
+<table>
+<tr><th>Транш</th><th>Сумма</th><th>Триггер</th><th>Обязательство</th></tr>
+<tr><td><strong>1. Pre-payment</strong></td><td><strong>€4,000</strong></td><td>Day 0 — pre-payment landed</td><td>Блокирует senior engineer; kickoff next business day</td></tr>
+<tr><td><strong>2. Mid-milestone</strong></td><td><strong>€4,000</strong></td><td>After Week 3</td><td>AC #1, #2, #3, #4 closed</td></tr>
+<tr><td><strong>3. Final</strong></td><td><strong>€2,000–€4,000</strong></td><td>After Week 6</td><td>AC #5, #6, #7, #8 closed. <strong>Размер зависит от buffer:</strong> €2k если buffer не использован, €4k если использован полностью</td></tr>
+</table>
+
+<p><strong>Floor</strong> (clean delivery, buffer не нужен): €4k + €4k + €2k = <strong>€10,000</strong><br>
+<strong>Ceiling</strong> (buffer использован): €4k + €4k + €4k = <strong>€12,000</strong></p>
+
+<h3>4.3 Триггер kickoff</h3>
+
+<blockquote><strong>Kickoff = next business day after pre-payment €4,000 landed.</strong> Не календарная дата.</blockquote>
+
+<p>Почему: на Cone Red parallel идут Tampere Horizon-prep, Cloudmaven, Casino Phase 01, Granat scaling. Без pre-payment-сигнала любой инженер может быть pulled на горящий проект. Pre-payment превращает «возможно» в «забронировано» — и <strong>делает срыв сроков проблемой обеих сторон, а не только моей.</strong></p>
+
+<p>После May 9 это <strong>третий раз</strong> когда я называю эту структуру (Apr 22 → 1 мая slip, Fri 8 May → Sat 9 May slip — два предыдущих slip моей стороны). Pre-payment-triggered kickoff — митигация против slip #3.</p>
+
+<p><strong>Если pre-payment landed Sat 17 May</strong> → kickoff <strong>Mon 19 May</strong> → launch <strong>~Mon 30 June</strong>.<br>
+<strong>Если landed Mon 19 May</strong> → kickoff <strong>Tue 20 May</strong> → launch <strong>~Tue 1 July</strong>. Линейно.</p>
+
+<hr />
+
+<h2><span class="num">5</span>Коммерческая гибкость — открыто к обсуждению</h2>
+
+<div class="callout">
+Текущий ценник <strong>€12,000</strong> — это deep discount от изначальных market-rate estimations (~€40–45k за такой скоуп greenfield + buffer + 3-month runtime).
+</div>
+
+<p>Скидка живёт за счёт:</p>
+<ul>
+<li>Тяжёлого reuse-pile (Di-Mentor Phase 1 memory layer + Bankstor TMA scaffold + Granat OCR pipeline)</li>
+<li>Free credit programs на LLM (Codex/GPT + Xiaomi MIMO + Anthropic partner + Z.AI fallback)</li>
+<li>Friend-rate + cap-table commitment (10% Cone Red, закрыто 6 мая)</li>
+</ul>
+
+<h3>5.1 Мы открыты к двум механизмам</h3>
+
+<h4>Механизм A · Development credit от будущих стадий</h4>
+
+<p>Часть €12k можно зафиксировать как <strong>dev-credit от будущего seed-раунда</strong> — формат convertible (получаем equity или приоритетную выплату при closing), не cash сейчас. Структура обсуждаема:</p>
+<ul>
+<li><strong>Minimum cash сейчас</strong> — достаточно чтобы заблокировать senior engineer (~€4–6k)</li>
+<li><strong>Balance отложен</strong> до закрытия seed-раунда — конвертируется в equity или приоритетную выплату по соглашению</li>
+<li>Подписываем простой promissory note или конвертируем в SAFE если хочется чище</li>
+</ul>
+
+<p>Это даёт Keep Pet возможность стартовать MVP без полного cash-burden + сохраняет skin in the game с обеих сторон.</p>
+
+<h4>Механизм B · Trigger-revert при подъёме раунда</h4>
+
+<p>Если Keep Pet поднимает seed-раунд (€300K+ из Vision §Phase-2), ценник на <strong>оставшиеся фазы работы</strong> пересчитывается по изначальным estimations (до anchor €30k friend-rate, ближе к market €40–45k за эквивалентный объём работ).</p>
+
+<p>Это касается:</p>
+<ul>
+<li>Phase-2 build (PWA + native app + B2B partnerships integrations)</li>
+<li>Real-time AI чат как paid-tier (€4–5k → market: €6–8k)</li>
+<li>Дополнительные локали и регионы</li>
+<li>Yandex Alice integration</li>
+</ul>
+
+<div class="callout ochre">
+<strong>Принцип.</strong> Мы хотим, чтобы у Keep Pet был cleanest possible MVP-старт без cash-давления, и <strong>at the same time</strong> не оказаться в позиции «сделали за бесплатно, а они подняли $300K и взяли другого подрядчика на Phase-2». Trigger-revert защищает обе стороны.
+</div>
+
+<p><strong>Что обсуждаемо:</strong> exact split между cash и credit · trigger threshold (что считается «raised») · конкретный коэффициент пересчёта в Phase-2 · структура конвертации (note vs SAFE vs прямой equity).</p>
+
+<p><strong>Что не обсуждаемо:</strong> ничего — назови предпочтительную структуру, отстроим вокруг неё.</p>
+
+<hr />
+
+<h2><span class="num">6</span>Что НЕ входит (parking lot, Phase-2)</h2>
+
+<p>Не блокирует MVP, не возвращается в v1 без новой оценки. Полный список — в <a href="spec.html#parking-lot">spec §7</a>.</p>
+
+<ul>
+<li><strong>PWA</strong> (стандартное web-приложение) — отложено на week 7+ если есть traction. На звонке 15 мая Юля и Олег подтвердили: TG-first strategy.</li>
+<li><strong>Vet voice-memo capture</strong> — v2, +€2,500 + 1 нед когда возвращается</li>
+<li><strong>Lost-pet poster generator</strong> — v2, +€1,500–2,000</li>
+<li><strong>Real-time AI чат</strong> («поговори с виртуальным ветеринаром») — v2 как платная фича, +€4,000–5,000</li>
+<li><strong>Ежедневные рутины + проактивные напоминания</strong> — v2, +€1,500</li>
+<li><strong>Native iOS/Android app</strong> — Phase-2 если PWA-лимиты бьют, +€8,000–12,000</li>
+<li><strong>Yandex Alice integration</strong> — v2, +€2,500–3,500</li>
+<li><strong>Фото-альбом / Memories video</strong> — v2, +€1,500</li>
+<li><strong>Сезонные алерты</strong> (клещи, жара) — v2, +€750</li>
+<li><strong>Карты ветеринаров с записью</strong> (партнёрские) — v2 после партнёрки, +€1,000+</li>
+<li><strong>B2B страховые/корм-партнёрки</strong> — Phase-2 после 10K-user gate</li>
+</ul>
+
+<hr />
+
+<h2><span class="num">7</span>Риски и митигации</h2>
+
+<table>
+<tr><th>Риск</th><th>Вероятность</th><th>Митигация</th></tr>
+<tr><td><strong>Reuse не подхватывается чисто</strong> (Bankstor TMA / Di-Mentor memory / Granat OCR)</td><td>Medium</td><td><strong>Week 1 pre-flight inventory</strong> — если фрагмент не подхватывается, raise immediately + re-cost before тратим</td></tr>
+<tr><td><strong>Free credit programs</strong> не одобряют все</td><td>Medium</td><td>Z.AI subscription $100/мес платный fallback включён в runtime €250</td></tr>
+<tr><td><strong>OCR качество на бумажных паспортах</strong> (особенно RU + IL bilingual)</td><td>Medium</td><td>MCQ-fallback работает в любом случае; pre-curate 3 паспорта week 1</td></tr>
+<tr><td><strong>Murgav инфраструктура</strong> (Питер) не работает параллельно</td><td>Low</td><td>Параллельная база, не зеркало; deploy 1-day engineer test первым делом week 5</td></tr>
+<tr><td><strong>Slip третий раз подряд</strong> (Apr 22 → 1 May, Fri 8 May → Sat 9 May)</td><td>Medium-Low</td><td><strong>Pre-payment triggered kickoff</strong> (§4.3); без денег on the table не обещаю календарную дату</td></tr>
+<tr><td><strong>Scope creep</strong> (новые идеи в Google Doc запросятся в MVP)</td><td>Medium</td><td>Жёсткое правило: всё в Google Doc после kickoff = parking lot, в v1 не идёт</td></tr>
+</table>
+
+<hr />
+
+<h2><span class="num">8</span>Команда</h2>
+
+<h3>8.1 Cone Red side</h3>
+
+<table>
+<tr><th>Роль</th><th>Кто</th><th>Доля</th></tr>
+<tr><td>Senior Engineer</td><td>Cone Red (locked после pre-payment)</td><td>100% × 5 нед build</td></tr>
+<tr><td>Architecture + redteam + memory layer lift</td><td>Дима Левин</td><td>10–15%</td></tr>
+<tr><td>Reuse-codebase support</td><td>Cone Red support (Di-Mentor / Bankstor / Granat)</td><td>5–10% on-demand</td></tr>
+</table>
+
+<h3>8.2 Keep Pet side</h3>
+
+<table>
+<tr><th>Кто</th><th>Что</th><th>Когда</th></tr>
+<tr><td><strong>Олег</strong></td><td>Pre-payment + ответы на spec §8 (7 вопросов) + 1–2 стратегических слайда по фандингу</td><td>Week 1–2</td></tr>
+<tr><td><strong>Юля</strong></td><td>Launch-copy для TG-каналов + подбор 10 тестеров из 700-юзерной аудитории + регион-стратегия</td><td>Week 5–6</td></tr>
+<tr><td><strong>Сергей</strong></td><td>Холодный взгляд на unit-economics после первого месяца тестинга</td><td>Week 6+</td></tr>
+</table>
+
+<hr />
+
+<h2><span class="num">9</span>Подписи / acknowledgment</h2>
+
+<p>Этот SOW зафиксирован на основании:</p>
+<ul>
+<li>Звонок <strong>15 мая 14:00</strong> (transcript: <code>transcripts/keep pet _ Transcription Export.md</code>)</li>
+<li>Звонок 6 мая (Part 1 + Part 2)</li>
+<li>Звонок 21 апреля</li>
+<li><a href="spec.html">MVP Спецификация v1</a> · <a href="plan.html">План разработки v1</a> · <a href="vision.html">Видение v6</a></li>
+</ul>
+
+<p><strong>Подтверждение от Keep Pet команды:</strong> Олег Аванесов, Юлия Красильникова, Сергей Островский — устное согласие на kickoff next week pending no questions в созвоне 16 мая (без меня).</p>
+
+<p><strong>Старт работы:</strong> Mon 19 May (или next business day after €4,000 pre-payment landed, что позже).</p>
+
+<hr />
+
+<h3>Changelog vs. May 9 dev-plan (€19k)</h3>
+
+<table>
+<tr><th>Тема</th><th>dev-plan v1 (May 9)</th><th>SOW v1 (May 16)</th><th>Эффект</th></tr>
+<tr><td>Budget anchor</td><td>€19,000 ceiling</td><td><strong>€12,000 ceiling / €10,000 floor</strong></td><td>−€7k</td></tr>
+<tr><td>PWA</td><td>в скоупе (€2,500)</td><td><strong>parking lot</strong></td><td>−€2,500</td></tr>
+<tr><td>Murgav (RU вариант)</td><td>не упомянут</td><td><strong>+1 deployment, same features</strong></td><td>+€250 work + €30/мес infra</td></tr>
+<tr><td>Memory Layer</td><td>implied в §3.3 без AC</td><td><strong>explicit AC #5</strong></td><td>+€750 integration</td></tr>
+<tr><td>Runtime</td><td>€1,000 (3 мес)</td><td><strong>€250</strong> через free credit programs</td><td>−€750</td></tr>
+<tr><td>Backend glue</td><td>€3,750</td><td><strong>€2,250</strong> (harder Bankstor reuse)</td><td>−€1,500</td></tr>
+<tr><td>Read-only passport + QR</td><td>€750 в «хочется»</td><td><strong>€0 inline</strong> (reuse CR internal TMA scaffold)</td><td>−€750</td></tr>
+<tr><td>Buffer</td><td>€1,750</td><td>€2,000</td><td>+€250</td></tr>
+<tr><td>Payment</td><td>€7,500 pre + €11,500 final</td><td><strong>€4k pre + €4k mid + €2–4k final</strong></td><td>три транша, привязаны к AC</td></tr>
+<tr><td>Коммерческая гибкость</td><td>не упоминается</td><td><strong>+ §5 — credit mechanism + raise-revert</strong></td><td>new</td></tr>
+</table>
+
+<p style="margin-top: 36px;"><em>SOW v1 by Dima Levin · Cone Red × Keep Pet · 2026-05-16. Re-cost from €19k → €12k ceiling based on: PWA deferred + runtime free via credit programs + heavy reuse Bankstor TMA / Di-Mentor memory / Granat OCR + Murgav added as parallel deployment. <strong>If reuse doesn't catch in Week 1 inventory — communicated immediately + re-cost discussion before spending.</strong></em></p>
+
+<footer>
+  <div class="logo">Cone Red</div>
+  <div>Statement of Work · Keep Pet · 2026-05-16 · <code>dvlevin.github.io/keep-pet/sow.html</code></div>
+</footer>
+
+</div>
+</body>
+</html>
